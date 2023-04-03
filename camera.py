@@ -141,7 +141,7 @@ try:
             if(start_depth > curr_depth):
                 # Foward
                 print("FOWARDDDD")
-                if(motor_value > 700):
+                if(motor_value > 7000):
                     motor_value = 7000
                 else:
                     motor_value += 500
