@@ -21,50 +21,50 @@ class KeyControl():
         self.motors = 6000
         self.turn = 6000
         
-    # def head(self,key):
-    #     print(key.keycode)
-    #     if key.keycode == 38:
-    #         self.headTurn += 200
-    #         if(self.headTurn > 7900):
-    #             self.headTurn = 7900
-    #         self.tango.setTarget(HEADTURN, self.headTurn)
-    #     elif key.keycode ==40:
-    #         self.headTurn -= 200
-    #         if(self.headTurn < 1510):
-    #             self.headTurn = 1510
-    #         self.tango.setTarget(HEADTURN, self.headTurn)
-    #     elif key.keycode == 25:
-    #         self.headTilt += 200
-    #         if(self.headTilt > 7900):
-    #             self.headTilt = 7900
-    #         self.tango.setTarget(HEADTILT, self.headTilt)
-    #     elif key.keycode == 39:
-    #         self.headTilt -= 200
-    #         if(self.headTilt < 1510):
-    #             self.headTilt = 1510
-    #         self.tango.setTarget(HEADTILT, self.headTilt)
+    def head(self,key):
+        print(key.keycode)
+        if key.keycode == 38:
+            self.headTurn += 200
+            if(self.headTurn > 7900):
+                self.headTurn = 7900
+            self.tango.setTarget(HEADTURN, self.headTurn)
+        elif key.keycode ==40:
+            self.headTurn -= 200
+            if(self.headTurn < 1510):
+                self.headTurn = 1510
+            self.tango.setTarget(HEADTURN, self.headTurn)
+        elif key.keycode == 25:
+            self.headTilt += 200
+            if(self.headTilt > 7900):
+                self.headTilt = 7900
+            self.tango.setTarget(HEADTILT, self.headTilt)
+        elif key.keycode == 39:
+            self.headTilt -= 200
+            if(self.headTilt < 1510):
+                self.headTilt = 1510
+            self.tango.setTarget(HEADTILT, self.headTilt)
                 
 
 
-    # def waist(self, key):
-    #     print(key.keycode)
+    def waist(self, key):
+        print(key.keycode)
         
-    #     if key.keycode == 54:
-    #         self.body += 200
-    #         if(self.body > 7900):
-    #             self.body = 7900
-    #         self.tango.setTarget(BODY, self.body)
-    #         print("waist right")
-    #     elif key.keycode == 52:
-    #         self.body -= 200
-    #         if(self.body < 1510):
-    #             self.body = 1510
-    #         self.tango.setTarget(BODY, self.body)
-    #         print ('waist left')
+        if key.keycode == 54:
+            self.body += 200
+            if(self.body > 7900):
+                self.body = 7900
+            self.tango.setTarget(BODY, self.body)
+            print("waist right")
+        elif key.keycode == 52:
+            self.body -= 200
+            if(self.body < 1510):
+                self.body = 1510
+            self.tango.setTarget(BODY, self.body)
+            print ('waist left')
    
     
     def arrow(self, key):
-        # print(key.keycode)
+        print(key.keycode)
         if key.keycode == 38:
             self.motors += 200
             if(self.motors > 7900):
@@ -103,12 +103,12 @@ win.bind('<Up>', keys.arrow)
 win.bind('<Left>', keys.arrow)
 win.bind('<Down>', keys.arrow)
 win.bind('<Right>', keys.arrow)
-# win.bind('<space>', keys.arrow)
-# win.bind('<z>', keys.waist)
-# win.bind('<c>', keys.waist)
-# win.bind('<w>', keys.head)
-# win.bind('<s>', keys.head)
-# win.bind('<a>', keys.head)
-# win.bind('<d>', keys.head)
+win.bind('<space>', keys.arrow)
+win.bind('<z>', keys.waist)
+win.bind('<c>', keys.waist)
+win.bind('<w>', keys.head)
+win.bind('<s>', keys.head)
+win.bind('<a>', keys.head)
+win.bind('<d>', keys.head)
 win.mainloop()
 keys = KeyControl(win)     
