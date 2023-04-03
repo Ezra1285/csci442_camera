@@ -64,33 +64,33 @@ class KeyControl():
    
     
     def arrow(self, key):
-        print(key.keycode)
-        if key.keycode == 116:
+        # print(key.keycode)
+        if key == 116:
             self.motors += 200
             if(self.motors > 7900):
                 self.motors = 7900
             print(self.motors)
             self.tango.setTarget(MOTORS, self.motors)
-        elif key.keycode == 111:
+        elif key == 111:
             self.motors -= 200
             if(self.motors < 1510):
                 self.motors = 1510
             print(self.motors)
             self.tango.setTarget(MOTORS, self.motors)
-        elif key.keycode == 114:
+        elif key == 114:
             self.turn += 200
             if(self.turn > 7400):
                 self.turn = 7400
             print(self.turn)
             self.tango.setTarget(TURN, self.turn)
-        elif key.keycode == 113:
+        elif key == 113:
             self.turn -= 200
             if(self.turn <2110):
                 self.turn = 2110
             print(self.turn)
             self.tango.setTarget(TURN, self.turn)
         
-        elif key.keycode == 65:
+        elif key == 65:
             self.motors = 6000
             self.turn = 6000
             self.tango.setTarget(MOTORS, self.motors)
