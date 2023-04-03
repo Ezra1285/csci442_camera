@@ -70,7 +70,7 @@ is_start_distance = True
 # win = tk.Tk()
 # keys = keyboardControl.KeyControl(win)
 robot_controll = maestro.Controller()
-robot_controll.setAccel(0,25)
+robot_controll.setAccel(0,60)
 robot_controll.setSpeed(0, 10)
 robot_controll.setTarget(0, 6000)
 # robot_controll.setRange(0,1, 100)
