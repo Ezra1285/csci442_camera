@@ -73,7 +73,7 @@ robot_controll = maestro.Controller()
 robot_controll.setAccel(0,25)
 robot_controll.setSpeed(0, 60)
 robot_controll.setTarget(0, 6000)
-robot_controll.setRange(1,10, 100)
+robot_controll.setRange(0,1, 10)
 
 
 # win.bind('<Up>', robot_controll.arrow)
@@ -137,23 +137,22 @@ try:
                 prev_depth = curr_depth
                 is_start_distance = False
             #  Check is distance is closer or further and the move foward or back
-            if(counter == 0 or counter%25 == 0):
-                if(curr_depth > prev_depth):
-                    # Foward
-                    print("FWOARDDDD")
-                    robot_controll.setTarget(0, 7000)
-                    # robot_controll.motors += 200
-                    # if(robot_controll.motors > 7900):
-                    #     robot_controll.motors = 7900
-                    # robot_controll.tango.setTarget(1, robot_controll.motors)
-                else:
-                    # back
-                    print("BACKKKK")
-                    robot_controll.setTarget(0, 5000)
-                    # robot_controll.motors -= 200
-                    # if(robot_controll.motors < 1510):
-                    #     robot_controll.motors = 1510
-                    # robot_controll.tango.setTarget(1, robot_controll.motors)
+            if(curr_depth > prev_depth):
+                # Foward
+                print("FWOARDDDD")
+                robot_controll.setTarget(0, 7000)
+                # robot_controll.motors += 200
+                # if(robot_controll.motors > 7900):
+                #     robot_controll.motors = 7900
+                # robot_controll.tango.setTarget(1, robot_controll.motors)
+            else:
+                # back
+                print("BACKKKK")
+                robot_controll.setTarget(0, 5000)
+                # robot_controll.motors -= 200
+                # if(robot_controll.motors < 1510):
+                #     robot_controll.motors = 1510
+                # robot_controll.tango.setTarget(1, robot_controll.motors)
             print(curr_depth)
             blue_start_x = int(300 - (curr_depth*10))
             blue_start_y = int(380 - (curr_depth*10))
