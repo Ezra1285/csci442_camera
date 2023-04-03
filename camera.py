@@ -1,5 +1,5 @@
 import pyrealsense2 as rs
-import keyboardControl
+import maestro
 import tkinter as tk
 import numpy as np
 import cv2
@@ -67,9 +67,9 @@ ok = tracker.init(color, bbox)
 
 is_start_distance = True
 
-win = tk.Tk()
+# win = tk.Tk()
 # keys = keyboardControl.KeyControl(win)
-robot_controll = keyboardControl.KeyControl(win)
+robot_controll = maestro.Controller()
 
 # win.bind('<Up>', robot_controll.arrow)
 # win.bind('<Left>', robot_controll.arrow)
@@ -134,17 +134,18 @@ try:
             #  Check is distance is closer or further and the move foward or back
             if(curr_depth > prev_depth):
                 # Foward
-                robot_controll.motors += 200
-                if(robot_controll.motors > 7900):
-                    robot_controll.motors = 7900
-                robot_controll.tango.setTarget(1, robot_controll.motors)
+                robot_controll.setTarget(1, 7000)
+                # robot_controll.motors += 200
+                # if(robot_controll.motors > 7900):
+                #     robot_controll.motors = 7900
+                # robot_controll.tango.setTarget(1, robot_controll.motors)
             else:
                 # back
-                robot_controll.motors -= 200
-                if(robot_controll.motors < 1510):
-                    robot_controll.motors = 1510
-                robot_controll.tango.setTarget(1, robot_controll.motors)
-
+                robot_controll.setTarget(1, 5000)
+                # robot_controll.motors -= 200
+                # if(robot_controll.motors < 1510):
+                #     robot_controll.motors = 1510
+                # robot_controll.tango.setTarget(1, robot_controll.motors)
             print(curr_depth)
             blue_start_x = int(300 - (curr_depth*10))
             blue_start_y = int(380 - (curr_depth*10))
