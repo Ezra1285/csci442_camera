@@ -70,8 +70,8 @@ is_start_distance = True
 # win = tk.Tk()
 # keys = keyboardControl.KeyControl(win)
 robot_controll = maestro.Controller()
-robot_controll.setAccel(0,25)
-robot_controll.setSpeed(0, 30)
+robot_controll.setAccel(0,10)
+robot_controll.setSpeed(0, 10)
 robot_controll.setTarget(0, 6000)
 # robot_controll.setRange(0,1, 100)
 
@@ -141,7 +141,10 @@ try:
             if(start_depth > curr_depth):
                 # Foward
                 print("FOWARDDDD")
-                motor_value += 500
+                if(motor_value > 700):
+                    motor_value = 7000
+                else:
+                    motor_value += 500
                 # robot_controll.motors += 200
                 # if(robot_controll.motors > 7900):
                 #     robot_controll.motors = 7900
@@ -149,7 +152,10 @@ try:
             else:
                 # back
                 print("BACKKKK")
-                motor_value -= 500
+                if(motor_value < 6000):
+                    motor_value = 6000
+                else:
+                    motor_value -= 500
                 # robot_controll.motors -= 200
                 # if(robot_controll.motors < 1510):
                 #     robot_controll.motors = 1510
