@@ -70,8 +70,8 @@ is_start_distance = True
 # win = tk.Tk()
 # keys = keyboardControl.KeyControl(win)
 robot_controll = maestro.Controller()
-robot_controll.setAccel(0,15)
-robot_controll.setSpeed(0, 30)
+robot_controll.setAccel(0,25)
+robot_controll.setSpeed(0, 60)
 robot_controll.setTarget(0, 6000)
 # robot_controll.setRange(1,0, 0)
 
@@ -137,7 +137,7 @@ try:
                 prev_depth = curr_depth
                 is_start_distance = False
             #  Check is distance is closer or further and the move foward or back
-            if(counter == 0 or counter%50 == 0):
+            if(counter == 0 or counter%25 == 0):
                 if(curr_depth > prev_depth):
                     # Foward
                     print("FWOARDDDD")
