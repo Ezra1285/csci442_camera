@@ -162,7 +162,7 @@ try:
                 # if(robot_controll.motors < 1510):
                 #     robot_controll.motors = 1510
                 # robot_controll.tango.setTarget(1, robot_controll.motors)
-            robot_controll.setTarget(0, motor_value)
+            # robot_controll.setTarget(0, motor_value)
             print(curr_depth)
             blue_start_x = int(300 - (curr_depth*10))
             blue_start_y = int(380 - (curr_depth*10))
