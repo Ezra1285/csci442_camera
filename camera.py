@@ -72,8 +72,8 @@ is_start_distance = True
 robot_controll = maestro.Controller()
 robot_controll.setAccel(0,25)
 robot_controll.setSpeed(0, 60)
-robot_controll.setTarget(0, 6000)
-robot_controll.setRange(0,1, 100)
+# robot_controll.setTarget(0, 6000)
+# robot_controll.setRange(0,1, 100)
 
 
 # win.bind('<Up>', robot_controll.arrow)
@@ -90,6 +90,7 @@ robot_controll.setRange(0,1, 100)
 # win.mainloop()
 # keys = keyboardControl.KeyControl(win)    
 counter = 0
+motor_value = 6000
 try:
     while True:
         
@@ -134,13 +135,13 @@ try:
             
             curr_depth = depth_frame.get_distance(int((bbox[0]) + .5*bbox[2]), int(bbox[1] + .5*bbox[3]))
             if(is_start_distance):
-                prev_depth = curr_depth
+                start_depth = curr_depth
                 is_start_distance = False
             #  Check is distance is closer or further and the move foward or back
-            if(curr_depth > prev_depth):
+            if(start_depth > prev_depth):
                 # Foward
-                print("FWOARDDDD")
-                robot_controll.setTarget(0, 7000)
+                print("FOWARDDDD")
+                motor_value += 500
                 # robot_controll.motors += 200
                 # if(robot_controll.motors > 7900):
                 #     robot_controll.motors = 7900
@@ -148,15 +149,18 @@ try:
             else:
                 # back
                 print("BACKKKK")
-                robot_controll.setTarget(0, 5000)
+                motor_value -= 500
                 # robot_controll.motors -= 200
                 # if(robot_controll.motors < 1510):
                 #     robot_controll.motors = 1510
                 # robot_controll.tango.setTarget(1, robot_controll.motors)
+            robot_controll.setTarget(0, 5000)
             print(curr_depth)
             blue_start_x = int(300 - (curr_depth*10))
             blue_start_y = int(380 - (curr_depth*10))
             images = cv2.rectangle(images, (blue_start_x,blue_start_y), (blue_start_x+55,blue_start_y+1), (255, 0, 0), -1) #Blue rectangle
+
+            
         else :
             # Tracking failure
             cv2.putText(images, "Tracking failure detected", (100,80), cv2.FONT_HERSHEY_SIMPLEX, 0.75,(0,0,255),2)
