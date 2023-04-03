@@ -85,7 +85,7 @@ robot_controll.setAccel(1,4)
 # win.bind('<d>', keys.head)
 # win.mainloop()
 # keys = keyboardControl.KeyControl(win)    
-
+counter = 0
 try:
     while True:
         
@@ -133,22 +133,23 @@ try:
                 prev_depth = curr_depth
                 is_start_distance = False
             #  Check is distance is closer or further and the move foward or back
-            if(curr_depth > prev_depth):
-                # Foward
-                print("FWOARDDDD")
-                robot_controll.setTarget(1, 7000)
-                # robot_controll.motors += 200
-                # if(robot_controll.motors > 7900):
-                #     robot_controll.motors = 7900
-                # robot_controll.tango.setTarget(1, robot_controll.motors)
-            else:
-                # back
-                print("BACKKKK")
-                robot_controll.setTarget(1, 5000)
-                # robot_controll.motors -= 200
-                # if(robot_controll.motors < 1510):
-                #     robot_controll.motors = 1510
-                # robot_controll.tango.setTarget(1, robot_controll.motors)
+            if(counter == 0 or counter%50 == 0):
+                if(curr_depth > prev_depth):
+                    # Foward
+                    print("FWOARDDDD")
+                    robot_controll.setTarget(1, 7000)
+                    # robot_controll.motors += 200
+                    # if(robot_controll.motors > 7900):
+                    #     robot_controll.motors = 7900
+                    # robot_controll.tango.setTarget(1, robot_controll.motors)
+                else:
+                    # back
+                    print("BACKKKK")
+                    robot_controll.setTarget(1, 5000)
+                    # robot_controll.motors -= 200
+                    # if(robot_controll.motors < 1510):
+                    #     robot_controll.motors = 1510
+                    # robot_controll.tango.setTarget(1, robot_controll.motors)
             print(curr_depth)
             blue_start_x = int(300 - (curr_depth*10))
             blue_start_y = int(380 - (curr_depth*10))
