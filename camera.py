@@ -1,5 +1,5 @@
 import pyrealsense2 as rs
-
+import keyboardControl
 import numpy as np
 import cv2
 import time
@@ -63,6 +63,8 @@ bbox = cv2.selectROI(color, False)
 
 # Initialize tracker with first frame and bounding box
 ok = tracker.init(color, bbox)
+robot_controll = keyboardControl.KeyControl()
+is_start_distance = True
 try:
     while True:
         
@@ -106,6 +108,17 @@ try:
             cv2.rectangle(images, (p1),(p2), (255,0,0), 2, 1)
             
             curr_depth = depth_frame.get_distance(int((bbox[0]) + .5*bbox[2]), int(bbox[1] + .5*bbox[3]))
+            if(is_start_distance):
+                prev_depth = curr_depth
+                is_start_distance = False
+            #  Check is distance is closer or further and the move foward or back
+            if(curr_depth > prev_depth):
+                # Foward
+                robot_controll.arrow(116)
+            else:
+                # back
+                robot_controll.arrow(113)
+
             print(curr_depth)
             blue_start_x = int(300 - (curr_depth*10))
             blue_start_y = int(380 - (curr_depth*10))
@@ -123,6 +136,7 @@ try:
         cv2.namedWindow('RealSense', cv2.WINDOW_AUTOSIZE)
         cv2.imshow('RealSense', images)
         key = cv2.waitKey(1)
+        prev_depth = curr_depth
         if(key == 27):
             break
         
