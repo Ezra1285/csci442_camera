@@ -188,5 +188,6 @@ try:
 
 finally:
     # Stop streaming
+    robot_controll.setTarget(0, 6000)
     robot_controll.close()
     pipeline.stop()
