@@ -172,6 +172,7 @@ try:
         else :
             # Tracking failure
             cv2.putText(images, "Tracking failure detected", (100,80), cv2.FONT_HERSHEY_SIMPLEX, 0.75,(0,0,255),2)
+            robot_controll.setTarget(0, 6000)
  
         # Display tracker type on frame
         cv2.putText(images, 'KCF' + " Tracker", (100,20), cv2.FONT_HERSHEY_SIMPLEX, 0.75, (50,170,50),2);
