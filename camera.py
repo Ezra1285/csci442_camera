@@ -138,7 +138,7 @@ try:
                 start_depth = curr_depth
                 is_start_distance = False
             #  Check is distance is closer or further and the move foward or back
-            if(start_depth > prev_depth):
+            if(start_depth > curr_depth):
                 # Foward
                 print("FOWARDDDD")
                 motor_value += 500
@@ -175,7 +175,7 @@ try:
         cv2.imshow('RealSense', images)
         counter += 1
         key = cv2.waitKey(1)
-        prev_depth = curr_depth
+        
         if(key == 27):
             break
         
