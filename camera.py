@@ -141,7 +141,7 @@ try:
                 if(curr_depth > prev_depth):
                     # Foward
                     print("FWOARDDDD")
-                    robot_controll.setTarget(0, 6500)
+                    robot_controll.setTarget(0, 7000)
                     # robot_controll.motors += 200
                     # if(robot_controll.motors > 7900):
                     #     robot_controll.motors = 7900
@@ -149,7 +149,7 @@ try:
                 else:
                     # back
                     print("BACKKKK")
-                    robot_controll.setTarget(0, 5500)
+                    robot_controll.setTarget(0, 5000)
                     # robot_controll.motors -= 200
                     # if(robot_controll.motors < 1510):
                     #     robot_controll.motors = 1510
