@@ -64,24 +64,26 @@ bbox = cv2.selectROI(color, False)
 
 # Initialize tracker with first frame and bounding box
 ok = tracker.init(color, bbox)
-robot_controll = keyboardControl.KeyControl()
-is_start_distance = True
-# win = tk.Tk()
-# keys = keyboardControl.KeyControl(win)
 
-# win.bind('<Up>', keys.arrow)
-# win.bind('<Left>', keys.arrow)
-# win.bind('<Down>', keys.arrow)
-# win.bind('<Right>', keys.arrow)
-# win.bind('<space>', keys.arrow)
+is_start_distance = True
+
+win = tk.Tk()
+# keys = keyboardControl.KeyControl(win)
+robot_controll = keyboardControl.KeyControl(win)
+
+win.bind('<Up>', robot_controll.arrow)
+win.bind('<Left>', robot_controll.arrow)
+win.bind('<Down>', robot_controll.arrow)
+win.bind('<Right>', robot_controll.arrow)
+win.bind('<space>', robot_controll.arrow)
 # win.bind('<z>', keys.waist)
 # win.bind('<c>', keys.waist)
 # win.bind('<w>', keys.head)
 # win.bind('<s>', keys.head)
 # win.bind('<a>', keys.head)
 # win.bind('<d>', keys.head)
-# win.mainloop()
-# keys = keyboardControl.KeyControl(win)    
+win.mainloop()
+keys = keyboardControl.KeyControl(win)    
 
 try:
     while True:
@@ -132,10 +134,10 @@ try:
             #  Check is distance is closer or further and the move foward or back
             if(curr_depth > prev_depth):
                 # Foward
-                robot_controll.arrow(116)
+                robot_controll.arrow(111)
             else:
                 # back
-                robot_controll.arrow(113)
+                robot_controll.arrow(116)
 
             print(curr_depth)
             blue_start_x = int(300 - (curr_depth*10))
