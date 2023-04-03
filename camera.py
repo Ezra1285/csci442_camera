@@ -71,6 +71,7 @@ is_start_distance = True
 # keys = keyboardControl.KeyControl(win)
 robot_controll = maestro.Controller()
 robot_controll.setAccel(1,4)
+robot_controll.setRange(1,0)
 
 # win.bind('<Up>', robot_controll.arrow)
 # win.bind('<Left>', robot_controll.arrow)
@@ -166,6 +167,7 @@ try:
  
         cv2.namedWindow('RealSense', cv2.WINDOW_AUTOSIZE)
         cv2.imshow('RealSense', images)
+        counter += 1
         key = cv2.waitKey(1)
         prev_depth = curr_depth
         if(key == 27):
