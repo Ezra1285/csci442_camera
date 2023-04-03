@@ -72,7 +72,7 @@ is_start_distance = True
 robot_controll = maestro.Controller()
 robot_controll.setAccel(0,25)
 robot_controll.setSpeed(0, 60)
-# robot_controll.setTarget(0, 6000)
+robot_controll.setTarget(0, 6000)
 # robot_controll.setRange(0,1, 100)
 
 
@@ -154,7 +154,7 @@ try:
                 # if(robot_controll.motors < 1510):
                 #     robot_controll.motors = 1510
                 # robot_controll.tango.setTarget(1, robot_controll.motors)
-            robot_controll.setTarget(0, 5000)
+            robot_controll.setTarget(0, motor_value)
             print(curr_depth)
             blue_start_x = int(300 - (curr_depth*10))
             blue_start_y = int(380 - (curr_depth*10))
