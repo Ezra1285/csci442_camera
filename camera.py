@@ -139,7 +139,7 @@ try:
                 start_depth = curr_depth
                 is_start_distance = False
             #  Check is distance is closer or further and the move foward or back
-            if(start_depth > (curr_depth - .15) ):
+            if(start_depth > (curr_depth - .25) ):
                 # Foward
                 robot_controll.setTarget(0, 6800)
                 # print("FOWARDDDD")
@@ -151,7 +151,7 @@ try:
                 # if(robot_controll.motors > 7900):
                 #     robot_controll.motors = 7900
                 # robot_controll.tango.setTarget(1, robot_controll.motors)
-            elif(start_depth < (curr_depth + .15)):
+            elif(start_depth < (curr_depth + .25)):
                 robot_controll.setTarget(0, 5200)
                 # back
                 # print("BACKKKK")
