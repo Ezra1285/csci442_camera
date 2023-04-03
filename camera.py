@@ -70,6 +70,7 @@ is_start_distance = True
 # win = tk.Tk()
 # keys = keyboardControl.KeyControl(win)
 robot_controll = maestro.Controller()
+robot_controll.setAccel(1,4)
 
 # win.bind('<Up>', robot_controll.arrow)
 # win.bind('<Left>', robot_controll.arrow)
@@ -170,4 +171,5 @@ try:
 
 finally:
     # Stop streaming
+    robot_controll.close()
     pipeline.stop()
