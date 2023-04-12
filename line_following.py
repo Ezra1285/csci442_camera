@@ -103,9 +103,9 @@ try:
         # rows, cols = transform.xy(edge.transform, rows, cols)
         # np.set_printoptions(threshold=12000)
         print(rows.size)
-        for i in range(100,480-100):
-            for j in range(180, 640-180):
-                print(edge[i,j])
+        # for i in range(100,480-100):
+        #     for j in range(180, 640-180):
+        #         print(edge[i,j])
         #         if(edge[i,j] > 100):
         #             x += i
         #             y += j
