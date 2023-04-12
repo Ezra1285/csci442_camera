@@ -99,15 +99,15 @@ try:
         y=0
         print("loop")
         rows, cols = np.where(edge == 255) # extract row and column numbers for each pixel
-        rows, cols = np.transform.xy(edge.transform, rows, cols)
+        # rows, cols = transform.xy(edge.transform, rows, cols)
         print(rows)
-        for i in range(100,480-100):
-            for j in range(180, 640-180):
-                if(edge[i,j] > 100):
-                    x += i
-                    y += j
-                    total +=1
-                pass
+        # for i in range(100,480-100):
+        #     for j in range(180, 640-180):
+        #         if(edge[i,j] > 100):
+        #             x += i
+        #             y += j
+        #             total +=1
+        #         pass
         if total == 0:
             total = 1
         yavg = x/total
