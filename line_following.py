@@ -70,7 +70,7 @@ robot_controll.setTarget(0, 6000)
 
 try:
     while True:
-
+        print("here")
         # Wait for a coherent pair of frames: depth and color
         frames = pipeline.wait_for_frames()
         color_frame = frames.get_color_frame()
