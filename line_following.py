@@ -34,7 +34,7 @@ pipeline.start(config)
 
 
 def move_forward():
-    robot_controll.setTarget(1, 6600)
+    robot_controll.setTarget(0, 6600)
     print("forward")
 
 def stop():
@@ -43,18 +43,20 @@ def stop():
     print("stop")
 
 def left_foward():
+    robot_controll.setTarget(1, 6400)
     print("left foward")
 
 def right_forward():
+    robot_controll.setTarget(1, 5400)
     print("right forward")
 
 def left():
-    robot_controll.setTarget(0, 6400)
+    robot_controll.setTarget(1, 6400)
     
     print("left")
 
 def right():
-    robot_controll.setTarget(0, 5400)
+    robot_controll.setTarget(1, 5400)
     print("right")
 
 robot_controll = maestro.Controller()
