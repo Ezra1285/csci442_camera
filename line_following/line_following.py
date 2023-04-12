@@ -1,5 +1,6 @@
 import pyrealsense2 as rs
 import numpy as np
+import maestro
 import cv2
 
 # Configure depth and color streams
@@ -33,6 +34,7 @@ pipeline.start(config)
 
 
 def move_forward():
+    robot_controll.setTarget(0, 6600)
     print("forward")
 
 def stop():
@@ -45,12 +47,16 @@ def right_forward():
     print("right forward")
 
 def left():
+    robot_controll.setTarget(1, 6600)
     print("left")
 
 def right():
     print("right")
 
-
+robot_controll = maestro.Controller()
+robot_controll.setAccel(0,60)
+robot_controll.setSpeed(0, 10)
+robot_controll.setTarget(0, 6000)
 
 try:
     while True:
