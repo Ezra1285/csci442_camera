@@ -34,32 +34,29 @@ pipeline.start(config)
 
 
 def move_forward():
-    robot_controll.setTarget(1, 6000)
+    robot_controll.setTarget(2, 6000)
     robot_controll.setTarget(0, 5400)
     print("forward")
 
 def stop():
-    robot_controll.setTarget(1, 6000)
+    robot_controll.setTarget(2, 6000)
     robot_controll.setTarget(0, 6000)
     print("stop")
 
 def left_foward():
-    robot_controll.setTarget(0, 6000)
-    robot_controll.setTarget(1, 6800)
+
+    robot_controll.setTarget(2, 6800)
     print("left foward")
 
 def right_forward():
-    robot_controll.setTarget(0, 6000)
-    robot_controll.setTarget(1, 5200)
+    robot_controll.setTarget(2, 5200)
     print("right forward")
 
 def left():
-    robot_controll.setTarget(0, 6000)
     robot_controll.setTarget(1, 6800)
     print("left")
 
 def right():
-    robot_controll.setTarget(0, 6000)
     robot_controll.setTarget(1, 5200)
     print("right")
 
