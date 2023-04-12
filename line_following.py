@@ -43,7 +43,7 @@ def stop():
     robot_controll.setTarget(0, 6000)
     # print("stop")
 
-def right_foward():
+def right_forward():
 
     robot_controll.setTarget(2, 7000)
     # print("left foward")
@@ -123,7 +123,7 @@ try:
             stop()
         elif xdif <-10:
             if ydif >10:
-                left_foward()
+                left_forward()
             else:
                 right()
         elif xdif >10:
