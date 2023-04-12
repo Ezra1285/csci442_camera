@@ -43,12 +43,12 @@ def stop():
     robot_controll.setTarget(0, 6000)
     # print("stop")
 
-def left_foward():
+def right_foward():
 
     robot_controll.setTarget(2, 7000)
     # print("left foward")
 
-def right_forward():
+def left_forward():
     robot_controll.setTarget(2, 5000)
     # print("right forward")
 
@@ -137,7 +137,7 @@ try:
         else:
             stop()
 
-        # cv2.imshow('RealSense', edge)
+        cv2.imshow('RealSense', edge)
         key = cv2.waitKey(1)
         if(key == 27):
             break
