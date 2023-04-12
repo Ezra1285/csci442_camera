@@ -43,7 +43,7 @@ def stop():
     print("stop")
 
 def left_foward():
-    robot_controll.setTarget(1, 6400)
+    robot_controll.setTarget(1, 6600)
     print("left foward")
 
 def right_forward():
@@ -51,12 +51,12 @@ def right_forward():
     print("right forward")
 
 def left():
-    robot_controll.setTarget(1, 6400)
+    robot_controll.setTarget(1, 6600)
     
     print("left")
 
 def right():
-    robot_controll.setTarget(1, 5400)
+    robot_controll.setTarget(1, 5600)
     print("right")
 
 robot_controll = maestro.Controller()
