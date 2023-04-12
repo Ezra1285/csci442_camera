@@ -36,29 +36,31 @@ pipeline.start(config)
 def move_forward():
     robot_controll.setTarget(2, 6000)
     robot_controll.setTarget(0, 5400)
-    print("forward")
+    # print("forward")
 
 def stop():
     robot_controll.setTarget(2, 6000)
     robot_controll.setTarget(0, 6000)
-    print("stop")
+    # print("stop")
 
 def left_foward():
 
     robot_controll.setTarget(2, 6800)
-    print("left foward")
+    # print("left foward")
 
 def right_forward():
     robot_controll.setTarget(2, 5200)
-    print("right forward")
+    # print("right forward")
 
 def left():
-    robot_controll.setTarget(1, 6800)
-    print("left")
+    robot_controll.setTarget(0, 6000)
+    robot_controll.setTarget(2, 6800)
+    # print("left")
 
 def right():
-    robot_controll.setTarget(1, 5200)
-    print("right")
+    robot_controll.setTarget(0, 6000)
+    robot_controll.setTarget(2, 5200)
+    # print("right")
 
 robot_controll = maestro.Controller()
 robot_controll.setAccel(0,60)
@@ -135,7 +137,7 @@ try:
         else:
             stop()
 
-        cv2.imshow('RealSense', edge)
+        # cv2.imshow('RealSense', edge)
         key = cv2.waitKey(1)
         if(key == 27):
             break
@@ -148,6 +150,6 @@ finally:
     robot_controll.setAccel(0,60)
     robot_controll.setSpeed(0, 10)
     robot_controll.setTarget(0, 6000)
-
+    robot_controll.setTarget(2, 6000)
     # Stop streaming
     pipeline.stop()
