@@ -31,6 +31,27 @@ else:
 # Start streaming
 pipeline.start(config)
 
+
+def move_forward():
+    print("forward")
+
+def stop():
+    print("stop")
+
+def left_foward():
+    print("left foward")
+
+def right_forward():
+    print("right forward")
+
+def left():
+    print("left")
+
+def right():
+    print("right")
+
+
+
 try:
     while True:
 
@@ -73,7 +94,7 @@ try:
         cv2.rectangle(edge,(150,50),(640-150,430),(155,155,155),5)
         cv2.circle(edge, (int(xavg), int(yavg)), 15, (155,0,0), 10)
         cofy = int(((480-100)/2)+50) +150
-        cofx = int(((640-300)/2)+150)
+        cofx = int(((640-300)/2)+125)
         cof = (cofx, cofy)
         cv2.circle(edge, cof, 10, (255,0,0), 5)
         cog = (xavg,yavg)
@@ -81,7 +102,24 @@ try:
         
         #TODO
         #move towards COG
-        
+        xdif = cog[0] - cof[0]
+        ydif = cog[1] - cof[1]
+
+        if xdif <-10:
+            if ydif >10:
+                left_foward()
+            else:
+                right()
+        elif xdif >10:
+            if ydif > 10:
+                right_forward()
+            else:
+                left()
+
+        elif ydif > 0:
+            move_forward()
+        else:
+            stop()
 
         cv2.imshow('RealSense', edge)
         key = cv2.waitKey(1)
