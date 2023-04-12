@@ -109,7 +109,7 @@ try:
             total = 1
         yavg = x/total
         xavg = y/total
-        # cv2.rectangle(edge,(150,50),(640-150,430),(155,155,155),5)
+        cv2.rectangle(edge,(250,75),(640-250,480-75),(155,155,155),5)
         # cv2.circle(edge, (int(xavg), int(yavg)), 15, (155,0,0), 10)
         cofy = int(((480-100)/2)+50) +100
         cofx = int(((640-300)/2)+125)
@@ -140,7 +140,7 @@ try:
         else:
             stop()
 
-        # cv2.imshow('RealSense', edge)
+        cv2.imshow('RealSense', edge)
         key = cv2.waitKey(1)
         if(key == 27):
             break
