@@ -113,8 +113,8 @@ try:
         x = rows.size
         y = cols.size
         print(x)
-       
-        total = x + y
+        print(y)
+        # total = x + y
         print(total)
         if total == 0:
             total = 1
