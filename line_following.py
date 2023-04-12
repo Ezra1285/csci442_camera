@@ -111,8 +111,8 @@ try:
         #             y += j
         #             total +=1
         #         pass
-        x = rows[0].size
-        y = cols[0].size
+        x = rows.size
+        y = cols.size
         print(x)
         print(total)
         total = x + y
