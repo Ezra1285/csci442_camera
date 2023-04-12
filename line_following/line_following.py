@@ -104,8 +104,9 @@ try:
         #move towards COG
         xdif = cog[0] - cof[0]
         ydif = cof[1] - cog[1]
-
-        if xdif <-10:
+        if ydif <0:
+            stop()
+        elif xdif <-10:
             if ydif >10:
                 left_foward()
             else:
