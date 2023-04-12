@@ -47,7 +47,7 @@ try:
         gray = cv2.cvtColor(gray, cv2.COLOR_GRAY2BGR)
         blur = cv2.blur(gray, (30,30))
         diff = cv2.absdiff(color, blur)
-        diff = cv2.blur(diff, (5,5))
+        # diff = cv2.blur(diff, (5,5))
         # thresh = cv2.inRange(diff, 100, 150)
         #start line following
         t_lower = 50  # Lower Threshold
