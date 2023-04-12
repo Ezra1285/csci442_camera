@@ -100,10 +100,11 @@ try:
         print("loop")
         for i in range(50,480-50):
             for j in range(150, 640-150):
-                if(edge[i,j] > 100):
-                    x += i
-                    y += j
-                    total +=1
+                # if(edge[i,j] > 100):
+                #     x += i
+                #     y += j
+                #     total +=1
+                pass
         if total == 0:
             total = 1
         yavg = x/total
