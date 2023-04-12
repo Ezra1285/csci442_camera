@@ -98,6 +98,8 @@ try:
         x=0
         y=0
         print("loop")
+        np.set_printoptions(threshold=12000)
+        print(edge)
         rows, cols = np.where(edge == 255) # extract row and column numbers for each pixel
         # rows, cols = transform.xy(edge.transform, rows, cols)
         # np.set_printoptions(threshold=12000)
@@ -148,7 +150,8 @@ try:
             move_forward()
         else:
             stop()
-
+        if(total <3):
+            stop()
         cv2.imshow('RealSense', edge)
         key = cv2.waitKey(1)
         if(key == 27):
