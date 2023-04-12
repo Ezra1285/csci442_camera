@@ -104,9 +104,6 @@ try:
                     x += i
                     y += j
                     total +=1
-                else:
-                    i+=1
-                    j+=1
                 pass
         if total == 0:
             total = 1
