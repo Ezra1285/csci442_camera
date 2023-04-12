@@ -99,7 +99,7 @@ try:
         y=0
         print("loop")
         for i in range(75,480-75):
-            for j in range(150, 640-350):
+            for j in range(250, 640-250):
                 if(edge[i,j] > 100):
                     x += i
                     y += j
