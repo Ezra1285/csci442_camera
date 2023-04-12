@@ -34,7 +34,7 @@ pipeline.start(config)
 
 
 def move_forward():
-    robot_controll.setTarget(0, 5200)
+    robot_controll.setTarget(0, 5400)
     print("forward")
 
 def stop():
