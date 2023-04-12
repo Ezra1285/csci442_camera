@@ -111,6 +111,8 @@ try:
         #         pass
         x = rows[0].size
         y = cols[0].size
+        print(x)
+        print(total)
         total = x + y
         if total == 0:
             total = 1
