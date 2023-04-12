@@ -70,33 +70,34 @@ robot_controll.setTarget(0, 6000)
 
 try:
     while True:
-        print("here")
         # Wait for a coherent pair of frames: depth and color
         frames = pipeline.wait_for_frames()
         color_frame = frames.get_color_frame()
         if not color_frame:
             continue
-
         # Convert color_frameimages to numpy arrays
         color = np.asanyarray(color_frame.get_data())
+        print("color")
         #fix lighting      	
         # gray = cv2.cvtColor(color, cv2.COLOR_BGR2GRAY)
         # gray = cv2.cvtColor(gray, cv2.COLOR_GRAY2BGR)
         # blur = cv2.blur(gray, (30,30))
         # diff = cv2.absdiff(color, blur)
         diff = cv2.blur(color, (5,5))
+        print("blur")
         # thresh = cv2.inRange(diff, 100, 150)
         #start line following
         t_lower = 100  # Lower Threshold
         t_upper = 150  # Upper threshold
 
         # Applying the Canny Edge filter
+        print("edge")
         edge = cv2.Canny(diff, t_lower, t_upper)
         #find COG
         total = 0
         x=0
         y=0
-        
+        print("loop")
         for i in range(50,480-50):
             for j in range(150, 640-150):
                 if(edge[i,j] > 100):
