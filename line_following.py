@@ -43,10 +43,12 @@ def stop():
     print("stop")
 
 def left_foward():
+    robot_controll.setTarget(0, 6000)
     robot_controll.setTarget(1, 6800)
     print("left foward")
 
 def right_forward():
+    robot_controll.setTarget(0, 6000)
     robot_controll.setTarget(1, 5200)
     print("right forward")
 
