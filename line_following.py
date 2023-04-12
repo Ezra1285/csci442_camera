@@ -99,6 +99,7 @@ try:
         y=0
         print("loop")
         np.set_printoptions(threshold=12000)
+        a = np.asanyarray(edge)
         print(edge)
         rows, cols = np.where(edge == 255) # extract row and column numbers for each pixel
         # rows, cols = transform.xy(edge.transform, rows, cols)
