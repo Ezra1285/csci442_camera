@@ -98,8 +98,8 @@ try:
         x=0
         y=0
         print("loop")
-        for i in range(75,480-75):
-            for j in range(150, 640-150):
+        for i in range(100,480-100):
+            for j in range(180, 640-180):
                 if(edge[i,j] > 100):
                     x += i
                     y += j
@@ -109,7 +109,7 @@ try:
             total = 1
         yavg = x/total
         xavg = y/total
-        cv2.rectangle(edge,(150,75),(640-150,480-75),(155,155,155),5)
+        cv2.rectangle(edge,(180,100),(640-10,480-100),(155,155,155),5)
         cv2.circle(edge, (int(xavg), int(yavg)), 15, (155,0,0), 10)
         cofy = int(((480-100)/2)+50) +100
         cofx = int(((640-300)/2)+125)
