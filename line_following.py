@@ -100,7 +100,7 @@ try:
         print("loop")
         np.set_printoptions(threshold=12000)
         a = np.asanyarray(edge)
-        print(edge)
+        print(a)
         rows, cols = np.where(edge == 255) # extract row and column numbers for each pixel
         # rows, cols = transform.xy(edge.transform, rows, cols)
         # np.set_printoptions(threshold=12000)
