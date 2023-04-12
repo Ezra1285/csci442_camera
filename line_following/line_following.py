@@ -102,7 +102,7 @@ try:
         
         #TODO
         #move towards COG
-        xdif = cog[0] - cof[0]
+        xdif = cof[0] - cog[0]
         ydif = cof[1] - cog[1]
         if ydif <0:
             stop()
