@@ -100,6 +100,7 @@ try:
         print("loop")
         np.set_printoptions(threshold=12000)
         rows, cols = np.where(edge == 255) # extract row and column numbers for each pixel
+
         # rows, cols = transform.xy(edge.transform, rows, cols)
         # np.set_printoptions(threshold=12000)
         # for i in range(100,480-100):
@@ -110,11 +111,11 @@ try:
         #             y += j
         #             total +=1
         #         pass
-        x = rows.size
-        y = cols.size
+        x = rows.sum()
+        y = cols.sum()
         print(x)
         print(y)
-        # total = x + y
+        total = rows.size
         print(total)
         if total == 0:
             total = 1
