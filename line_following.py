@@ -121,12 +121,12 @@ try:
         ydif = cof[1] - cog[1]
         if ydif <0:
             stop()
-        elif xdif <-50:
+        elif xdif <-35:
             if ydif >10:
                 left_forward()
             else:
                 right()
-        elif xdif >50:
+        elif xdif >35:
             if ydif > 10:
                 right_forward()
             else:
