@@ -48,6 +48,7 @@ def right_forward():
 
 def left():
     robot_controll.setTarget(1, 6600)
+    
     print("left")
 
 def right():
