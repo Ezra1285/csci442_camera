@@ -50,7 +50,7 @@ try:
         # diff = cv2.blur(diff, (5,5))
         # thresh = cv2.inRange(diff, 100, 150)
         #start line following
-        t_lower = 50  # Lower Threshold
+        t_lower = 100  # Lower Threshold
         t_upper = 150  # Upper threshold
 
         # Applying the Canny Edge filter
