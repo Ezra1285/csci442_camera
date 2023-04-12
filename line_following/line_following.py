@@ -103,7 +103,7 @@ try:
         #TODO
         #move towards COG
         xdif = cog[0] - cof[0]
-        ydif = cog[1] - cof[1]
+        ydif = cof[1] - cog[1]
 
         if xdif <-10:
             if ydif >10:
