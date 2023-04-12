@@ -117,8 +117,8 @@ try:
         xavg = y/total
         cv2.rectangle(edge,(180,100),(640-10,480-100),(155,155,155),5)
         cv2.circle(edge, (int(xavg), int(yavg)), 15, (155,0,0), 10)
-        cofy = int(((480-100)/2)+50) +100
-        cofx = int(((640-300)/2)+125)
+        cofy = int(((480)/2))
+        cofx = int(((640)/2))
         cof = (cofx, cofy)
         cv2.circle(edge, cof, 10, (255,0,0), 5)
         cog = (xavg,yavg)
