@@ -137,7 +137,7 @@ try:
         else:
             stop()
 
-        cv2.imshow('RealSense', edge)
+        # cv2.imshow('RealSense', edge)
         key = cv2.waitKey(1)
         if(key == 27):
             break
