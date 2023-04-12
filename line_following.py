@@ -102,7 +102,6 @@ try:
         rows, cols = np.where(edge == 255) # extract row and column numbers for each pixel
         # rows, cols = transform.xy(edge.transform, rows, cols)
         # np.set_printoptions(threshold=12000)
-        print(rows.size)
         # for i in range(100,480-100):
         #     for j in range(180, 640-180):
         #         print(edge[i,j])
@@ -114,8 +113,9 @@ try:
         x = rows.size
         y = cols.size
         print(x)
-        print(total)
+       
         total = x + y
+        print(total)
         if total == 0:
             total = 1
         yavg = x/total
