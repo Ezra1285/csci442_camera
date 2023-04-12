@@ -103,8 +103,10 @@ try:
         x=0
         y=0
         print("loop")
+        print(edge.size)
         np.set_printoptions(threshold=12000)
         crop_center(edge,300,450)
+        print(edge.size)
         rows, cols = np.where(edge == 255) # extract row and column numbers for each pixel
 
         # rows, cols = transform.xy(edge.transform, rows, cols)
