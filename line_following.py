@@ -98,6 +98,9 @@ try:
         x=0
         y=0
         print("loop")
+        rows, cols = np.where(edge == i) # extract row and column numbers for each pixel
+        rows, cols = np.transform.xy(edge.transform, rows, cols)
+        print(rows)
         for i in range(100,480-100):
             for j in range(180, 640-180):
                 if(edge[i,j] > 100):
