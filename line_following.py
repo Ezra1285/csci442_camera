@@ -34,6 +34,7 @@ pipeline.start(config)
 
 
 def move_forward():
+    robot_controll.setTarget(1, 6000)
     robot_controll.setTarget(0, 5400)
     print("forward")
 
@@ -53,11 +54,12 @@ def right_forward():
     print("right forward")
 
 def left():
+    robot_controll.setTarget(0, 6000)
     robot_controll.setTarget(1, 6800)
-    
     print("left")
 
 def right():
+    robot_controll.setTarget(0, 6000)
     robot_controll.setTarget(1, 5200)
     print("right")
 
