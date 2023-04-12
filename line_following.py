@@ -105,7 +105,7 @@ try:
         print("loop")
  
         crop_center(edge,100,450)
-        edge = edge[100:380,100:400]
+        edge = edge[60:420,100:400]
         rows, cols = np.where(edge == 255) # extract row and column numbers for each pixel
 
         # rows, cols = transform.xy(edge.transform, rows, cols)
