@@ -111,6 +111,7 @@ try:
         #         pass
         x = rows[0].size
         y = cols[0].size
+        total = x + y
         if total == 0:
             total = 1
         yavg = x/total
