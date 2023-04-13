@@ -103,7 +103,7 @@ try:
         x=0
         y=0
         print("loop")
-        edge = edge[60:420,150:450]
+        edge = edge[40:440,150:450]
         rows, cols = np.where(edge == 255) # extract row and column numbers for each pixel
 
         # rows, cols = transform.xy(edge.transform, rows, cols)
@@ -129,7 +129,7 @@ try:
         cv2.rectangle(edge,(180,100),(640-10,480-100),(155,155,155),5)
         cv2.circle(edge, (int(xavg), int(yavg)), 15, (155,0,0), 10)
         cofy = int(300)
-        cofx = int((420-60)/2)
+        cofx = int((440-40)/2)
         cof = (cofx, cofy)
         cv2.circle(edge, cof, 10, (255,0,0), 5)
         cog = (xavg,yavg)
