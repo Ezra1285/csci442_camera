@@ -48,22 +48,22 @@ def stop():
     robot_controll.setTarget(0, 6000)
     print("stop")
 
-def left_forward():
+def right_forward():
     robot_controll.setTarget(0, 5200)
     robot_controll.setTarget(2, 7000)
     print("left foward")
 
-def right_forward():
+def left_forward():
     robot_controll.setTarget(0, 5200)
     robot_controll.setTarget(2, 5000)
     print("right forward")
 
-def left():
+def right():
     robot_controll.setTarget(0, 6000)
     robot_controll.setTarget(2, 7000)
     print("left")
 
-def right():
+def left():
     robot_controll.setTarget(0, 6000)
     robot_controll.setTarget(2, 5000)
     print("right")
@@ -128,7 +128,7 @@ try:
         xavg = y/total
         cv2.rectangle(edge,(180,100),(640-10,480-100),(155,155,155),5)
         cv2.circle(edge, (int(xavg), int(yavg)), 15, (155,0,0), 10)
-        cofy = int(200)
+        cofy = int(100)
         cofx = int((420-60)/2)
         cof = (cofx, cofy)
         cv2.circle(edge, cof, 10, (255,0,0), 5)
