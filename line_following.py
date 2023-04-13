@@ -103,8 +103,6 @@ try:
         x=0
         y=0
         print("loop")
- 
-        crop_center(edge,100,450)
         edge = edge[60:420,150:450]
         rows, cols = np.where(edge == 255) # extract row and column numbers for each pixel
 
