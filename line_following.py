@@ -40,7 +40,7 @@ def crop_center(img,cropx,cropy):
 
 def move_forward():
     robot_controll.setTarget(2, 6000)
-    robot_controll.setTarget(0, 5000)
+    robot_controll.setTarget(0, 5250)
     print("forward")
 
 def stop():
