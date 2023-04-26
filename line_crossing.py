@@ -113,7 +113,7 @@ try:
         # Set up the detector with default parameters.
         # Grayscale
         gray = cv2.cvtColor(edge, cv2.COLOR_BGR2GRAY)
-        
+        gray = cv2.blur(gray, (10,10))
         # Find Canny edges
         print("edge")
         edged = cv2.Canny(gray, 30, 200)
