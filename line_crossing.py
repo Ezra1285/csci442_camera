@@ -133,11 +133,10 @@ try:
             total = 1
         yavg = x/total
         xavg = y/total
-        cv2.rectangle(edge,(180,100),(640-10,480-100),(155,155,155),5)
         cofy = int(300)
         cofx = int((440-40)/2)
         cof = (cofx, cofy)
-        cv2.circle(edge, cof, 10, (255,0,0), 5)
+        # cv2.circle(edge, cof, 10, (255,0,0), 5)
         cog = (xavg,yavg)
 
         
