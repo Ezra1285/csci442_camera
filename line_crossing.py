@@ -123,11 +123,11 @@ try:
         print("detector")
         # Detect blobs.
         keypoints = detector.detect(edge)
-        
+        print("keypoints")
         # Draw detected blobs as red circles.
         # cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS ensures the size of the circle corresponds to the size of blob
         im_with_keypoints = cv2.drawKeypoints(edge, keypoints, np.array([]), (0,0,255), cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
-
+        print("draw keypoints")
 
         if total == 0:
             total = 1
