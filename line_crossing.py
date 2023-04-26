@@ -101,7 +101,7 @@ try:
         print("color")
         #fix lighting      	
         gray = cv2.cvtColor(color, cv2.COLOR_BGR2GRAY)
-        # gray = cv2.cvtColor(gray, cv2.COLOR_GRAY2BGR)
+        gray = cv2.cvtColor(gray, cv2.COLOR_GRAY2BGR)
         blur = cv2.blur(gray, (30,30))
         diff = cv2.absdiff(color, blur)
         # diff = cv2.blur(color, (5,5))
