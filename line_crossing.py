@@ -163,7 +163,7 @@ try:
         #     stop()
         # if(total <3):
         #     stop()
-        cv2.imshow('RealSense', edge)
+        cv2.imshow('RealSense', im_with_keypoints)
         key = cv2.waitKey(1)
         if(key == 27):
             break
