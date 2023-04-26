@@ -121,7 +121,7 @@ try:
         y=0
         print("loop")
         edge = edge[40:440,150:450]
-        rows, cols = np.where(edge == 255) # extract row and column numbers for each pixel
+        # rows, cols = np.where(edge == 255) # extract row and column numbers for each pixel
 
         # rows, cols = transform.xy(edge.transform, rows, cols)
         # np.set_printoptions(threshold=12000)
