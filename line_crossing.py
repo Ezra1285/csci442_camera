@@ -111,6 +111,8 @@ try:
         gray = gray[40:440,150:450]
         # Read image
         # Set up the detector with default parameters.
+        gray = cv2.cvtColor(color, cv2.COLOR_BGR2GRAY)
+        gray = cv2.blur(gray, (5,5))
         detector = cv2.SimpleBlobDetector_create()
         print("detector")
         # Detect blobs.
