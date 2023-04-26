@@ -107,44 +107,35 @@ try:
         diff = cv2.blur(color, (5,5))
         edge = diff
         print("blur")
-        # thresh = cv2.inRange(diff, 100, 150)
-        #start line following
         t_lower = 100  # Lower Threshold
         t_upper = 150  # Upper threshold
-
-        # Applying the Canny Edge filter
-        print("edge")
-        # edge = cv2.Canny(diff, t_lower, t_upper)
         #find COG
         total = 0
         x=0
         y=0
         print("loop")
         edge = edge[40:440,150:450]
-        # rows, cols = np.where(edge == 255) # extract row and column numbers for each pixel
+    
 
-        # rows, cols = transform.xy(edge.transform, rows, cols)
-        # np.set_printoptions(threshold=12000)
-        # for i in range(100,480-100):
-        #     for j in range(180, 640-180):
-        #         print(edge[i,j])
-        #         if(edge[i,j] > 100):
-        #             x += i
-        #             y += j
-        #             total +=1
-        #         pass
-        # x = rows.sum()
-        # y = cols.sum()
-        # print(x)
-        # print(y)
-        # total = rows.size
-        # print(total)
+        # Read image
+        \
+        
+        # Set up the detector with default parameters.
+        detector = cv2.SimpleBlobDetector()
+        
+        # Detect blobs.
+        keypoints = detector.detect(edge)
+        
+        # Draw detected blobs as red circles.
+        # cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS ensures the size of the circle corresponds to the size of blob
+        im_with_keypoints = cv2.drawKeypoints(edge, keypoints, np.array([]), (0,0,255), cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
+
+
         if total == 0:
             total = 1
         yavg = x/total
         xavg = y/total
         cv2.rectangle(edge,(180,100),(640-10,480-100),(155,155,155),5)
-        cv2.circle(edge, (int(xavg), int(yavg)), 15, (155,0,0), 10)
         cofy = int(300)
         cofx = int((440-40)/2)
         cof = (cofx, cofy)
