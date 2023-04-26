@@ -119,7 +119,7 @@ try:
 
         # Read image
         # Set up the detector with default parameters.
-        detector = cv2.SimpleBlobDetector()
+        detector = cv2.SimpleBlobDetector_create()
         print("detector")
         # Detect blobs.
         keypoints = detector.detect(edge)
