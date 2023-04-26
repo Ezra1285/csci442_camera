@@ -114,7 +114,7 @@ try:
         # Grayscale
         # Find Canny edges
         print("edge")
-        blur = cv2.blur(edge, (10,10))
+        blur = cv2.blur(edge, (5,5))
         edged = cv2.Canny(blur, 30, 200)
         
         # Finding Contours
