@@ -100,27 +100,25 @@ try:
         color = np.asanyarray(color_frame.get_data())
         print("color")
         #fix lighting      	
-        gray = cv2.cvtColor(color, cv2.COLOR_BGR2GRAY)
-        gray = cv2.cvtColor(gray, cv2.COLOR_GRAY2BGR)
-        blur = cv2.blur(gray, (30,30))
-        diff = cv2.absdiff(color, blur)
+        # gray = cv2.cvtColor(color, cv2.COLOR_BGR2GRAY)
+        # gray = cv2.cvtColor(gray, cv2.COLOR_GRAY2BGR)
+        # blur = cv2.blur(gray, (30,30))
+        # diff = cv2.absdiff(color, blur)
         # diff = cv2.blur(color, (5,5))
-        edge = diff
+        edge = color
         print("blur")
         edge = edge[40:440,150:450]
-        gray = gray[40:440,150:450]
+        # gray = gray[40:440,150:450]
         # Read image
         # Set up the detector with default parameters.
-        gray = cv2.cvtColor(color, cv2.COLOR_BGR2GRAY)
-        gray = cv2.blur(gray, (5,5))
-        detector = cv2.SimpleBlobDetector_create()
+        detector = cv2.SimpleBlobDetector_create(filterByColor = 1)
         print("detector")
         # Detect blobs.
-        keypoints = detector.detect(gray)
+        keypoints = detector.detect(edge)
         print("keypoints")
         # Draw detected blobs as red circles.
         # cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS ensures the size of the circle corresponds to the size of blob
-        im_with_keypoints = cv2.drawKeypoints(gray, keypoints, np.array([]), (0,0,255), cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
+        im_with_keypoints = cv2.drawKeypoints(edge, keypoints, np.array([]), (0,0,255), cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
         print("draw keypoints")
         total = 0
         x=0
