@@ -108,17 +108,23 @@ try:
         edge = color
         print("blur")
         edge = edge[40:440,150:450]
+        frame = edge
         # gray = gray[40:440,150:450]
         # Read image
         # Set up the detector with default parameters.
-        detector = cv2.SimpleBlobDetector_create(filterByColor = 1)
-        print("detector")
-        # Detect blobs.
-        keypoints = detector.detect(edge)
-        print("keypoints")
-        # Draw detected blobs as red circles.
-        # cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS ensures the size of the circle corresponds to the size of blob
-        im_with_keypoints = cv2.drawKeypoints(edge, keypoints, np.array([]), (0,0,255), cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
+        lower = (130,150,80)  #130,150,80
+        upper = (250,250,120) #250,250,120
+        mask = cv2.inRange(frame, lower, upper)
+        lower, contours, upper = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+        blob = max(contours, key=lambda el: cv2.contourArea(el))
+        M = cv2.moments(blob)
+        center = (int(M["m10"] / M["m00"]), int(M["m01"] / M["m00"]))
+        canvas = im.copy()
+        cv2.circle(canvas, center, 2, (0,0,255), -1)
+
+        cv2.imshow('frame',frame)
+
+
         print("draw keypoints")
         total = 0
         x=0
@@ -157,7 +163,7 @@ try:
         #     stop()
         # if(total <3):
         #     stop()
-        cv2.imshow('RealSense', gray)
+        cv2.imshow('RealSense', frame)
         key = cv2.waitKey(1)
         if(key == 27):
             break
