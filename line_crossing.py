@@ -133,12 +133,12 @@ try:
         #             y += j
         #             total +=1
         #         pass
-        x = rows.sum()
-        y = cols.sum()
-        print(x)
-        print(y)
-        total = rows.size
-        print(total)
+        # x = rows.sum()
+        # y = cols.sum()
+        # print(x)
+        # print(y)
+        # total = rows.size
+        # print(total)
         if total == 0:
             total = 1
         yavg = x/total
