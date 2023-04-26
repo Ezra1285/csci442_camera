@@ -117,7 +117,6 @@ try:
         # Find Canny edges
         print("edge")
         edged = cv2.Canny(gray, 30, 200)
-        cv2.waitKey(0)
         
         # Finding Contours
         # Use a copy of the image e.g. edged.copy()
