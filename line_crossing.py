@@ -120,7 +120,7 @@ try:
         print("keypoints")
         # Draw detected blobs as red circles.
         # cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS ensures the size of the circle corresponds to the size of blob
-        im_with_keypoints = cv2.drawKeypoints(edge, keypoints, np.array([]), (0,0,255), cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
+        im_with_keypoints = cv2.drawKeypoints(gray, keypoints, np.array([]), (0,0,255), cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
         print("draw keypoints")
         total = 0
         x=0
@@ -159,7 +159,7 @@ try:
         #     stop()
         # if(total <3):
         #     stop()
-        cv2.imshow('RealSense', im_with_keypoints)
+        cv2.imshow('RealSense', gray)
         key = cv2.waitKey(1)
         if(key == 27):
             break
