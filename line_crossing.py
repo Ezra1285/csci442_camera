@@ -114,10 +114,10 @@ try:
         # Grayscale
         # Find Canny edges
         imghsv = cv2.cvtColor(edge, cv2.COLOR_BGR2HSV)
-        lower_blue = np.array([110,50,50])
-        upper_blue = np.array([130,255,255])
-        mask_blue = cv2.inRange(imghsv, lower_blue, upper_blue)
-        contours, _ = cv2.findContours(mask_blue, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        lower_orange = np.array([110,50,50])
+        upper_orange = np.array([130,255,255])
+        mask_orange = cv2.inRange(imghsv, lower_orange, upper_orange)
+        contours, _ = cv2.findContours(mask_orange, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
         
         cv2.drawContours(edge, contours, -1, (0, 255, 0), 1)
         total = 0
