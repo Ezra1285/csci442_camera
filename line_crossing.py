@@ -104,7 +104,7 @@ try:
         gray = cv2.cvtColor(gray, cv2.COLOR_GRAY2BGR)
         blur = cv2.blur(gray, (30,30))
         diff = cv2.absdiff(color, blur)
-        diff = cv2.blur(color, (5,5))
+        # diff = cv2.blur(color, (5,5))
         edge = diff
         print("blur")
         t_lower = 100  # Lower Threshold
