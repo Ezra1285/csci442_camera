@@ -113,25 +113,13 @@ try:
         # Set up the detector with default parameters.
         # Grayscale
         # Find Canny edges
-        print("edge")
-        blur = cv2.blur(edge, (7,7))
-        edged = cv2.Canny(blur, 30, 200)
+        imghsv = cv2.cvtColor(edge, cv2.COLOR_BGR2HSV)
+        lower_blue = np.array([110,50,50])
+        upper_blue = np.array([130,255,255])
+        mask_blue = cv2.inRange(imghsv, lower_blue, upper_blue)
+        contours, _ = cv2.findContours(mask_blue, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
         
-        # Finding Contours
-        # Use a copy of the image e.g. edged.copy()
-        # since findContours alters the image
-        print("contuors")
-        contours, hierarchy = cv2.findContours(edged, 
-            cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
-
-        print("Number of Contours found = " + str(len(contours)))
-        
-        # Draw all contours
-        # -1 signifies drawing all contours
-        cv2.drawContours(edge, contours, -1, (0, 255, 0), 3)
-  
-
-        print("draw keypoints")
+        cv2.drawContours(edge, contours, -1, (0, 255, 0), 1)
         total = 0
         x=0
         y=0
