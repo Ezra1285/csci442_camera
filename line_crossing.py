@@ -118,8 +118,6 @@ try:
     
 
         # Read image
-        \
-        
         # Set up the detector with default parameters.
         detector = cv2.SimpleBlobDetector()
         
