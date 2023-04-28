@@ -53,13 +53,13 @@ class robot:
         if(self.waist > 7900):
             self.waist = 7900
         print("waist ", self.waist)
-        self.robot_controll.setTarget(0, self.waist)
+        self.robot_controll.setTarget(2, self.waist)
 
     def waistLeft(self):
         self.waist -= 200
         if(self.waist < 1510):
             self.waist = 1510
-        self.robot_controll.setTarget(0, self.waist)
+        self.robot_controll.setTarget(2, self.waist)
 
     #  handle head movement
     def headRight(self):
