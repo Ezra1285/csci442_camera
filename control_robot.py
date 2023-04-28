@@ -1,6 +1,6 @@
 import maestro
 
-class control_robot:
+class robot:
     
     def __init__(self):
         self.robot_controll = maestro.Controller()
