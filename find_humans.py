@@ -1,6 +1,3 @@
-import numpy as np
-import cv2 as cv
-
 import pyrealsense2 as rs
 import numpy as np
 import maestro
@@ -93,57 +90,17 @@ try:
 
         # # Applying the Canny Edge filter
         edge = cv2.Canny(diff, t_lower, t_upper)
-        # #find COG
-        # total = 0
-        # x=0
-        # y=0
-        # print("loop")
         edge = edge[40:440,150:450]
-        # rows, cols = np.where(edge == 255) # extract row and column numbers for each pixel
+        rows, cols = np.where(edge == 255) # extract row and column numbers for each pixel
 
-        
-        # x = rows.sum()
-        # y = cols.sum()
-        # print(x)
-        # print(y)
-        # total = rows.size
-        # print(total)
-        # if total == 0:
-        #     total = 1
-        # yavg = x/total
-        # xavg = y/total
-        # cv2.rectangle(edge,(180,100),(640-10,480-100),(155,155,155),5)
-        # cv2.circle(edge, (int(xavg), int(yavg)), 15, (155,0,0), 10)
-        # cofy = int(300)
-        # cofx = int((440-40)/2)
-        # cof = (cofx, cofy)
-        # cv2.circle(edge, cof, 10, (255,0,0), 5)
-        # cog = (xavg,yavg)
+        #  First find a human
+        hog = cv2.HOGDescriptor()
+        hog.setSVMDetector(cv2.HOGDescriptor_getDefaultPeopleDetector())
+        (humans, _) = hog.detectMultiScale(frames, winStride=(10, 10),
+        padding=(32, 32), scale=1.1)
 
-        
-        #TODO
-        #move towards COG
-        # xdif = cof[0] - cog[0]
-        # ydif = cof[1] - cog[1]
-        # if ydif <0:
-        #     stop()
-        # elif xdif <-35:
-        #     if ydif >10:
-        #         left_forward()
-        #     else:
-        #         right()
-        # elif xdif >35:
-        #     if ydif > 10:
-        #         right_forward()
-        #     else:
-        #         left()
 
-        # elif ydif > 0:
-        #     move_forward()
-        # else:
-        #     stop()
-        # if(total <3):
-        #     stop()
+            
         cv2.imshow('RealSense', color)
         # cv2.imshow('RealSense', edge)
         key = cv2.waitKey(1)
