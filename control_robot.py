@@ -48,12 +48,12 @@ class robot:
     #  handle waist movement
     def waistRight(self):
         self.waist += 200
-        if(self.body > 7900):
-            self.body = 7900
+        if(self.waist > 7900):
+            self.waist = 7900
         self.robot_controll.setTarget(0, self.waist)
 
     def waistRight(self):
         self.waist -= 200
-        if(self.body < 1510):
-            self.body = 1510
+        if(self.waist < 1510):
+            self.waist = 1510
         self.robot_controll.setTarget(0, self.waist)
