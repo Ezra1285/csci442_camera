@@ -98,18 +98,18 @@ try:
         
         # thresh = cv2.inRange(diff, 100, 150)
         #start line following
-        # t_lower = 100  # Lower Threshold
-        # t_upper = 150  # Upper threshold
+        t_lower = 100  # Lower Threshold
+        t_upper = 150  # Upper threshold
 
         # # Applying the Canny Edge filter
         # print("edge")
-        # edge = cv2.Canny(diff, t_lower, t_upper)
+        edge = cv2.Canny(diff, t_lower, t_upper)
         # #find COG
         # total = 0
         # x=0
         # y=0
         # print("loop")
-        # edge = edge[40:440,150:450]
+        edge = edge[40:440,150:450]
         # rows, cols = np.where(edge == 255) # extract row and column numbers for each pixel
 
         
@@ -155,7 +155,7 @@ try:
         #     stop()
         # if(total <3):
         #     stop()
-        cv2.imshow('RealSense', color_frame)
+        cv2.imshow('RealSense', edge)
         key = cv2.waitKey(1)
         if(key == 27):
             break
