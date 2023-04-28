@@ -97,8 +97,13 @@ try:
         rows, cols = np.where(edge == 255) # extract row and column numbers for each pixel
 
         #  First find a human
-        (humans, _) = hog.detectMultiScale(color, winStride=(10, 10),
-        padding=(32, 32), scale=1.1)
+        # (humans, _) = hog.detectMultiScale(color, winStride=(10, 10),
+        # padding=(32, 32), scale=1.1)
+        
+        (regions, _) = hog.detectMultiScale(color, 
+                                    winStride=(4, 4),
+                                    padding=(4, 4),
+                                    scale=1.05)
 
 
             
