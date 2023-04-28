@@ -73,6 +73,9 @@ robot_controll.setAccel(0,60)
 robot_controll.setSpeed(0, 10)
 robot_controll.setTarget(0, 6000)
 
+hog = cv2.HOGDescriptor()
+hog.setSVMDetector(cv2.HOGDescriptor_getDefaultPeopleDetector())
+
 try:
     while True:
         # Wait for a coherent pair of frames: depth and color
@@ -94,8 +97,6 @@ try:
         rows, cols = np.where(edge == 255) # extract row and column numbers for each pixel
 
         #  First find a human
-        hog = cv2.HOGDescriptor()
-        hog.setSVMDetector(cv2.HOGDescriptor_getDefaultPeopleDetector())
         (humans, _) = hog.detectMultiScale(color, winStride=(10, 10),
         padding=(32, 32), scale=1.1)
 
