@@ -32,49 +32,13 @@ else:
 # Start streaming
 pipeline.start(config)
 
-def crop_center(img,cropx,cropy):
-    y,x = img.shape
-    startx = x//2-(cropx//2)
-    starty = y//2-(cropy//2)    
-    return img[starty:starty+cropy,startx:startx+cropx]
-
-def move_forward():
-    robot_controll.setTarget(2, 6000)
-    robot_controll.setTarget(0, 5250)
-    print("forward")
-
-def stop():
-    robot_controll.setTarget(2, 6000)
-    robot_controll.setTarget(0, 6000)
-    print("stop")
-
-def right_forward():
-    robot_controll.setTarget(0, 5200)
-    robot_controll.setTarget(2, 7000)
-    print("left foward")
-
-def left_forward():
-    robot_controll.setTarget(0, 5200)
-    robot_controll.setTarget(2, 5000)
-    print("right forward")
-
-def right():
-    robot_controll.setTarget(0, 6000)
-    robot_controll.setTarget(2, 7000)
-    print("left")
-
-def left():
-    robot_controll.setTarget(0, 6000)
-    robot_controll.setTarget(2, 5000)
-    print("right")
-
 robot_controll = maestro.Controller()
 robot_controll.setAccel(0,60)
 robot_controll.setSpeed(0, 10)
 robot_controll.setTarget(0, 6000)
 
-hog = cv2.HOGDescriptor()
-hog.setSVMDetector(cv2.HOGDescriptor_getDefaultPeopleDetector())
+# hog = cv2.HOGDescriptor()
+# hog.setSVMDetector(cv2.HOGDescriptor_getDefaultPeopleDetector())
 
 try:
     while True:
@@ -97,14 +61,7 @@ try:
         rows, cols = np.where(edge == 255) # extract row and column numbers for each pixel
 
         #  First find a human
-        # (humans, _) = hog.detectMultiScale(color, winStride=(10, 10),
-        # padding=(32, 32), scale=1.1)
         
-        (regions, _) = hog.detectMultiScale(color, 
-                                    winStride=(4, 4),
-                                    padding=(4, 4),
-                                    scale=1.05)
-
 
             
         cv2.imshow('RealSense', color)
