@@ -96,7 +96,7 @@ try:
         #  First find a human
         hog = cv2.HOGDescriptor()
         hog.setSVMDetector(cv2.HOGDescriptor_getDefaultPeopleDetector())
-        (humans, _) = hog.detectMultiScale(frames, winStride=(10, 10),
+        (humans, _) = hog.detectMultiScale(color, winStride=(10, 10),
         padding=(32, 32), scale=1.1)
 
 
