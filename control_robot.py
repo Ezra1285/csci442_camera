@@ -8,6 +8,8 @@ class robot:
         self.robot_controll.setSpeed(0, 10)
         self.robot_controll.setTarget(0, 6000)
         self.waist = 6000
+        self.headTurn = 6000
+        self.headTilt = 6000
 
     # def stopRobot(self):
     #     self.robot_controll.setAccel(0,60)
@@ -52,8 +54,23 @@ class robot:
             self.waist = 7900
         self.robot_controll.setTarget(1, self.waist)
 
-    def waistRight(self):
+    def waistLeft(self):
         self.waist -= 200
         if(self.waist < 1510):
             self.waist = 1510
         self.robot_controll.setTarget(1, self.waist)
+
+    #  handle head movement
+    def headRight(self):
+        pass
+        # self.waist += 200
+        # if(self.waist > 7900):
+        #     self.waist = 7900
+        # self.robot_controll.setTarget(1, self.waist)
+
+    def headLeft(self):
+        pass
+        # self.waist -= 200
+        # if(self.waist < 1510):
+        #     self.waist = 1510
+        # self.robot_controll.setTarget(1, self.waist)
