@@ -52,6 +52,7 @@ class robot:
         self.waist += 200
         if(self.waist > 7900):
             self.waist = 7900
+        print("waist ", self.waist)
         self.robot_controll.setTarget(1, self.waist)
 
     def waistLeft(self):
