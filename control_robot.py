@@ -50,10 +50,10 @@ class robot:
         self.waist += 200
         if(self.waist > 7900):
             self.waist = 7900
-        self.robot_controll.setTarget(0, self.waist)
+        self.robot_controll.setTarget(1, self.waist)
 
     def waistRight(self):
         self.waist -= 200
         if(self.waist < 1510):
             self.waist = 1510
-        self.robot_controll.setTarget(0, self.waist)
+        self.robot_controll.setTarget(1, self.waist)
