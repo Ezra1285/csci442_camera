@@ -85,24 +85,13 @@ try:
             continue
         # Convert color_frameimages to numpy arrays
         color = np.asanyarray(color_frame.get_data())
-        # print("color")
-
-        #fix lighting      	
-        # gray = cv2.cvtColor(color, cv2.COLOR_BGR2GRAY)
-        # gray = cv2.cvtColor(gray, cv2.COLOR_GRAY2BGR)
-        # blur = cv2.blur(gray, (30,30))
-        # diff = cv2.absdiff(color, blur)
-        
         diff = cv2.blur(color, (5,5))
-        # print("blur")
-        
-        # thresh = cv2.inRange(diff, 100, 150)
+            
         #start line following
         t_lower = 100  # Lower Threshold
         t_upper = 150  # Upper threshold
 
         # # Applying the Canny Edge filter
-        # print("edge")
         edge = cv2.Canny(diff, t_lower, t_upper)
         # #find COG
         # total = 0
@@ -155,20 +144,17 @@ try:
         #     stop()
         # if(total <3):
         #     stop()
-        cv2.imshow('RealSense', edge)
+        cv2.imshow('RealSense', color)
+        # cv2.imshow('RealSense', edge)
         key = cv2.waitKey(1)
         if(key == 27):
             break
         
-
-
-
-
 finally:
-    # robot_controll.setAccel(0,60)
-    # robot_controll.setSpeed(0, 10)
-    # robot_controll.setTarget(0, 6000)
-    # robot_controll.setTarget(2, 6000)
+    robot_controll.setAccel(0,60)
+    robot_controll.setSpeed(0, 10)
+    robot_controll.setTarget(0, 6000)
+    robot_controll.setTarget(2, 6000)
     # Stop streaming
     pipeline.stop()
 
