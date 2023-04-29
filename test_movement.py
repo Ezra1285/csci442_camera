@@ -19,9 +19,9 @@ import time
 # bot.close()
 
 robot = control_robot.robot()
-
-for i in range(8):
-    robot.waistRight()
-    time.sleep(5)
+robot.spinInCircle()
+time.sleep(5)
+# for i in range(8):
+#     robot.waistRight()
 
 robot.stop()

@@ -43,6 +43,9 @@ class robot:
         self.robot_controll.setTarget(2, 5000)
         print("right")
 
+    def spinInCircle(self):
+        self.robot_controll.setTarget(2, 7000)
+
     #  handle waist movement
     def waistRight(self):
         self.waist += 200
