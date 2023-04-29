@@ -27,9 +27,4 @@ while True:
          break
     count +=1
 
-
-# time.sleep(6)
-# for i in range(8):
-#     robot.waistRight()
-
 robot.stop()

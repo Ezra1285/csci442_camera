@@ -2,6 +2,8 @@ import pyrealsense2 as rs
 import numpy as np
 import maestro
 import cv2
+import control_robot
+import time
 
 # Configure depth and color streams
 pipeline = rs.pipeline()
@@ -32,10 +34,7 @@ else:
 # Start streaming
 pipeline.start(config)
 
-robot_controll = maestro.Controller()
-robot_controll.setAccel(0,60)
-robot_controll.setSpeed(0, 10)
-robot_controll.setTarget(0, 6000)
+robot = control_robot.robot()
 
 # hog = cv2.HOGDescriptor()
 # hog.setSVMDetector(cv2.HOGDescriptor_getDefaultPeopleDetector())
@@ -51,6 +50,13 @@ try:
         color = np.asanyarray(color_frame.get_data())
         diff = cv2.blur(color, (5,5))
             
+        print("STart")            
+        hsvFrame = cv2.cvtColor(frames, cv2.COLOR_BGR2HSV)
+        print("end")
+        red_lower = np.array([136, 87, 111], np.uint8)
+        red_upper = np.array([180, 255, 255], np.uint8)
+        red_mask = cv2.inRange(hsvFrame, red_lower, red_upper)
+        print("Mask done")
         #start line following
         t_lower = 100  # Lower Threshold
         t_upper = 150  # Upper threshold
@@ -62,7 +68,17 @@ try:
 
         #  First find a human
         
-
+        #  We can set a timer that stops this loops just incase it cant find the ice
+        #  ex) wait 1 min before breaking if ice is not found
+        #  TODO - follow color finding artical
+        #       - break out once color has been found
+        count = 0
+        while True:
+            robot.spinInCircle()
+            time.sleep(1)
+            if(count == 12):
+                break
+            count +=1
             
         cv2.imshow('RealSense', color)
         # cv2.imshow('RealSense', edge)
@@ -71,10 +87,8 @@ try:
             break
         
 finally:
-    robot_controll.setAccel(0,60)
-    robot_controll.setSpeed(0, 10)
-    robot_controll.setTarget(0, 6000)
-    robot_controll.setTarget(2, 6000)
+    robot.stop()
+    robot.close()
     # Stop streaming
     pipeline.stop()
 
