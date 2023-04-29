@@ -1,5 +1,6 @@
 import control_robot
 import maestro
+import time
 
 
 bot = maestro.Controller()
@@ -9,8 +10,9 @@ bot.setSpeed(0, 10)
 bot.setTarget(0, 6000)
 
 # bot.setTarget(2, 7000)
-bot.setTarget(0, 5000)
+bot.setTarget(0, 7000)
 
+time.sleep(10)
 
 bot.setTarget(0, 6000)
 bot.setTarget(2, 6000)
