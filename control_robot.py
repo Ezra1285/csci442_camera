@@ -12,11 +12,6 @@ class robot:
         self.headTilt = 6000
         self.turn = 6000
 
-    # def stopRobot(self):
-    #     self.robot_controll.setAccel(0,60)
-    #     self.robot_controll.setSpeed(0, 10)
-    #     self.robot_controll.setTarget(0, 6000)
-    
     #  Handle body movement
     def move_forward(self):
         self.robot_controll.setTarget(2, 6000)
@@ -44,11 +39,6 @@ class robot:
         print("left")
 
     def left(self):
-        # self.turn -= 200
-        # if(self.turn <2110):
-        #     self.turn = 2110
-        # print(self.turn)
-        # self.robot_controll.setTarget(2, self.turn)
         self.robot_controll.setTarget(0, 6000)
         self.robot_controll.setTarget(2, 5000)
         print("right")
@@ -91,3 +81,6 @@ class robot:
         if(self.headTilt < 1510):
             self.headTilt = 1510
         self.robot_controll.setTarget(4, self.headTilt)
+
+    def close(self):
+        self.robot_controll.close()
