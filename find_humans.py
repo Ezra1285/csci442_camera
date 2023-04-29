@@ -39,7 +39,7 @@ def spinRobot():
     while True:
         robot.spinInCircle()
         time.sleep(1)
-        if(count == 10):
+        if(count == 13):
             break
         count +=1
 
@@ -68,6 +68,11 @@ try:
         
         red_mask = cv2.inRange(hsvFrame, red_lower, red_upper)
         print("Mask done")
+        kernel = np.ones((5, 5), "uint8")
+      
+        # For red color
+        red_mask = cv2.dilate(red_mask, kernel)
+        res_red = cv2.bitwise_and(color, color, mask = red_mask)
         #start line following
         # t_lower = 100  # Lower Threshold
         # t_upper = 150  # Upper threshold
