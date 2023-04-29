@@ -47,6 +47,7 @@ robot = control_robot.robot()
 #  red thresh
 red_lower = np.array([136, 87, 111], np.uint8)
 red_upper = np.array([180, 255, 255], np.uint8)
+isFirst = True
 # hog = cv2.HOGDescriptor()
 # hog.setSVMDetector(cv2.HOGDescriptor_getDefaultPeopleDetector())
 
@@ -83,7 +84,8 @@ try:
         #  TODO - follow color finding artical
         #       - break out once color has been found
         if(isFirst):
-            spinRobot()    
+            spinRobot()
+            isFirst = False    
         # cv2.imshow('RealSense', color)
         # cv2.imshow('RealSense', edge)
         key = cv2.waitKey(1)

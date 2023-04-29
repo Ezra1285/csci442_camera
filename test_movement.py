@@ -20,11 +20,11 @@ import time
 
 robot = control_robot.robot()
 count = 0
-# while True:
-robot.spinInCircle()
-time.sleep(10)
-#     if(count == 10):
-#          break
-#     count +=1
+while True:
+    robot.spinInCircle()
+    time.sleep(1)
+    if(count == 10):
+        break
+    count +=1
 
 robot.stop()
