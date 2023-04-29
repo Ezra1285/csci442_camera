@@ -22,7 +22,8 @@ robot = control_robot.robot()
 count = 0
 while True:
     robot.spinInCircle()
-    if(count == 100):
+    time.sleep(1)
+    if(count == 10):
          break
     count +=1
 
