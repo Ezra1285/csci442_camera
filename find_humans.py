@@ -75,7 +75,8 @@ try:
         # For red color
         red_mask = cv2.dilate(red_mask, kernel)
         res_red = cv2.bitwise_and(color, color, mask = red_mask)
-
+        #  possiable hack - have 3 programs one for each color
+        #  then run the program bassed on color hunter chooses
         contours, hierarchy = cv2.findContours(red_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
         for pic, contour in enumerate(contours):
             area = cv2.contourArea(contour)
