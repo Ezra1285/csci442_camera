@@ -56,9 +56,9 @@ clipping_distance = clipping_distance_in_meters / depth_scale
 #  Create an align object
 align_to = rs.stream.color
 align = rs.align(align_to)
-bbox = cv2.selectROI(color, False)
+# bbox = cv2.selectROI(color, False)
 # Initialize tracker with first frame and bounding box
-ok = tracker.init(color, bbox)
+# ok = tracker.init(color, bbox)
 is_start_distance = True
 
 
@@ -71,21 +71,39 @@ try:
     while True:
         # Wait for a coherent pair of frames: depth and color
         frames = pipeline.wait_for_frames()
+        depth_frame = frames.get_depth_frame()
         color_frame = frames.get_color_frame()
         if not color_frame:
             continue
         # Convert color_frameimages to numpy arrays
+        depth_image = np.asanyarray(depth_frame.get_data())
+        color_image = np.asanyarray(color_frame.get_data())
         color = np.asanyarray(color_frame.get_data())
-        # diff = cv2.blur(color, (5,5))
+
+        depth_colormap = cv2.applyColorMap(cv2.convertScaleAbs(depth_image, alpha=0.03), cv2.COLORMAP_JET)
+        depth_colormap_dim = depth_colormap.shape
+        color_colormap_dim = color.shape
+        # diff = cv2.blur(color_image, (5,5))
+
+         # If depth and color resolutions are different, resize color image to match depth image for display
+        # if depth_colormap_dim != color_colormap_dim:
+        #     resized_color_image = cv2.resize(color_image, dsize=(depth_colormap_dim[1], depth_colormap_dim[0]), interpolation=cv2.INTER_AREA)
+        #     images = np.hstack((resized_color_image, depth_colormap))
+        # else:
+        #     images = np.hstack((color_image, depth_colormap))
+
+        # blank = np.zeros_like(images)
+        
+        # images = np.vstack((images,blank))
                         
-        hsvFrame = cv2.cvtColor(color, cv2.COLOR_BGR2HSV)
+        hsvFrame = cv2.cvtColor(color_image, cv2.COLOR_BGR2HSV)
         red_mask = cv2.inRange(hsvFrame, red_lower, red_upper)
         
         kernel = np.ones((5, 5), "uint8")
 
         # For red color
         red_mask = cv2.dilate(red_mask, kernel)
-        res_red = cv2.bitwise_and(color, color, mask = red_mask)
+        res_red = cv2.bitwise_and(color_image, color_image, mask = red_mask)
         #  possiable hack - have 3 programs one for each color
         #  then run the program bassed on color hunter chooses
         contours, hierarchy = cv2.findContours(red_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
@@ -95,16 +113,16 @@ try:
                 robot.stopSpin()
                 print("We found red")
                 x, y, w, h = cv2.boundingRect(contour)
-                color = cv2.rectangle(color, (x, y), 
+                color_image = cv2.rectangle(color_image, (x, y), 
                                         (x + w, y + h), 
                                         (0, 0, 255), 2)
                 
-                cv2.putText(color, "Red Colour", (x, y),
+                cv2.putText(color_image, "Red Colour", (x, y),
                             cv2.FONT_HERSHEY_SIMPLEX, 1.0,
                             (0, 0, 255))
                 break 
    
-        cv2.imshow('RealSense', color)
+        cv2.imshow('RealSense', color_image)
         # cv2.imshow('RealSense', edge)
         key = cv2.waitKey(1)
         if(key == 27):
@@ -115,15 +133,3 @@ finally:
     robot.close()
     # Stop streaming
     pipeline.stop()
-
-
-# webcam = cv.VideoCapture(0)
-
-# while(1):
-#     _, frame = webcam.read()
-#     frame = cv.resize(frame, None, fx=.75,fy=.75, interpolation=cv.INTER_AREA)
-#     cv.imshow("Window", frame)
-#     key = cv.waitKey(1)
-#     if(key == 27):
-#         cv.destroyAllWindows()
-#         break
