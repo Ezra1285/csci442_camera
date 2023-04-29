@@ -51,7 +51,7 @@ isFirst = True
 iceFound = False
 # hog = cv2.HOGDescriptor()
 # hog.setSVMDetector(cv2.HOGDescriptor_getDefaultPeopleDetector())
-
+robot.startSpin()
 try:
     while True:
         # Wait for a coherent pair of frames: depth and color
@@ -79,7 +79,8 @@ try:
         for pic, contour in enumerate(contours):
             area = cv2.contourArea(contour)
             if(area > 1100):
-                iceFound = True
+                robot.stopSpin()
+                print("We found red")
                 x, y, w, h = cv2.boundingRect(contour)
                 color = cv2.rectangle(color, (x, y), 
                                         (x + w, y + h), 
@@ -103,9 +104,9 @@ try:
         #  ex) wait 1 min before breaking if ice is not found
         #  TODO - follow color finding artical
         #       - break out once color has been found
-        if(isFirst):
-            spinRobot()
-            isFirst = False    
+        # if(isFirst):
+        #     spinRobot()
+        #     isFirst = False    
 
         cv2.imshow('RealSense', color)
         # cv2.imshow('RealSense', edge)
