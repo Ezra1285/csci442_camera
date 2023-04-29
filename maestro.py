@@ -167,4 +167,3 @@ class Controller:
         cmd = chr(0x24)
         self.sendCmd(cmd)
 
-
