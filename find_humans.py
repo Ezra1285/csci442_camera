@@ -35,7 +35,9 @@ else:
 pipeline.start(config)
 
 robot = control_robot.robot()
-
+#  red thresh
+red_lower = np.array([136, 87, 111], np.uint8)
+red_upper = np.array([180, 255, 255], np.uint8)
 # hog = cv2.HOGDescriptor()
 # hog.setSVMDetector(cv2.HOGDescriptor_getDefaultPeopleDetector())
 
@@ -53,18 +55,17 @@ try:
         print("STart")            
         hsvFrame = cv2.cvtColor(frames, cv2.COLOR_BGR2HSV)
         print("end")
-        red_lower = np.array([136, 87, 111], np.uint8)
-        red_upper = np.array([180, 255, 255], np.uint8)
+        
         red_mask = cv2.inRange(hsvFrame, red_lower, red_upper)
         print("Mask done")
         #start line following
-        t_lower = 100  # Lower Threshold
-        t_upper = 150  # Upper threshold
+        # t_lower = 100  # Lower Threshold
+        # t_upper = 150  # Upper threshold
 
-        # # Applying the Canny Edge filter
-        edge = cv2.Canny(diff, t_lower, t_upper)
-        edge = edge[40:440,150:450]
-        rows, cols = np.where(edge == 255) # extract row and column numbers for each pixel
+        # # # Applying the Canny Edge filter
+        # edge = cv2.Canny(diff, t_lower, t_upper)
+        # edge = edge[40:440,150:450]
+        # rows, cols = np.where(edge == 255) # extract row and column numbers for each pixel
 
         #  First find a human
         
@@ -76,7 +77,7 @@ try:
         while True:
             robot.spinInCircle()
             time.sleep(1)
-            if(count == 12):
+            if(count == 10):
                 break
             count +=1
             
