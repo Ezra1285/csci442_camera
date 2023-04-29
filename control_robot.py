@@ -4,9 +4,9 @@ class robot:
     
     def __init__(self):
         self.robot_controll = maestro.Controller()
-        # self.robot_controll.setAccel(0,60)
-        # self.robot_controll.setSpeed(0, 10)
-        # self.robot_controll.setTarget(0, 6000)
+        self.robot_controll.setAccel(0,60)
+        self.robot_controll.setSpeed(0, 10)
+        self.robot_controll.setTarget(0, 6000)
         self.waist = 6000
         self.headTurn = 6000
         self.headTilt = 6000
