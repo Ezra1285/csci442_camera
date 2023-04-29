@@ -19,8 +19,15 @@ import time
 # bot.close()
 
 robot = control_robot.robot()
-robot.spinInCircle()
-time.sleep(5)
+count = 0
+while True:
+    robot.spinInCircle()
+    if(count == 100):
+         break
+    count +=1
+
+
+# time.sleep(6)
 # for i in range(8):
 #     robot.waistRight()
 
