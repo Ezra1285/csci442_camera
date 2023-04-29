@@ -34,6 +34,15 @@ else:
 # Start streaming
 pipeline.start(config)
 
+def spinRobot():
+    count = 0
+    while True:
+        robot.spinInCircle()
+        time.sleep(1)
+        if(count == 10):
+            break
+        count +=1
+
 robot = control_robot.robot()
 #  red thresh
 red_lower = np.array([136, 87, 111], np.uint8)
@@ -73,15 +82,9 @@ try:
         #  ex) wait 1 min before breaking if ice is not found
         #  TODO - follow color finding artical
         #       - break out once color has been found
-        count = 0
-        while True:
-            robot.spinInCircle()
-            time.sleep(1)
-            if(count == 10):
-                break
-            count +=1
-            
-        cv2.imshow('RealSense', color)
+        if(isFirst):
+            spinRobot()    
+        # cv2.imshow('RealSense', color)
         # cv2.imshow('RealSense', edge)
         key = cv2.waitKey(1)
         if(key == 27):
