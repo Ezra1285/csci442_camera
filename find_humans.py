@@ -73,6 +73,19 @@ try:
         # For red color
         red_mask = cv2.dilate(red_mask, kernel)
         res_red = cv2.bitwise_and(color, color, mask = red_mask)
+
+        contours, hierarchy = cv2.findContours(red_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+        for pic, contour in enumerate(contours):
+            area = cv2.contourArea(contour)
+            if(area > 300):
+                x, y, w, h = cv2.boundingRect(contour)
+                color = cv2.rectangle(color, (x, y), 
+                                        (x + w, y + h), 
+                                        (0, 0, 255), 2)
+                
+                cv2.putText(color, "Red Colour", (x, y),
+                            cv2.FONT_HERSHEY_SIMPLEX, 1.0,
+                            (0, 0, 255)) 
         #start line following
         # t_lower = 100  # Lower Threshold
         # t_upper = 150  # Upper threshold
@@ -88,10 +101,11 @@ try:
         #  ex) wait 1 min before breaking if ice is not found
         #  TODO - follow color finding artical
         #       - break out once color has been found
-        if(isFirst):
-            spinRobot()
-            isFirst = False    
-        # cv2.imshow('RealSense', color)
+        # if(isFirst):
+        #     spinRobot()
+        #     isFirst = False    
+
+        cv2.imshow('RealSense', color)
         # cv2.imshow('RealSense', edge)
         key = cv2.waitKey(1)
         if(key == 27):
