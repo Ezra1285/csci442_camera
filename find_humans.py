@@ -34,12 +34,12 @@ else:
 # Start streaming
 pipeline.start(config)
 
-def spinRobot():
+def spinRobot(iceFound):
     count = 0
     while True:
         robot.spinInCircle()
         time.sleep(1)
-        if(count == 13):
+        if(count == 20 or iceFound):
             break
         count +=1
 
@@ -48,6 +48,7 @@ robot = control_robot.robot()
 red_lower = np.array([136, 87, 111], np.uint8)
 red_upper = np.array([180, 255, 255], np.uint8)
 isFirst = True
+iceFound = False
 # hog = cv2.HOGDescriptor()
 # hog.setSVMDetector(cv2.HOGDescriptor_getDefaultPeopleDetector())
 
@@ -77,7 +78,8 @@ try:
         contours, hierarchy = cv2.findContours(red_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
         for pic, contour in enumerate(contours):
             area = cv2.contourArea(contour)
-            if(area > 300):
+            if(area > 1100):
+                iceFound = True
                 x, y, w, h = cv2.boundingRect(contour)
                 color = cv2.rectangle(color, (x, y), 
                                         (x + w, y + h), 
@@ -101,9 +103,9 @@ try:
         #  ex) wait 1 min before breaking if ice is not found
         #  TODO - follow color finding artical
         #       - break out once color has been found
-        # if(isFirst):
-        #     spinRobot()
-        #     isFirst = False    
+        if(isFirst):
+            spinRobot()
+            isFirst = False    
 
         cv2.imshow('RealSense', color)
         # cv2.imshow('RealSense', edge)

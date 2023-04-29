@@ -49,6 +49,14 @@ class robot:
         self.robot_controll.setSpeed(2, 3)
         self.robot_controll.setTarget(2, 7000)
 
+    def startSpin(self):
+        self.robot_controll.setSpeed(2, 3)
+        self.robot_controll.setTarget(2, 7400)
+        
+    def stopSpin(self):
+        # self.robot_controll.setSpeed(2, 3)
+        self.robot_controll.setTarget(2, 6000) 
+
     #  handle waist movement
     def waistRight(self):
         self.waist += 200
