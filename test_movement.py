@@ -9,6 +9,10 @@ bot.setSpeed(0, 10)
 bot.setTarget(0, 6000)
 
 bot.setTarget(2, 6800)
+
+
+bot.setTarget(0, 6000)
+bot.setTarget(2, 6000)
 # robot = control_robot.robot()
 # for i in range(10):
 # robot.right_forward()
