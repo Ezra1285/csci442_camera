@@ -50,10 +50,10 @@ try:
             continue
         # Convert color_frameimages to numpy arrays
         color = np.asanyarray(color_frame.get_data())
-        diff = cv2.blur(color, (5,5))
+        # diff = cv2.blur(color, (5,5))
             
         print("STart")            
-        hsvFrame = cv2.cvtColor(frames, cv2.COLOR_BGR2HSV)
+        hsvFrame = cv2.cvtColor(color, cv2.COLOR_BGR2HSV)
         print("end")
         
         red_mask = cv2.inRange(hsvFrame, red_lower, red_upper)
