@@ -44,13 +44,13 @@ class robot:
         print("left")
 
     def left(self):
-        self.turn -= 200
-        if(self.turn <2110):
-            self.turn = 2110
-        print(self.turn)
-        self.robot_controll.setTarget(2, self.turn)
-        # self.robot_controll.setTarget(0, 6000)
-        # self.robot_controll.setTarget(2, 5000)
+        # self.turn -= 200
+        # if(self.turn <2110):
+        #     self.turn = 2110
+        # print(self.turn)
+        # self.robot_controll.setTarget(2, self.turn)
+        self.robot_controll.setTarget(0, 6000)
+        self.robot_controll.setTarget(2, 5000)
         print("right")
 
     #  handle waist movement
