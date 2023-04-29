@@ -51,8 +51,9 @@ isFirst = True
 iceFound = False
 # hog = cv2.HOGDescriptor()
 # hog.setSVMDetector(cv2.HOGDescriptor_getDefaultPeopleDetector())
-robot.startSpin()
 try:
+    robot.startSpin()
+    time.sleep(5)
     while True:
         # Wait for a coherent pair of frames: depth and color
         frames = pipeline.wait_for_frames()
@@ -88,7 +89,8 @@ try:
                 
                 cv2.putText(color, "Red Colour", (x, y),
                             cv2.FONT_HERSHEY_SIMPLEX, 1.0,
-                            (0, 0, 255)) 
+                            (0, 0, 255))
+                break 
         #start line following
         # t_lower = 100  # Lower Threshold
         # t_upper = 150  # Upper threshold
