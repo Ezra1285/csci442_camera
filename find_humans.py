@@ -31,24 +31,39 @@ if device_product_line == 'L500':
 else:
     config.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 30)
 
-# Start streaming
-pipeline.start(config)
-
-def spinRobot(iceFound):
-    count = 0
-    while True:
-        robot.spinInCircle()
-        time.sleep(1)
-        if(count == 20 or iceFound):
-            break
-        count +=1
-
-robot = control_robot.robot()
 #  red thresh
 red_lower = np.array([136, 87, 111], np.uint8)
 red_upper = np.array([180, 255, 255], np.uint8)
-isFirst = True
-iceFound = False
+
+# Start streaming
+profile = pipeline.start(config)
+time.sleep(2)
+robot = control_robot.robot()
+
+#  Set up depth to find how far our person with ice is.
+frames = pipeline.wait_for_frames()
+depth_frame = frames.get_depth_frame()
+color_frame = frames.get_color_frame()
+color = np.asanyarray(color_frame.get_data())
+tracker = cv2.TrackerKCF_create()
+bbox = (287, 23, 86, 320)
+# Getting the depth sensor's depth scale (see rs-align example for explanation)
+depth_sensor = profile.get_device().first_depth_sensor()
+depth_scale = depth_sensor.get_depth_scale()
+#  clipping_distance_in_meters meters away
+clipping_distance_in_meters = 1 #1 meter
+clipping_distance = clipping_distance_in_meters / depth_scale
+#  Create an align object
+align_to = rs.stream.color
+align = rs.align(align_to)
+bbox = cv2.selectROI(color, False)
+# Initialize tracker with first frame and bounding box
+ok = tracker.init(color, bbox)
+is_start_distance = True
+
+
+def findCurrDepth():
+    pass
 
 try:
     robot.startSpin()
@@ -62,15 +77,12 @@ try:
         # Convert color_frameimages to numpy arrays
         color = np.asanyarray(color_frame.get_data())
         # diff = cv2.blur(color, (5,5))
-            
-        print("STart")            
+                        
         hsvFrame = cv2.cvtColor(color, cv2.COLOR_BGR2HSV)
-        print("end")
-        
         red_mask = cv2.inRange(hsvFrame, red_lower, red_upper)
-        print("Mask done")
+        
         kernel = np.ones((5, 5), "uint8")
-      
+
         # For red color
         red_mask = cv2.dilate(red_mask, kernel)
         res_red = cv2.bitwise_and(color, color, mask = red_mask)
