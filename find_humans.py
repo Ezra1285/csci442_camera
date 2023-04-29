@@ -49,8 +49,7 @@ red_lower = np.array([136, 87, 111], np.uint8)
 red_upper = np.array([180, 255, 255], np.uint8)
 isFirst = True
 iceFound = False
-# hog = cv2.HOGDescriptor()
-# hog.setSVMDetector(cv2.HOGDescriptor_getDefaultPeopleDetector())
+
 try:
     robot.startSpin()
     time.sleep(5)
@@ -92,25 +91,7 @@ try:
                             cv2.FONT_HERSHEY_SIMPLEX, 1.0,
                             (0, 0, 255))
                 break 
-        #start line following
-        # t_lower = 100  # Lower Threshold
-        # t_upper = 150  # Upper threshold
-
-        # # # Applying the Canny Edge filter
-        # edge = cv2.Canny(diff, t_lower, t_upper)
-        # edge = edge[40:440,150:450]
-        # rows, cols = np.where(edge == 255) # extract row and column numbers for each pixel
-
-        #  First find a human
-        
-        #  We can set a timer that stops this loops just incase it cant find the ice
-        #  ex) wait 1 min before breaking if ice is not found
-        #  TODO - follow color finding artical
-        #       - break out once color has been found
-        # if(isFirst):
-        #     spinRobot()
-        #     isFirst = False    
-
+   
         cv2.imshow('RealSense', color)
         # cv2.imshow('RealSense', edge)
         key = cv2.waitKey(1)
