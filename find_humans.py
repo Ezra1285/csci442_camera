@@ -86,15 +86,37 @@ try:
         # diff = cv2.blur(color_image, (5,5))
 
          # If depth and color resolutions are different, resize color image to match depth image for display
-        # if depth_colormap_dim != color_colormap_dim:
-        #     resized_color_image = cv2.resize(color_image, dsize=(depth_colormap_dim[1], depth_colormap_dim[0]), interpolation=cv2.INTER_AREA)
-        #     images = np.hstack((resized_color_image, depth_colormap))
-        # else:
-        #     images = np.hstack((color_image, depth_colormap))
+        if depth_colormap_dim != color_colormap_dim:
+            resized_color_image = cv2.resize(color_image, dsize=(depth_colormap_dim[1], depth_colormap_dim[0]), interpolation=cv2.INTER_AREA)
+            images = np.hstack((resized_color_image, depth_colormap))
+        else:
+            images = np.hstack((color_image, depth_colormap))
 
-        # blank = np.zeros_like(images)
+        blank = np.zeros_like(images)
+        images = np.vstack((images,blank))
+        #  TODO - start here refrencing the camera code
+        #       -  finish getting the distance and go to 2 feet away if needed
+        ok, bbox = tracker.update(color)
         
-        # images = np.vstack((images,blank))
+        images = cv2.rectangle(images, (320,400), (325, 410), (0, 0, 255), -1) #Red rectangle
+        if ok:
+            # Tracking success
+            p1 = (int(bbox[0]/2), int(bbox[1]/2))
+            p2 = (int((bbox[0] + bbox[2])/2), int((bbox[1] + bbox[3])/2))
+            cv2.rectangle(images, (p1),(p2), (255,0,0), 2, 1)
+            
+            curr_depth = depth_frame.get_distance(int((bbox[0]) + .5*bbox[2]), int(bbox[1] + .5*bbox[3]))
+            print(curr_depth)
+            if(is_start_distance):
+                start_depth = curr_depth
+                is_start_distance = False
+            if(start_depth > (curr_depth - .25) ):
+                # Foward
+                print("Foward")
+                # robot.setTarget(0, 6800)
+            elif(start_depth < (curr_depth + .25)):
+                # robot.setTarget(0, 5200)
+                print("Back")
                         
         hsvFrame = cv2.cvtColor(color_image, cv2.COLOR_BGR2HSV)
         red_mask = cv2.inRange(hsvFrame, red_lower, red_upper)
@@ -111,7 +133,6 @@ try:
             area = cv2.contourArea(contour)
             if(area > 1100):
                 robot.stopSpin()
-                print("We found red")
                 x, y, w, h = cv2.boundingRect(contour)
                 color_image = cv2.rectangle(color_image, (x, y), 
                                         (x + w, y + h), 
