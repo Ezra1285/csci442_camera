@@ -127,10 +127,10 @@ try:
         #       -  finish getting the distance and go to 2 feet away if needed
         ok = False
         if(trackerNeedsInit and firstBoxFound):
-            ok = tracker.init(color, bbox)
+            ok = tracker.init(color_image, bbox)
             isTrackerInit = False
         elif(not trackerNeedsInit):
-            ok, bbox = tracker.update(color)
+            ok, bbox = tracker.update(color_image)
         
         images = cv2.rectangle(images, (320,400), (325, 410), (0, 0, 255), -1) #Red rectangle
         if ok:
