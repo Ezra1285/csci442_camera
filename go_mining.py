@@ -49,6 +49,8 @@ class ctrl_methods():
             ret = goto_area.goto_mine(color, "blue")
         elif(self.method_num ==1):
             ret = goto_area.goto_mine(color, "orange")
+        else:
+            raise Exception("Done!")
         if(ret == "done"):
             method_num +=1
 ctrlr = ctrl_methods()
