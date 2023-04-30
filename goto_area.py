@@ -27,32 +27,32 @@ cr = control_robot.robot()
 def move_forward():
     robot_control.setTarget(2, 6000)
     robot_control.setTarget(0, 5250)
-    print("forward")
+    # print("forward")
 
 def stop():
     robot_control.setTarget(2, 6000)
     robot_control.setTarget(0, 6000)
-    print("stop")
+    # print("stop")
 
 def right_forward():
     robot_control.setTarget(0, 5200)
     robot_control.setTarget(2, 7000)
-    print("left foward")
+    # print("left foward")
 
 def left_forward():
     robot_control.setTarget(0, 5200)
     robot_control.setTarget(2, 5000)
-    print("right forward")
+    # print("right forward")
 
 def right():
     robot_control.setTarget(0, 6000)
     robot_control.setTarget(2, 7000)
-    print("left")
+    # print("left")
 
 def left():
     robot_control.setTarget(0, 6000)
     robot_control.setTarget(2, 5000)
-    print("right")
+    # print("right")
 
 lower_blue = np.array([80,188,188])
 upper_blue = np.array([150,255,255])
@@ -72,6 +72,7 @@ def goto_mine(edge, line_color):
         hsv_low = lower_orange
         hsv_high = upper_orange
     else:
+        print("no color")
         hsv_low = lower_blue
         hsv_high = upper_blue
     edge = edge[40:440,150:450]
