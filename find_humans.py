@@ -109,7 +109,7 @@ try:
         contours, hierarchy = cv2.findContours(red_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
         for pic, contour in enumerate(contours):
             area = cv2.contourArea(contour)
-            if(area > 1100):
+            if(area > 2500):
                 robot.stopSpin()
                 x, y, w, h = cv2.boundingRect(contour)
                 bbox = (x, y, w, h)
