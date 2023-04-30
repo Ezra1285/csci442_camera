@@ -62,7 +62,7 @@ align = rs.align(align_to)
 is_start_distance = True
 trackerNeedsInit = True
 firstBoxFound = False
-firstBbox = (0,0,0,0)
+bbox = (0,0,0,0)
 
 def findCurrDepth():
     pass
@@ -112,7 +112,7 @@ try:
             if(area > 1100):
                 robot.stopSpin()
                 x, y, w, h = cv2.boundingRect(contour)
-                firstBbox = (x, y, w, h)
+                bbox = (x, y, w, h)
                 firstBoxFound = True
                 color_image = cv2.rectangle(color_image, (x, y), 
                                         (x + w, y + h), 
