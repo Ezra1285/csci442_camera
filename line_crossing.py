@@ -129,7 +129,7 @@ try:
         total = 0
         x=0
         y=0
-        if(not(contours.len() <2)):
+        if(not(len(contours) <2)):
             cr.stopSpin()
             for i in contours:
                 M = cv2.moments(i)
