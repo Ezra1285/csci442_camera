@@ -88,7 +88,7 @@ robot_controll = maestro.Controller()
 robot_controll.setAccel(0,60)
 robot_controll.setSpeed(0, 10)
 robot_controll.setTarget(0, 6000)
-control_robot.spin()
+control_robot.startSpin()
 try:
     while True:
         # Wait for a coherent pair of frames: depth and color
