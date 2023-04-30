@@ -125,6 +125,7 @@ try:
 
         #  TODO - start here refrencing the camera code
         #       -  finish getting the distance and go to 2 feet away if needed
+        ok = False
         if(trackerNeedsInit and firstBoxFound):
             ok = tracker.init(color, bbox)
             isTrackerInit = False
