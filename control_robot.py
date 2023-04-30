@@ -18,12 +18,17 @@ class robot:
         self.robot_controll.setTarget(0, 5250)
         print("forward")
 
-    def stop(self):
+    def fullyStop(self):
         self.robot_controll.setAccel(0,60)
         self.robot_controll.setSpeed(0, 10)
         self.robot_controll.setTarget(2, 6000)
         self.robot_controll.setTarget(0, 6000)
-        print("stop")
+        print("Full stop")
+
+    def stop(self):
+        self.robot_controll.setTarget(2, 6000)
+        self.robot_controll.setTarget(0, 6000)
+        print("Stop")
 
     def right_forward(self):
         self.robot_controll.setTarget(0, 5200)

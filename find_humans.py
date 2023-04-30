@@ -138,20 +138,15 @@ try:
             p1 = (int(bbox[0]/2), int(bbox[1]/2))
             p2 = (int((bbox[0] + bbox[2])/2), int((bbox[1] + bbox[3])/2))
             # cv2.rectangle(images, (p1),(p2), (255,0,0), 2, 1)
-            
             curr_depth = depth_frame.get_distance(int((bbox[0]) + .5*bbox[2]), int(bbox[1] + .5*bbox[3]))
             print("Curr ", curr_depth)
             if(curr_depth > 2):
-                # Foward
                 print("Foward")
-                # robot.setTarget(0, 6800)
                 robot.move_forward()
-                time.sleep(.5)
+            else:
+                print("Stopped")
                 robot.stop()
-            # elif(start_depth < (curr_depth + .25)):
-            #     # robot.setTarget(0, 5200)
-            #     print("Back")
-
+            
         cv2.imshow('RealSense', color_image)
         # cv2.imshow('RealSense', edge)
         key = cv2.waitKey(1)
