@@ -64,9 +64,11 @@ def goto_mine(edge, line_color):
     cr.headDown()
     cr.startSpin()
     if("blue" == line_color):
+        print("looking for blue")
         hsv_low = lower_blue
         hsv_high = upper_blue
     elif ("orange" == line_color):
+        print("looking for orange")
         hsv_low = lower_orange
         hsv_high = upper_orange
     else:
@@ -134,4 +136,6 @@ def goto_mine(edge, line_color):
             stop()
         if(total <3):
             stop()
+    else:
+        print("spinning")
     return "not done"
