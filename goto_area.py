@@ -71,7 +71,7 @@ def goto_mine(edge, line_color):
         hsv_high = upper_blue
         mask_blue = cv2.inRange(imghsv, lower_blue, upper_blue)
         contours, _ = cv2.findContours(mask_blue, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-  
+        blurred = cv2.blur(mask_orange, (10,10))
     elif ("orange" == line_color):
         print("looking for orange")
         hsv_low = lower_orange
