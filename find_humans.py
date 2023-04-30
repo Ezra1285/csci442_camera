@@ -146,6 +146,8 @@ try:
                 print("Foward")
                 # robot.setTarget(0, 6800)
                 robot.move_forward()
+                time.sleep(.5)
+                robot.stop()
             # elif(start_depth < (curr_depth + .25)):
             #     # robot.setTarget(0, 5200)
             #     print("Back")
