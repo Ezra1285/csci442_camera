@@ -116,6 +116,7 @@ def goto_mine(edge, line_color):
         ydif = cof[1] - cog[1]
         if ydif <0:
             stop()
+            cv2.imshow('RealSense', edge)
             return "done"
         elif xdif <-35:
             if ydif >10:
@@ -136,6 +137,7 @@ def goto_mine(edge, line_color):
             stop()
         cv2.imshow('RealSense', edge)
     else:
-        cv2.imshow('RealSense', edge)
+        
         print("spinning")
+    cv2.imshow('RealSense', edge)
     return "not done"
