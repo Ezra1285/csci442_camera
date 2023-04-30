@@ -78,7 +78,7 @@ def goto_mine(edge, line_color):
         contours, _ = cv2.findContours(mask_blue, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
         
         mask_orange = cv2.inRange(imghsv, lower_orange, upper_orange)
-        blurred = cv2.blur(mask_orange, (5,5))
+        blurred = cv2.blur(mask_orange, (10,10))
         contours, _ = cv2.findContours(blurred, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
         total = 0
         x=0
