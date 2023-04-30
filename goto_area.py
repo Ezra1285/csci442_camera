@@ -63,26 +63,29 @@ def goto_mine(edge, line_color):
     cr.headDown()
     cr.headDown()
     cr.startSpin()
+    edge = edge[40:440,150:450]
+    imghsv = cv2.cvtColor(edge, cv2.COLOR_BGR2HSV)
     if("blue" == line_color):
         print("looking for blue")
         hsv_low = lower_blue
         hsv_high = upper_blue
+        mask_blue = cv2.inRange(imghsv, lower_blue, upper_blue)
+        contours, _ = cv2.findContours(mask_blue, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+  
     elif ("orange" == line_color):
         print("looking for orange")
         hsv_low = lower_orange
         hsv_high = upper_orange
+        mask_orange = cv2.inRange(imghsv, lower_orange, upper_orange)
+        blurred = cv2.blur(mask_orange, (10,10))
     else:
         print("no color")
         hsv_low = lower_blue
         hsv_high = upper_blue
-    edge = edge[40:440,150:450]
-    imghsv = cv2.cvtColor(edge, cv2.COLOR_BGR2HSV)
     
-    mask_blue = cv2.inRange(imghsv, lower_blue, upper_blue)
-    contours, _ = cv2.findContours(mask_blue, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+      
     
-    mask_orange = cv2.inRange(imghsv, lower_orange, upper_orange)
-    blurred = cv2.blur(mask_orange, (10,10))
     contours, _ = cv2.findContours(blurred, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     total = 0
     x=0
