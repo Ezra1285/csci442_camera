@@ -61,6 +61,7 @@ upper_orange = np.array([40,150,255])
         
 def goto_mine(edge, line_color):
     cr.headDown()
+    cr.headDown()
     cr.startSpin()
     if("blue" == line_color):
         hsv_low = lower_blue
