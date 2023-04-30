@@ -60,75 +60,77 @@ lower_orange = np.array([0,89,202])
 upper_orange = np.array([40,150,255])
         
 def goto_mine(edge, line_color):
-        cr.headDown()
-        cr.startSpin()
-        if("blue" == line_color):
-            hsv_low = lower_blue
-            hsv_high = upper_blue
-        elif ("orange" == line_color):
-            hsv_low = lower_orange
-            hsv_high = upper_orange
-        else:
-            hsv_low = lower_blue
-            hsv_high = upper_blue
-        edge = edge[40:440,150:450]
-        imghsv = cv2.cvtColor(edge, cv2.COLOR_BGR2HSV)
+    cr.headDown()
+    cr.startSpin()
+    if("blue" == line_color):
+        hsv_low = lower_blue
+        hsv_high = upper_blue
+    elif ("orange" == line_color):
+        hsv_low = lower_orange
+        hsv_high = upper_orange
+    else:
+        hsv_low = lower_blue
+        hsv_high = upper_blue
+    edge = edge[40:440,150:450]
+    imghsv = cv2.cvtColor(edge, cv2.COLOR_BGR2HSV)
+    
+    mask_blue = cv2.inRange(imghsv, lower_blue, upper_blue)
+    contours, _ = cv2.findContours(mask_blue, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    
+    mask_orange = cv2.inRange(imghsv, lower_orange, upper_orange)
+    blurred = cv2.blur(mask_orange, (10,10))
+    contours, _ = cv2.findContours(blurred, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    total = 0
+    x=0
+    y=0
+    if(not(len(contours) <2)):
+        cr.stopSpin()
+        for i in contours:
+            M = cv2.moments(i)
+            if M['m00'] != 0:
+                
+                cx = int(M['m10']/M['m00'])
+                cy = int(M['m01']/M['m00'])
+                x += cx
+                y += cy
+                total +=1
+                cv2.drawContours(edge, [i], -1, (0, 255, 0), 2)
+                cv2.circle(edge, (cx, cy), 7, (0, 0, 255), -1)
+                cv2.putText(edge, "center", (cx - 20, cy - 20),
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2)
+        if total == 0:
+            total = 1
+        yavg = int(x/total)
+        xavg = int(y/total)
+        cofy = int((150+450)/2)
+        cofx = int(150)
+        cof = (cofx, cofy)
+        cv2.circle(edge, cof, 10, (255,0,0), 5)
+        cog = (xavg,yavg)
+        cv2.circle(edge, cog, 10, (255,0,0), 5)
         
-        mask_blue = cv2.inRange(imghsv, lower_blue, upper_blue)
-        contours, _ = cv2.findContours(mask_blue, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-        
-        mask_orange = cv2.inRange(imghsv, lower_orange, upper_orange)
-        blurred = cv2.blur(mask_orange, (10,10))
-        contours, _ = cv2.findContours(blurred, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-        total = 0
-        x=0
-        y=0
-        if(not(len(contours) <2)):
-            cr.stopSpin()
-            for i in contours:
-                M = cv2.moments(i)
-                if M['m00'] != 0:
-                    
-                    cx = int(M['m10']/M['m00'])
-                    cy = int(M['m01']/M['m00'])
-                    x += cx
-                    y += cy
-                    total +=1
-                    cv2.drawContours(edge, [i], -1, (0, 255, 0), 2)
-                    cv2.circle(edge, (cx, cy), 7, (0, 0, 255), -1)
-                    cv2.putText(edge, "center", (cx - 20, cy - 20),
-                            cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2)
-            if total == 0:
-                total = 1
-            yavg = int(x/total)
-            xavg = int(y/total)
-            cofy = int((150+450)/2)
-            cofx = int(150)
-            cof = (cofx, cofy)
-            cv2.circle(edge, cof, 10, (255,0,0), 5)
-            cog = (xavg,yavg)
-            cv2.circle(edge, cog, 10, (255,0,0), 5)
-            
-            #TODO
-            #move towards COG
-            xdif = cof[0] - cog[0]
-            ydif = cof[1] - cog[1]
-            if ydif <0:
-                stop()
-            elif xdif <-35:
-                if ydif >10:
-                    left_forward()
-                else:
-                    right()
-            elif xdif >35:
-                if ydif > 10:
-                    right_forward()
-                else:
-                    left()
-
-            elif ydif > 0:
-                move_forward()
+        #TODO
+        #move towards COG
+        xdif = cof[0] - cog[0]
+        ydif = cof[1] - cog[1]
+        if ydif <0:
+            stop()
+            return "done"
+        elif xdif <-35:
+            if ydif >10:
+                left_forward()
             else:
-                stop()
-            if(total <3):
-                stop()
+                right()
+        elif xdif >35:
+            if ydif > 10:
+                right_forward()
+            else:
+                left()
+
+        elif ydif > 0:
+            move_forward()
+        else:
+            stop()
+        if(total <3):
+            stop()
+    return "not done"

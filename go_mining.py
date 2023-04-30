@@ -36,15 +36,18 @@ else:
 # Start streaming
 pipeline.start(config)
 
-def crop_center(img,cropx,cropy):
-    y,x = img.shape
-    startx = x//2-(cropx//2)
-    starty = y//2-(cropy//2)    
-    return img[starty:starty+cropy,startx:startx+cropx]
-
 robot_control.setAccel(0,60)
 robot_control.setSpeed(0, 10)
 robot_control.setTarget(0, 6000)
+method_num = 0
+def control_methods():
+    ret = "not done"
+    if(method_num ==0):
+        ret = goto_area.goto_mine(color, "blue")
+    elif(method_num ==1):
+        ret = goto_area.goto_mine(color, "orange")
+    if(ret == "done"):
+        method_num +=1
 try:
     while True:
         # Wait for a coherent pair of frames: depth and color
@@ -54,10 +57,7 @@ try:
             continue
         color = np.asanyarray(color_frame.get_data())
         # goto_mine(color, line_color)
-        goto_area.goto_mine(color, "blue")
-        
-        goto_area.goto_mine(color, "blue")
-        
+        control_methods()
         cv2.imshow('RealSense', color)
 
 
