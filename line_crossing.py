@@ -147,9 +147,9 @@ try:
         cofy = int(300)
         cofx = int((440-40)/2)
         cof = (cofx, cofy)
-        # cv2.circle(edge, cof, 10, (255,0,0), 5)
+        cv2.circle(edge, cof, 10, (255,0,0), 5)
         cog = (xavg,yavg)
-
+        cv2.circle(edge, cog, 10, (255,0,0), 5)
         
         #TODO
         #move towards COG
