@@ -146,7 +146,7 @@ try:
         yavg = int(x/total)
         xavg = int(y/total)
         cofy = int((150+450)/2)
-        cofx = int(100)
+        cofx = int(150)
         cof = (cofx, cofy)
         cv2.circle(edge, cof, 10, (255,0,0), 5)
         cog = (xavg,yavg)
