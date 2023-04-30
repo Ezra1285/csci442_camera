@@ -54,20 +54,31 @@ def left():
     robot_control.setTarget(2, 5000)
     print("right")
 
-
-cr.startSpin()
+lower_blue = np.array([80,188,188])
+upper_blue = np.array([150,255,255])
+lower_orange = np.array([0,89,202])
+upper_orange = np.array([40,150,255])
         
-def goto(edge):
+def goto_mine(edge, line_color):
+        cr.headDown()
+        cr.startSpin()
+        if("blue" == line_color):
+            hsv_low = lower_blue
+            hsv_high = upper_blue
+        elif ("orange" == line_color):
+            hsv_low = lower_orange
+            hsv_high = upper_orange
+        else:
+            hsv_low = lower_blue
+            hsv_high = upper_blue
         edge = edge[40:440,150:450]
         imghsv = cv2.cvtColor(edge, cv2.COLOR_BGR2HSV)
-        lower_blue = np.array([80,188,188])
-        upper_blue = np.array([150,255,255])
+        
         mask_blue = cv2.inRange(imghsv, lower_blue, upper_blue)
         contours, _ = cv2.findContours(mask_blue, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-        lower_orange = np.array([0,89,202])
-        upper_orange = np.array([40,150,255])
+        
         mask_orange = cv2.inRange(imghsv, lower_orange, upper_orange)
-        blurred = cv2.blur(mask_orange, (5,5))
+        blurred = cv2.blur(mask_orange, (10,10))
         contours, _ = cv2.findContours(blurred, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
         total = 0
         x=0
