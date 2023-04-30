@@ -69,7 +69,7 @@ def findCurrDepth():
 
 try:
     robot.startSpin()
-    time.sleep(5)
+    # time.sleep(5)
     while True:
         # Wait for a coherent pair of frames: depth and color
         frames = pipeline.wait_for_frames()
@@ -128,7 +128,7 @@ try:
         if(trackerNeedsInit and firstBoxFound):
             ok = tracker.init(color, bbox)
             isTrackerInit = False
-        else:
+        elif(not trackerNeedsInit):
             ok, bbox = tracker.update(color)
         
         images = cv2.rectangle(images, (320,400), (325, 410), (0, 0, 255), -1) #Red rectangle
