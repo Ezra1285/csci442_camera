@@ -46,13 +46,13 @@ depth_frame = frames.get_depth_frame()
 color_frame = frames.get_color_frame()
 color = np.asanyarray(color_frame.get_data())
 tracker = cv2.TrackerKCF_create()
-bbox = (287, 23, 86, 320)
+# bbox = (287, 23, 86, 320)
 # Getting the depth sensor's depth scale (see rs-align example for explanation)
 depth_sensor = profile.get_device().first_depth_sensor()
 depth_scale = depth_sensor.get_depth_scale()
 #  clipping_distance_in_meters meters away
-clipping_distance_in_meters = 1 #1 meter
-clipping_distance = clipping_distance_in_meters / depth_scale
+# clipping_distance_in_meters = 1 #1 meter
+# clipping_distance = clipping_distance_in_meters / depth_scale
 #  Create an align object
 align_to = rs.stream.color
 align = rs.align(align_to)
@@ -60,7 +60,9 @@ align = rs.align(align_to)
 # Initialize tracker with first frame and bounding box
 # ok = tracker.init(color, bbox)
 is_start_distance = True
-
+trackerNeedsInit = True
+firstBoxFound = False
+firstBbox = (0,0,0,0)
 
 def findCurrDepth():
     pass
@@ -94,33 +96,9 @@ try:
 
         blank = np.zeros_like(images)
         images = np.vstack((images,blank))
-        #  TODO - start here refrencing the camera code
-        #       -  finish getting the distance and go to 2 feet away if needed
-        ok, bbox = tracker.update(color)
-        
-        images = cv2.rectangle(images, (320,400), (325, 410), (0, 0, 255), -1) #Red rectangle
-        if ok:
-            # Tracking success
-            p1 = (int(bbox[0]/2), int(bbox[1]/2))
-            p2 = (int((bbox[0] + bbox[2])/2), int((bbox[1] + bbox[3])/2))
-            cv2.rectangle(images, (p1),(p2), (255,0,0), 2, 1)
-            
-            curr_depth = depth_frame.get_distance(int((bbox[0]) + .5*bbox[2]), int(bbox[1] + .5*bbox[3]))
-            print(curr_depth)
-            if(is_start_distance):
-                start_depth = curr_depth
-                is_start_distance = False
-            if(start_depth > (curr_depth - .25) ):
-                # Foward
-                print("Foward")
-                # robot.setTarget(0, 6800)
-            elif(start_depth < (curr_depth + .25)):
-                # robot.setTarget(0, 5200)
-                print("Back")
-                        
+
         hsvFrame = cv2.cvtColor(color_image, cv2.COLOR_BGR2HSV)
-        red_mask = cv2.inRange(hsvFrame, red_lower, red_upper)
-        
+        red_mask = cv2.inRange(hsvFrame, red_lower, red_upper)    
         kernel = np.ones((5, 5), "uint8")
 
         # For red color
@@ -134,6 +112,8 @@ try:
             if(area > 1100):
                 robot.stopSpin()
                 x, y, w, h = cv2.boundingRect(contour)
+                firstBbox = (x, y, w, h)
+                firstBoxFound = True
                 color_image = cv2.rectangle(color_image, (x, y), 
                                         (x + w, y + h), 
                                         (0, 0, 255), 2)
@@ -142,7 +122,35 @@ try:
                             cv2.FONT_HERSHEY_SIMPLEX, 1.0,
                             (0, 0, 255))
                 break 
-   
+
+        #  TODO - start here refrencing the camera code
+        #       -  finish getting the distance and go to 2 feet away if needed
+        if(trackerNeedsInit and firstBoxFound):
+            ok = tracker.init(color, bbox)
+            isTrackerInit = False
+        else:
+            ok, bbox = tracker.update(color)
+        
+        images = cv2.rectangle(images, (320,400), (325, 410), (0, 0, 255), -1) #Red rectangle
+        if ok:
+            # Tracking success
+            p1 = (int(bbox[0]/2), int(bbox[1]/2))
+            p2 = (int((bbox[0] + bbox[2])/2), int((bbox[1] + bbox[3])/2))
+            # cv2.rectangle(images, (p1),(p2), (255,0,0), 2, 1)
+            
+            curr_depth = depth_frame.get_distance(int((bbox[0]) + .5*bbox[2]), int(bbox[1] + .5*bbox[3]))
+            print(curr_depth)
+            if(is_start_distance):
+                start_depth = curr_depth
+                is_start_distance = False
+            if(start_depth > (curr_depth - .25) ):
+                # Foward
+                print("Foward")
+                # robot.setTarget(0, 6800)
+            elif(start_depth < (curr_depth + .25)):
+                # robot.setTarget(0, 5200)
+                print("Back")
+
         cv2.imshow('RealSense', color_image)
         # cv2.imshow('RealSense', edge)
         key = cv2.waitKey(1)
