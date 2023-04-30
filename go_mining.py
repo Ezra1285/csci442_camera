@@ -64,7 +64,7 @@ try:
         color = np.asanyarray(color_frame.get_data())
         cv2.imshow("color", color)
         # goto_mine(color, line_color)
-        ctrlr.control_methods()
+        # ctrlr.control_methods()
 
 
 
