@@ -1,25 +1,11 @@
-#things robot needs to do
-#follow color
-#   move head up
-#cross color lines
-#   move head down
-#   
-#find orientation
-#   move head down
-#   spin until it finds the orange
-#   move towards orange
-#   stop when at orange
-#move across the field
-#   spin until it finds blue
-#   move towards blue
-#   print when in mining area
 
 import pyrealsense2 as rs
 import numpy as np
 import maestro
 import cv2
 import control_robot
-
+import line_crossing
+import goto_area
 robot_control = maestro.Controller()
 # Configure depth and color streams
 pipeline = rs.pipeline()
@@ -66,8 +52,12 @@ try:
         color_frame = frames.get_color_frame()
         if not color_frame:
             continue
-        # Convert color_frameimages to numpy arrays
         color = np.asanyarray(color_frame.get_data())
+        # goto_mine(color, line_color)
+        goto_area.goto_mine(color, "blue")
+        
+        goto_area.goto_mine(color, "blue")
+        
         cv2.imshow('RealSense', color)
 
 
