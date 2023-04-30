@@ -26,9 +26,9 @@ class robot:
         print("Full stop")
 
     def stop(self):
-        self.robot_controll.setTarget(2, 6000)
+        # self.robot_controll.setTarget(2, 6000)
         self.robot_controll.setTarget(0, 6000)
-        print("Stop")
+        # print("Stop")
 
     def right_forward(self):
         self.robot_controll.setTarget(0, 5200)
@@ -55,8 +55,8 @@ class robot:
         self.robot_controll.setTarget(2, 7000)
 
     def startSpin(self):
-        self.robot_controll.setSpeed(2, 2)
-        self.robot_controll.setTarget(2, 7000)
+        self.robot_controll.setSpeed(2, 1)
+        self.robot_controll.setTarget(2, 6700)
         
     def stopSpin(self):
         # self.robot_controll.setSpeed(2, 3)

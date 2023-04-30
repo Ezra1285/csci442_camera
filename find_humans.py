@@ -146,6 +146,10 @@ try:
             else:
                 print("Stopped")
                 robot.stop()
+        else :
+            # Tracking failure
+            cv2.putText(images, "Tracking failure detected", (100,80), cv2.FONT_HERSHEY_SIMPLEX, 0.75,(0,0,255),2)
+            robot.stop()
             
         cv2.imshow('RealSense', color_image)
         # cv2.imshow('RealSense', edge)
