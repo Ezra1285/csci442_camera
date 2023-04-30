@@ -115,9 +115,7 @@ def goto_mine(edge, line_color):
         cv2.circle(edge, cof, 10, (255,0,0), 5)
         cog = (xavg,yavg)
         cv2.circle(edge, cog, 10, (255,0,0), 5)
-        
-        #TODO
-        #move towards COG
+
         xdif = cof[0] - cog[0]
         ydif = cof[1] - cog[1]
         if ydif <0:
@@ -140,6 +138,7 @@ def goto_mine(edge, line_color):
             stop()
         if(total <3):
             stop()
+        cv2.imshow('RealSense', edge)
     else:
         print("spinning")
     return "not done"
