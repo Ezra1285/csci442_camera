@@ -154,27 +154,27 @@ try:
         
         #TODO
         #move towards COG
-        # xdif = cof[0] - cog[0]
-        # ydif = cof[1] - cog[1]
-        # if ydif <0:
-        #     stop()
-        # elif xdif <-35:
-        #     if ydif >10:
-        #         left_forward()
-        #     else:
-        #         right()
-        # elif xdif >35:
-        #     if ydif > 10:
-        #         right_forward()
-        #     else:
-        #         left()
+        xdif = cof[0] - cog[0]
+        ydif = cof[1] - cog[1]
+        if ydif <0:
+            stop()
+        elif xdif <-35:
+            if ydif >10:
+                left_forward()
+            else:
+                right()
+        elif xdif >35:
+            if ydif > 10:
+                right_forward()
+            else:
+                left()
 
-        # elif ydif > 0:
-        #     move_forward()
-        # else:
-        #     stop()
-        # if(total <3):
-        #     stop()
+        elif ydif > 0:
+            move_forward()
+        else:
+            stop()
+        if(total <3):
+            stop()
         cv2.imshow('RealSense', edge)
         key = cv2.waitKey(1)
         if(key == 27):
