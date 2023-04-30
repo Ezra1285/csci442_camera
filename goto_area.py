@@ -82,10 +82,6 @@ def goto_mine(edge, line_color):
         print("no color")
         hsv_low = lower_blue
         hsv_high = upper_blue
-    
-
-      
-    
     contours, _ = cv2.findContours(blurred, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     total = 0
     x=0
@@ -140,5 +136,6 @@ def goto_mine(edge, line_color):
             stop()
         cv2.imshow('RealSense', edge)
     else:
+        cv2.imshow('RealSense', edge)
         print("spinning")
     return "not done"
