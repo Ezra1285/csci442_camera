@@ -146,7 +146,7 @@ try:
             else:
                 print("Stopped")
                 robot.stop()
-        else :
+        elif(not ok and firstBoxFound) :
             # Tracking failure
             cv2.putText(images, "Tracking failure detected", (100,80), cv2.FONT_HERSHEY_SIMPLEX, 0.75,(0,0,255),2)
             robot.stop()
