@@ -41,7 +41,7 @@ robot_control.setSpeed(0, 10)
 robot_control.setTarget(0, 6000)
 class ctrl_methods():
     def __init__(self) -> None:
-        method_num = 0
+        self.method_num = 0
             
     def control_methods(self):
         ret = "not done"
