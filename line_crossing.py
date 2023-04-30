@@ -143,8 +143,8 @@ try:
         
         if total == 0:
             total = 1
-        yavg = x/total
-        xavg = y/total
+        yavg = int(x/total)
+        xavg = int(y/total)
         cofy = int(300)
         cofx = int((440-40)/2)
         cof = (cofx, cofy)
