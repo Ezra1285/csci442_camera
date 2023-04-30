@@ -121,7 +121,8 @@ try:
         lower_orange = np.array([0,89,202])
         upper_orange = np.array([40,150,255])
         mask_orange = cv2.inRange(imghsv, lower_orange, upper_orange)
-        contours, _ = cv2.findContours(mask_orange, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        blurred = cv2.blur(mask_orange, (5.5))
+        contours, _ = cv2.findContours(blurred, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
         for i in contours:
             M = cv2.moments(i)
             if M['m00'] != 0:
