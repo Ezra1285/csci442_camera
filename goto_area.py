@@ -84,7 +84,7 @@ def goto_mine(edge, line_color):
     total = 0
     x=0
     y=0
-    if(not(len(contours) <2)):
+    if(not(len(contours) <10)):
         cr.stopSpin()
         for i in contours:
             M = cv2.moments(i)
