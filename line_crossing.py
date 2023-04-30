@@ -123,19 +123,23 @@ try:
         mask_orange = cv2.inRange(imghsv, lower_orange, upper_orange)
         blurred = cv2.blur(mask_orange, (5,5))
         contours, _ = cv2.findContours(blurred, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        total = contours.size
+        x=0
+        y=0
         for i in contours:
             M = cv2.moments(i)
             if M['m00'] != 0:
+                
                 cx = int(M['m10']/M['m00'])
                 cy = int(M['m01']/M['m00'])
+                x += cx
+                y += cy
                 cv2.drawContours(edge, [i], -1, (0, 255, 0), 2)
                 cv2.circle(edge, (cx, cy), 7, (0, 0, 255), -1)
                 cv2.putText(edge, "center", (cx - 20, cy - 20),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2)
         # cv2.drawContours(edge, contours, -1, (0, 255, 0), 1)
-        total = 0
-        x=0
-        y=0
+        
         if total == 0:
             total = 1
         yavg = x/total
