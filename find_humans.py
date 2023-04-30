@@ -59,7 +59,7 @@ align = rs.align(align_to)
 # bbox = cv2.selectROI(color, False)
 # Initialize tracker with first frame and bounding box
 # ok = tracker.init(color, bbox)
-is_start_distance = True
+
 trackerNeedsInit = True
 firstBoxFound = False
 bbox = (287, 23, 86, 320)
@@ -127,8 +127,6 @@ try:
         #       -  finish getting the distance and go to 2 feet away if needed
         ok = False
         if(trackerNeedsInit and firstBoxFound):
-            print("Color img ", color_image)
-            print("Bbox ", bbox)
             ok = tracker.init(color_image, bbox)
             trackerNeedsInit = False
         elif(not trackerNeedsInit):
@@ -142,17 +140,13 @@ try:
             # cv2.rectangle(images, (p1),(p2), (255,0,0), 2, 1)
             
             curr_depth = depth_frame.get_distance(int((bbox[0]) + .5*bbox[2]), int(bbox[1] + .5*bbox[3]))
-            print(curr_depth)
-            if(is_start_distance):
-                start_depth = curr_depth
-                is_start_distance = False
-            if(start_depth > (curr_depth - .25) ):
+            if(curr_depth > 2):
                 # Foward
                 print("Foward")
-                # robot.setTarget(0, 6800)
-            elif(start_depth < (curr_depth + .25)):
-                # robot.setTarget(0, 5200)
-                print("Back")
+                robot.setTarget(0, 6800)
+            # elif(start_depth < (curr_depth + .25)):
+            #     # robot.setTarget(0, 5200)
+            #     print("Back")
 
         cv2.imshow('RealSense', color_image)
         # cv2.imshow('RealSense', edge)
