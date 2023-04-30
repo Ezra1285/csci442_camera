@@ -56,15 +56,16 @@ class ctrl_methods():
 ctrlr = ctrl_methods()
 try:
     while True:
+        print("here1")
         # Wait for a coherent pair of frames: depth and color
         frames = pipeline.wait_for_frames()
         color_frame = frames.get_color_frame()
+        print("here")
         if not color_frame:
             continue
         color = np.asanyarray(color_frame.get_data())
         # goto_mine(color, line_color)
         ctrlr.control_methods()
-        cv2.imshow('RealSense', color)
 
 
 
