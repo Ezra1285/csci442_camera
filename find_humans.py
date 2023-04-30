@@ -130,7 +130,7 @@ try:
             print("Color img ", color_image)
             print("Bbox ", bbox)
             ok = tracker.init(color_image, bbox)
-            isTrackerInit = False
+            trackerNeedsInit = False
         elif(not trackerNeedsInit):
             ok, bbox = tracker.update(color_image)
         
