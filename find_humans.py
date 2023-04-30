@@ -62,7 +62,7 @@ align = rs.align(align_to)
 is_start_distance = True
 trackerNeedsInit = True
 firstBoxFound = False
-bbox = (0,0,0,0)
+bbox = (287, 23, 86, 320)
 
 def findCurrDepth():
     pass
@@ -80,7 +80,7 @@ try:
         # Convert color_frameimages to numpy arrays
         depth_image = np.asanyarray(depth_frame.get_data())
         color_image = np.asanyarray(color_frame.get_data())
-        color = np.asanyarray(color_frame.get_data())
+        # color = np.asanyarray(color_frame.get_data())
 
         depth_colormap = cv2.applyColorMap(cv2.convertScaleAbs(depth_image, alpha=0.03), cv2.COLORMAP_JET)
         depth_colormap_dim = depth_colormap.shape
@@ -127,6 +127,8 @@ try:
         #       -  finish getting the distance and go to 2 feet away if needed
         ok = False
         if(trackerNeedsInit and firstBoxFound):
+            print("Color img ", color_image)
+            print("Bbox ", bbox)
             ok = tracker.init(color_image, bbox)
             isTrackerInit = False
         elif(not trackerNeedsInit):
