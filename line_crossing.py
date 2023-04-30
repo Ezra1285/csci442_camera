@@ -88,7 +88,10 @@ robot_controll = maestro.Controller()
 robot_controll.setAccel(0,60)
 robot_controll.setSpeed(0, 10)
 robot_controll.setTarget(0, 6000)
-control_robot.startSpin()
+
+cr = control_robot.robot()
+
+cr.startSpin()
 try:
     while True:
         # Wait for a coherent pair of frames: depth and color
@@ -126,8 +129,8 @@ try:
         total = 0
         x=0
         y=0
-        if(not(contours.len() <2)):
-            control_robot.stopSpin()
+        if(not(len(contours) <2)):
+            cr.stopSpin()
             for i in contours:
                 M = cv2.moments(i)
                 if M['m00'] != 0:
