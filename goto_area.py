@@ -65,7 +65,7 @@ def goto_mine(edge, line_color, spin_flag):
         cr.headDown()
         cr.headDown()
         cr.startSpin()
-    edge = edge[40:440,0:450]
+    edge = edge[40:440,0:550]
     imghsv = cv2.cvtColor(edge, cv2.COLOR_BGR2HSV)
     if("blue" == line_color):
         print("looking for blue")
