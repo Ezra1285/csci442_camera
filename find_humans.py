@@ -60,6 +60,19 @@ align = rs.align(align_to)
 trackerNeedsInit = True
 firstBoxFound = False
 bbox = (287, 23, 86, 320)
+# isFaceFound = False
+
+def handleFaces(color_image):
+    gray = cv2.cvtColor(color_image, cv2.COLOR_BGR2GRAY)
+    faces = face_cascade.detectMultiScale(gray, 1.5, 5)
+    for (x,y,w,h) in faces:
+            #  if faces exist then we stop the spin and init bbox and boolean vars
+            robot.stopSpin()
+            bbox = (x,y,w,h)
+            cv2.rectangle(color_image,(x,y),(x+w,y+h),(255,0,0),2)
+            firstBoxFound = True
+    return bbox
+    
 
 try:
     robot.startSpin()
@@ -75,10 +88,7 @@ try:
         depth_image = np.asanyarray(depth_frame.get_data())
         color_image = np.asanyarray(color_frame.get_data())
         # color = np.asanyarray(color_frame.get_data())
-
-        gray = cv2.cvtColor(color_image, cv2.COLOR_BGR2GRAY)
-        faces = face_cascade.detectMultiScale(gray, 1.5, 5)
-            
+    
         depth_colormap = cv2.applyColorMap(cv2.convertScaleAbs(depth_image, alpha=0.03), cv2.COLORMAP_JET)
         depth_colormap_dim = depth_colormap.shape
         color_colormap_dim = color.shape
@@ -98,13 +108,8 @@ try:
         red_mask = cv2.inRange(hsvFrame, red_lower, red_upper)    
         kernel = np.ones((5, 5), "uint8")
         #  For face detection
-        for (x,y,w,h) in faces:
-            #  if faces exist then we stop the spin and init bbox and boolean vars
-            robot.stopSpin()
-            bbox = (x,y,w,h)
-            firstBoxFound = True
-            cv2.rectangle(color_image,(x,y),(x+w,y+h),(255,0,0),2)
-            
+        if(not firstBoxFound):
+            bbox = handleFaces(color_image)
 
         # For red color
         red_mask = cv2.dilate(red_mask, kernel)
