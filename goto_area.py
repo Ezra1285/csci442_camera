@@ -88,7 +88,7 @@ def goto_mine(edge, line_color, spin_flag):
     total = 0
     x=0
     y=0
-    if(not(len(contours) <2)):
+    if(not(len(contours) <1)):
             cr.stopSpin()
             spin_flag = True
     if(spin_flag):
