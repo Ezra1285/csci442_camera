@@ -134,6 +134,7 @@ try:
         #       -  finish getting the distance and go to 2 feet away if needed
         ok = False
         if(trackerNeedsInit and firstBoxFound):
+            print("INIT tracker: ", trackerNeedsInit, ", firstBox: ", firstBoxFound)
             ok = tracker.init(color_image, bbox)
             trackerNeedsInit = False
         elif(not trackerNeedsInit):
