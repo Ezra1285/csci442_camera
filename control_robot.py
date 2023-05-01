@@ -51,12 +51,12 @@ class robot:
         print("right")
 
     def spinInCircle(self):
-        self.robot_controll.setSpeed(2, 3)
-        self.robot_controll.setTarget(2, 7000)
+        self.robot_controll.setSpeed(2, 5)
+        self.robot_controll.setTarget(2, 6800)
 
     def startSpin(self, speed=7000):
-        self.robot_controll.setSpeed(2, 2)
-        self.robot_controll.setTarget(2, 7000)
+        self.robot_controll.setSpeed(2, 3)
+        self.robot_controll.setTarget(2, 6900)
         print("Start spin")
         
     def stopSpin(self):
