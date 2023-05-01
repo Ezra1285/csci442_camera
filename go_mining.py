@@ -47,9 +47,9 @@ class ctrl_methods():
     def control_methods(self):
         ret = "not done"
         if(self.method_num ==0):
-            ret, spin_flag = goto_area.goto_mine(color, "blue", self.spin_flag)
+            ret, self.spin_flag = goto_area.goto_mine(color, "blue", self.spin_flag)
         elif(self.method_num ==1):
-            ret, spin_flag = goto_area.goto_mine(color, "orange", self.spin_flag)
+            ret, self.spin_flag = goto_area.goto_mine(color, "orange", self.spin_flag)
         else:
             raise Exception("Done!")
         if(ret == "done"):
