@@ -59,10 +59,11 @@ upper_blue = np.array([150,255,255])
 lower_orange = np.array([0,89,202])
 upper_orange = np.array([40,150,255])
         
-def goto_mine(edge, line_color):
-    cr.headDown()
-    cr.headDown()
-    cr.startSpin()
+def goto_mine(edge, line_color, spin_flag):
+    if(spin_flag == False):
+        cr.headDown()
+        cr.headDown()
+        cr.startSpin()
     edge = edge[40:440,150:450]
     imghsv = cv2.cvtColor(edge, cv2.COLOR_BGR2HSV)
     if("blue" == line_color):
@@ -119,7 +120,7 @@ def goto_mine(edge, line_color):
         if ydif <0:
             stop()
             cv2.imshow('RealSense', edge)
-            return "done"
+            return "done", spin_flag
         elif xdif <-15:
             if ydif >10:
                 left_forward()
@@ -142,4 +143,4 @@ def goto_mine(edge, line_color):
         
         print("spinning")
     cv2.imshow('RealSense', edge)
-    return "not done"
+    return "not done", spin_flag
