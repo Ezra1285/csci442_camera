@@ -5,7 +5,7 @@ import maestro
 import cv2
 import control_robot
 # import line_crossing
-import goto_area
+# import goto_area
 robot_control = maestro.Controller()
 # Configure depth and color streams
 pipeline = rs.pipeline()
@@ -39,21 +39,21 @@ pipeline.start(config)
 robot_control.setAccel(0,60)
 robot_control.setSpeed(0, 10)
 robot_control.setTarget(0, 6000)
-class ctrl_methods():
-    def __init__(self) -> None:
-        self.method_num = 0
+# class ctrl_methods():
+#     def __init__(self) -> None:
+#         self.method_num = 0
             
-    def control_methods(self):
-        ret = "not done"
-        if(self.method_num ==0):
-            ret = goto_area.goto_mine(color, "blue")
-        elif(self.method_num ==1):
-            ret = goto_area.goto_mine(color, "orange")
-        else:
-            raise Exception("Done!")
-        if(ret == "done"):
-            method_num +=1
-ctrlr = ctrl_methods()
+#     def control_methods(self):
+#         ret = "not done"
+#         if(self.method_num ==0):
+#             ret = goto_area.goto_mine(color, "blue")
+#         elif(self.method_num ==1):
+#             ret = goto_area.goto_mine(color, "orange")
+#         else:
+#             raise Exception("Done!")
+#         if(ret == "done"):
+#             method_num +=1
+# ctrlr = ctrl_methods()
 try:
     while True:
         # Wait for a coherent pair of frames: depth and color
