@@ -147,7 +147,7 @@ try:
             # cv2.rectangle(images, (p1),(p2), (255,0,0), 2, 1)
             curr_depth = depth_frame.get_distance(int((bbox[0]) + .5*bbox[2]), int(bbox[1] + .5*bbox[3]))
             print("Curr ", curr_depth)
-            if(curr_depth > 2):
+            if(curr_depth > 1.3):
                 print("Foward")
                 robot.move_forward()
             else:
