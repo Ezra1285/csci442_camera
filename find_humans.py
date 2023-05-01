@@ -59,7 +59,6 @@ align = rs.align(align_to)
 # Initialize tracker with first frame and bounding box
 trackerNeedsInit = True
 firstBoxFound = False
-bbox = (287, 23, 86, 320)
 # isFaceFound = False
 
 def handleFaces(color_image):
@@ -71,7 +70,9 @@ def handleFaces(color_image):
             bbox = (x,y,w,h)
             cv2.rectangle(color_image,(x,y),(x+w,y+h),(255,0,0),2)
             firstBoxFound = True
-    return bbox
+            return bbox
+    return None
+    
     
 
 try:
