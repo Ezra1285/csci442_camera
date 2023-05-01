@@ -31,6 +31,8 @@ if device_product_line == 'L500':
 else:
     config.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 30)
 
+face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+
 #  red thresh
 red_lower = np.array([136, 87, 111], np.uint8)
 red_upper = np.array([180, 255, 255], np.uint8)
@@ -50,22 +52,14 @@ tracker = cv2.TrackerKCF_create()
 # Getting the depth sensor's depth scale (see rs-align example for explanation)
 depth_sensor = profile.get_device().first_depth_sensor()
 depth_scale = depth_sensor.get_depth_scale()
-#  clipping_distance_in_meters meters away
-# clipping_distance_in_meters = 1 #1 meter
-# clipping_distance = clipping_distance_in_meters / depth_scale
 #  Create an align object
 align_to = rs.stream.color
 align = rs.align(align_to)
 # bbox = cv2.selectROI(color, False)
 # Initialize tracker with first frame and bounding box
-# ok = tracker.init(color, bbox)
-
 trackerNeedsInit = True
 firstBoxFound = False
 bbox = (287, 23, 86, 320)
-
-def findCurrDepth():
-    pass
 
 try:
     robot.startSpin()
@@ -82,6 +76,9 @@ try:
         color_image = np.asanyarray(color_frame.get_data())
         # color = np.asanyarray(color_frame.get_data())
 
+        gray = cv2.cvtColor(color_image, cv2.COLOR_BGR2GRAY)
+        faces = face_cascade.detectMultiScale(gray, 1.5, 5)
+            
         depth_colormap = cv2.applyColorMap(cv2.convertScaleAbs(depth_image, alpha=0.03), cv2.COLORMAP_JET)
         depth_colormap_dim = depth_colormap.shape
         color_colormap_dim = color.shape
@@ -100,6 +97,11 @@ try:
         hsvFrame = cv2.cvtColor(color_image, cv2.COLOR_BGR2HSV)
         red_mask = cv2.inRange(hsvFrame, red_lower, red_upper)    
         kernel = np.ones((5, 5), "uint8")
+        #  For face detection
+        for (x,y,w,h) in faces:
+            cv2.rectangle(color_image,(x,y),(x+w,y+h),(255,0,0),2)
+            # roi_gray = gray[y:y+h, x:x+w]
+            # roi_color = color_image[y:y+h, x:x+w]
 
         # For red color
         red_mask = cv2.dilate(red_mask, kernel)
