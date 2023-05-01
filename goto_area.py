@@ -64,6 +64,10 @@ def goto_mine(edge, line_color, spin_flag):
         print(" start spining")
         cr.headDown()
         cr.headDown()
+        cr.headDown()
+        cr.headDown()
+        cr.headDown()
+        cr.headDown()
         cr.startSpin()
     edge = edge[40:440,0:375]
     imghsv = cv2.cvtColor(edge, cv2.COLOR_BGR2HSV)
