@@ -146,4 +146,5 @@ def goto_mine(edge, line_color, spin_flag):
         
         print("spinning")
     cv2.imshow('RealSense', edge)
+    cv2.waitKey(1)
     return "not done", spin_flag
