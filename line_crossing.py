@@ -165,12 +165,12 @@ try:
             ydif = cof[1] - cog[1]
             if ydif <0:
                 stop()
-            elif xdif <-35:
+            elif xdif <-10:
                 if ydif >10:
                     left_forward()
                 else:
                     right()
-            elif xdif >35:
+            elif xdif >10:
                 if ydif > 10:
                     right_forward()
                 else:
