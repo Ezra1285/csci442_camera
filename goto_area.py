@@ -27,27 +27,27 @@ cr = control_robot.robot()
 def move_forward():
     robot_control.setTarget(2, 6000)
     robot_control.setTarget(0, 5200)
-    # print("forward")
+    print("forward")
 
 def stop():
     robot_control.setTarget(2, 6000)
     robot_control.setTarget(0, 6000)
-    # print("stop")
+    print("stop")
 
 def right_forward():
     robot_control.setTarget(0, 5100)
     robot_control.setTarget(2, 7100)
-    # print("left foward")
+    print("left foward")
 
 def left_forward():
     robot_control.setTarget(0, 5100)
     robot_control.setTarget(2, 4900)
-    # print("right forward")
+    print("right forward")
 
 def right():
     robot_control.setTarget(0, 6000)
     robot_control.setTarget(2, 7100)
-    # print("left")
+    print("left")
 
 def left():
     robot_control.setTarget(0, 6000)
