@@ -13,7 +13,7 @@
 #   spin until it finds blue
 #   move towards blue
 #   print when in mining area
-
+import time
 import pyrealsense2 as rs
 import numpy as np
 import maestro
@@ -65,7 +65,7 @@ def goto_mine(edge, line_color, spin_flag):
         cr.headDown()
         cr.headDown()
         cr.startSpin()
-    edge = edge[40:440,150:450]
+    edge = edge[40:440,0:450]
     imghsv = cv2.cvtColor(edge, cv2.COLOR_BGR2HSV)
     if("blue" == line_color):
         print("looking for blue")
@@ -90,6 +90,8 @@ def goto_mine(edge, line_color, spin_flag):
     y=0
     if(not(len(contours) <1)):
             cr.stopSpin()
+            stop()
+            time.sleep(2)
             spin_flag = True
     if(spin_flag):
         for i in contours:
@@ -145,6 +147,8 @@ def goto_mine(edge, line_color, spin_flag):
     else:
         
         print("spinning")
+    cv2.circle(edge, cof, 10, (255,0,0), 5)
+    cv2.circle(edge, cog, 10, (255,0,0), 5)
     cv2.imshow('RealSense', edge)
     cv2.waitKey(1)
     return "not done", spin_flag
