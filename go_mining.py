@@ -1,12 +1,12 @@
 
 import pyrealsense2 as rs
 import numpy as np
-# import maestro
+import maestro
 import cv2
-# import control_robot
-# import line_crossing
-# import goto_area
-# robot_control = maestro.Controller()
+import control_robot
+import line_crossing
+import goto_area
+robot_control = maestro.Controller()
 # Configure depth and color streams
 pipeline = rs.pipeline()
 config = rs.config()
@@ -36,24 +36,24 @@ else:
 # Start streaming
 pipeline.start(config)
 
-# robot_control.setAccel(0,60)
-# robot_control.setSpeed(0, 10)
-# robot_control.setTarget(0, 6000)
-# class ctrl_methods():
-#     def __init__(self) -> None:
-#         self.method_num = 0
+robot_control.setAccel(0,60)
+robot_control.setSpeed(0, 10)
+robot_control.setTarget(0, 6000)
+class ctrl_methods():
+    def __init__(self) -> None:
+        self.method_num = 0
             
-#     def control_methods(self):
-#         ret = "not done"
-#         if(self.method_num ==0):
-#             ret = goto_area.goto_mine(color, "blue")
-#         elif(self.method_num ==1):
-#             ret = goto_area.goto_mine(color, "orange")
-#         else:
-#             raise Exception("Done!")
-#         if(ret == "done"):
-#             method_num +=1
-# ctrlr = ctrl_methods()
+    def control_methods(self):
+        ret = "not done"
+        if(self.method_num ==0):
+            ret = goto_area.goto_mine(color, "blue")
+        elif(self.method_num ==1):
+            ret = goto_area.goto_mine(color, "orange")
+        else:
+            raise Exception("Done!")
+        if(ret == "done"):
+            method_num +=1
+ctrlr = ctrl_methods()
 try:
     while True:
         # Wait for a coherent pair of frames: depth and color
@@ -64,14 +64,14 @@ try:
         color = np.asanyarray(color_frame.get_data())
         cv2.imshow("color", color)
         # goto_mine(color, line_color)
-        # ctrlr.control_methods()
+        ctrlr.control_methods()
 
 
 
 finally:
-    # robot_control.setAccel(0,60)
-    # robot_control.setSpeed(0, 10)
-    # robot_control.setTarget(0, 6000)
-    # robot_control.setTarget(2, 6000)
+    robot_control.setAccel(0,60)
+    robot_control.setSpeed(0, 10)
+    robot_control.setTarget(0, 6000)
+    robot_control.setTarget(2, 6000)
     # Stop streaming
     pipeline.stop()

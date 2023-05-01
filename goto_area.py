@@ -86,8 +86,10 @@ def goto_mine(edge, line_color):
     total = 0
     x=0
     y=0
-    if(not(len(contours) <10)):
-        cr.stopSpin()
+    if(not(len(contours) <2)):
+            cr.stopSpin()
+            spin_flag = True
+    if(spin_flag):
         for i in contours:
             M = cv2.moments(i)
             if M['m00'] != 0:
@@ -118,12 +120,12 @@ def goto_mine(edge, line_color):
             stop()
             cv2.imshow('RealSense', edge)
             return "done"
-        elif xdif <-35:
+        elif xdif <-15:
             if ydif >10:
                 left_forward()
             else:
                 right()
-        elif xdif >35:
+        elif xdif >15:
             if ydif > 10:
                 right_forward()
             else:
