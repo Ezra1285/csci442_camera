@@ -62,8 +62,7 @@ upper_orange = np.array([40,150,255])
 def goto_mine(edge, line_color, spin_flag):
     if(spin_flag == False):
         print(" start spining")
-        cr.headDown()
-        cr.headDown()
+        
         cr.startSpin()
     edge = edge[40:440,0:650]
     imghsv = cv2.cvtColor(edge, cv2.COLOR_BGR2HSV)
@@ -90,11 +89,13 @@ def goto_mine(edge, line_color, spin_flag):
     y=0
     if(not(len(contours) <1)):
             if(not spin_flag):
+                
                 cr.stopSpin()
                 stop()
                 time.sleep(2)
                 spin_flag = True
     if(spin_flag):
+        cr.headDown()
         for i in contours:
             M = cv2.moments(i)
             if M['m00'] != 0:
