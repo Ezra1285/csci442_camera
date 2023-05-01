@@ -143,12 +143,12 @@ def goto_mine(edge, line_color, spin_flag):
         # if(total <3):
         #     stop()
         #     return "done", spin_flag
-        cv2.imshow('RealSense', edge)
+        cv2.circle(edge, cof, 10, (255,0,0), 5)
+        cv2.circle(edge, cog, 10, (255,0,0), 5)
     else:
         
         print("spinning")
-    cv2.circle(edge, cof, 10, (255,0,0), 5)
-    cv2.circle(edge, cog, 10, (255,0,0), 5)
+    
     cv2.imshow('RealSense', edge)
     cv2.waitKey(1)
     return "not done", spin_flag
