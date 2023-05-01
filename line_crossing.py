@@ -48,11 +48,11 @@ else:
 # Start streaming
 pipeline.start(config)
 
-# def crop_center(img,cropx,cropy):
-#     y,x = img.shape
-#     startx = x//2-(cropx//2)
-#     starty = y//2-(cropy//2)    
-#     return img[starty:starty+cropy,startx:startx+cropx]
+def crop_center(img,cropx,cropy):
+    y,x = img.shape
+    startx = x//2-(cropx//2)
+    starty = y//2-(cropy//2)    
+    return img[starty:starty+cropy,startx:startx+cropx]
 
 def move_forward():
     robot_controll.setTarget(2, 6000)
@@ -117,7 +117,7 @@ try:
         # Grayscale
         # Find Canny edges
         imghsv = cv2.cvtColor(edge, cv2.COLOR_BGR2HSV)
-        lower_blue = np.array([80,188,188])
+        # lower_blue = np.array([80,188,188])
         # upper_blue = np.array([150,255,255])
         # mask_blue = cv2.inRange(imghsv, lower_blue, upper_blue)
         # contours, _ = cv2.findContours(mask_blue, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
@@ -129,62 +129,62 @@ try:
         total = 0
         x=0
         y=0
-        if(not(len(contours) <2)):
-            cr.stopSpin()
-            for i in contours:
-                M = cv2.moments(i)
-                if M['m00'] != 0:
-                    
-                    cx = int(M['m10']/M['m00'])
-                    cy = int(M['m01']/M['m00'])
-                    x += cx
-                    y += cy
-                    total +=1
-                    cv2.drawContours(edge, [i], -1, (0, 255, 0), 2)
-                    cv2.circle(edge, (cx, cy), 7, (0, 0, 255), -1)
-                    cv2.putText(edge, "center", (cx - 20, cy - 20),
-                            cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2)
-        # cv2.drawContours(edge, contours, -1, (0, 255, 0), 1)
+        # if(not(len(contours) <2)):
+        cr.stopSpin()
+        for i in contours:
+            M = cv2.moments(i)
+            if M['m00'] != 0:
+                
+                cx = int(M['m10']/M['m00'])
+                cy = int(M['m01']/M['m00'])
+                x += cx
+                y += cy
+                total +=1
+                cv2.drawContours(edge, [i], -1, (0, 255, 0), 2)
+                cv2.circle(edge, (cx, cy), 7, (0, 0, 255), -1)
+                cv2.putText(edge, "center", (cx - 20, cy - 20),
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2)
+    # cv2.drawContours(edge, contours, -1, (0, 255, 0), 1)
+    
+        if total == 0:
+            total = 1
+        yavg = int(x/total)
+        xavg = int(y/total)
+        cofy = int((150+450)/2)
+        cofx = int(150)
+        cof = (cofx, cofy)
+        cv2.circle(edge, cof, 10, (255,0,0), 5)
+        cog = (xavg,yavg)
+        cv2.circle(edge, cog, 10, (255,0,0), 5)
         
-            if total == 0:
-                total = 1
-            yavg = int(x/total)
-            xavg = int(y/total)
-            cofy = int((150+450)/2)
-            cofx = int(150)
-            cof = (cofx, cofy)
-            cv2.circle(edge, cof, 10, (255,0,0), 5)
-            cog = (xavg,yavg)
-            cv2.circle(edge, cog, 10, (255,0,0), 5)
-            
-            #TODO
-            #move towards COG
-            xdif = cof[0] - cog[0]
-            ydif = cof[1] - cog[1]
-            if ydif <0:
-                stop()
-            elif xdif <-35:
-                if ydif >10:
-                    left_forward()
-                else:
-                    right()
-            elif xdif >35:
-                if ydif > 10:
-                    right_forward()
-                else:
-                    left()
-
-            elif ydif > 0:
-                move_forward()
+        #TODO
+        #move towards COG
+        xdif = cof[0] - cog[0]
+        ydif = cof[1] - cog[1]
+        if ydif <0:
+            stop()
+        elif xdif <-35:
+            if ydif >10:
+                left_forward()
             else:
-                stop()
-            if(total <3):
-                stop()
-            cv2.imshow('RealSense', edge)
-            key = cv2.waitKey(1)
-            if(key == 27):
-                break
-            
+                right()
+        elif xdif >35:
+            if ydif > 10:
+                right_forward()
+            else:
+                left()
+
+        elif ydif > 0:
+            move_forward()
+        else:
+            stop()
+        if(total <3):
+            stop()
+        cv2.imshow('RealSense', edge)
+        key = cv2.waitKey(1)
+        if(key == 27):
+            break
+        
 
 
 
