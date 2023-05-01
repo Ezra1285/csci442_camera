@@ -89,10 +89,11 @@ def goto_mine(edge, line_color, spin_flag):
     x=0
     y=0
     if(not(len(contours) <1)):
-            cr.stopSpin()
-            stop()
-            time.sleep(2)
-            spin_flag = True
+            if(not spin_flag):
+                cr.stopSpin()
+                stop()
+                time.sleep(2)
+                spin_flag = True
     if(spin_flag):
         for i in contours:
             M = cv2.moments(i)
