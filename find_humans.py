@@ -99,9 +99,12 @@ try:
         kernel = np.ones((5, 5), "uint8")
         #  For face detection
         for (x,y,w,h) in faces:
+            #  if faces exist then we stop the spin and init bbox and boolean vars
+            robot.stopSpin()
+            bbox = (x,y,w,h)
+            firstBoxFound = True
             cv2.rectangle(color_image,(x,y),(x+w,y+h),(255,0,0),2)
-            # roi_gray = gray[y:y+h, x:x+w]
-            # roi_color = color_image[y:y+h, x:x+w]
+            
 
         # For red color
         red_mask = cv2.dilate(red_mask, kernel)
@@ -112,10 +115,10 @@ try:
         for pic, contour in enumerate(contours):
             area = cv2.contourArea(contour)
             if(area > 2500):
-                robot.stopSpin()
+                # robot.stopSpin()
                 x, y, w, h = cv2.boundingRect(contour)
-                bbox = (x, y, w, h)
-                firstBoxFound = True
+                # bbox = (x, y, w, h)
+                # firstBoxFound = True
                 color_image = cv2.rectangle(color_image, (x, y), 
                                         (x + w, y + h), 
                                         (0, 0, 255), 2)
