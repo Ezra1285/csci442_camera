@@ -4,7 +4,7 @@ import numpy as np
 import maestro
 import cv2
 import control_robot
-import line_crossing
+# import line_crossing
 import goto_area
 robot_control = maestro.Controller()
 # Configure depth and color streams
@@ -42,13 +42,14 @@ robot_control.setTarget(0, 6000)
 class ctrl_methods():
     def __init__(self) -> None:
         self.method_num = 0
+        self.spin_flag = False
             
     def control_methods(self):
         ret = "not done"
         if(self.method_num ==0):
-            ret = goto_area.goto_mine(color, "blue")
+            ret, self.spin_flag = goto_area.goto_mine(color, "blue", self.spin_flag)
         elif(self.method_num ==1):
-            ret = goto_area.goto_mine(color, "orange")
+            ret, self.spin_flag = goto_area.goto_mine(color, "orange", self.spin_flag)
         else:
             raise Exception("Done!")
         if(ret == "done"):
