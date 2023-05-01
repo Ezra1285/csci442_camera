@@ -73,11 +73,28 @@ def handleFaces(color_image):
             return bbox
     return None
     
-    
+def handleColor(color_image):
+    hsvFrame = cv2.cvtColor(color_image, cv2.COLOR_BGR2HSV)
+    red_mask = cv2.inRange(hsvFrame, red_lower, red_upper)
+    # For red color
+    red_mask = cv2.dilate(red_mask, kernel)
+    res_red = cv2.bitwise_and(color_image, color_image, mask = red_mask)
+    contours, hierarchy = cv2.findContours(red_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+    for pic, contour in enumerate(contours):
+        area = cv2.contourArea(contour)
+        if(area > 2500):
+            x, y, w, h = cv2.boundingRect(contour)
+            color_image = cv2.rectangle(color_image, (x, y), 
+                                    (x + w, y + h), 
+                                    (0, 0, 255), 2)
+            
+            cv2.putText(color_image, "Red Colour", (x, y),
+                        cv2.FONT_HERSHEY_SIMPLEX, 1.0,
+                        (0, 0, 255))
+            break    
 
 try:
     robot.startSpin()
-    # time.sleep(5)
     while True:
         # Wait for a coherent pair of frames: depth and color
         frames = pipeline.wait_for_frames()
@@ -105,34 +122,13 @@ try:
         blank = np.zeros_like(images)
         images = np.vstack((images,blank))
 
-        hsvFrame = cv2.cvtColor(color_image, cv2.COLOR_BGR2HSV)
-        red_mask = cv2.inRange(hsvFrame, red_lower, red_upper)    
         kernel = np.ones((5, 5), "uint8")
         #  For face detection
         if(not firstBoxFound):
             bbox = handleFaces(color_image)
 
-        # For red color
-        red_mask = cv2.dilate(red_mask, kernel)
-        res_red = cv2.bitwise_and(color_image, color_image, mask = red_mask)
-        #  possiable hack - have 3 programs one for each color
-        #  then run the program bassed on color hunter chooses
-        contours, hierarchy = cv2.findContours(red_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-        for pic, contour in enumerate(contours):
-            area = cv2.contourArea(contour)
-            if(area > 2500):
-                # robot.stopSpin()
-                x, y, w, h = cv2.boundingRect(contour)
-                # bbox = (x, y, w, h)
-                # firstBoxFound = True
-                color_image = cv2.rectangle(color_image, (x, y), 
-                                        (x + w, y + h), 
-                                        (0, 0, 255), 2)
-                
-                cv2.putText(color_image, "Red Colour", (x, y),
-                            cv2.FONT_HERSHEY_SIMPLEX, 1.0,
-                            (0, 0, 255))
-                break 
+        if(firstBoxFound):
+            handleColor(color_image) 
 
         #  TODO - start here refrencing the camera code
         #       -  finish getting the distance and go to 2 feet away if needed
