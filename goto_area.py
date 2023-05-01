@@ -61,6 +61,7 @@ upper_orange = np.array([40,150,255])
         
 def goto_mine(edge, line_color, spin_flag):
     if(spin_flag == False):
+        print(" start spining")
         cr.headDown()
         cr.headDown()
         cr.startSpin()
