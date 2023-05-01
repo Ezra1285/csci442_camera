@@ -65,7 +65,7 @@ def goto_mine(edge, line_color, spin_flag):
         cr.headDown()
         cr.headDown()
         cr.startSpin()
-    edge = edge[40:440,0:450]
+    edge = edge[40:440,0:375]
     imghsv = cv2.cvtColor(edge, cv2.COLOR_BGR2HSV)
     if("blue" == line_color):
         print("looking for blue")
@@ -89,10 +89,11 @@ def goto_mine(edge, line_color, spin_flag):
     x=0
     y=0
     if(not(len(contours) <1)):
-            cr.stopSpin()
-            stop()
-            time.sleep(2)
-            spin_flag = True
+            if(not spin_flag):
+                cr.stopSpin()
+                stop()
+                time.sleep(2)
+                spin_flag = True
     if(spin_flag):
         for i in contours:
             M = cv2.moments(i)
