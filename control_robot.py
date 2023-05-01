@@ -55,8 +55,8 @@ class robot:
         self.robot_controll.setTarget(2, 7000)
 
     def startSpin(self):
-        # self.robot_controll.setSpeed(2, 1)
-        self.robot_controll.setTarget(2, 6800)
+        self.robot_controll.setSpeed(2, 3)
+        self.robot_controll.setTarget(2, 7000)
         print("Start spin")
         
     def stopSpin(self):
