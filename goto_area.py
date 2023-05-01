@@ -62,10 +62,9 @@ upper_orange = np.array([40,150,255])
 def goto_mine(edge, line_color, spin_flag):
     if(spin_flag == False):
         print(" start spining")
-        cr.headDown()
-        cr.headDown()
+        
         cr.startSpin()
-    edge = edge[40:440,0:550]
+    edge = edge[40:440,0:650]
     imghsv = cv2.cvtColor(edge, cv2.COLOR_BGR2HSV)
     if("blue" == line_color):
         print("looking for blue")
@@ -90,11 +89,13 @@ def goto_mine(edge, line_color, spin_flag):
     y=0
     if(not(len(contours) <1)):
             if(not spin_flag):
+                
                 cr.stopSpin()
                 stop()
                 time.sleep(2)
                 spin_flag = True
     if(spin_flag):
+        cr.headDown()
         for i in contours:
             M = cv2.moments(i)
             if M['m00'] != 0:
@@ -112,8 +113,8 @@ def goto_mine(edge, line_color, spin_flag):
             total = 1
         yavg = int(x/total)
         xavg = int(y/total)
-        cofy = int((200))
-        cofx = int(150)
+        cofy = int((375))
+        cofx = int(250)
         cof = (cofx, cofy)
         cv2.circle(edge, cof, 10, (255,0,0), 5)
         cog = (xavg,yavg)
@@ -122,7 +123,7 @@ def goto_mine(edge, line_color, spin_flag):
         xdif = cof[0] - cog[0]
         ydif = cof[1] - cog[1]
         print("MOVING")
-        if ydif <0:
+        if ydif <-50:
             stop()
             return "done", spin_flag
         elif xdif <-15:
