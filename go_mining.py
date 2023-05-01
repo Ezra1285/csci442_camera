@@ -53,7 +53,7 @@ class ctrl_methods():
         else:
             raise Exception("Done!")
         if(ret == "done"):
-            method_num +=1
+            self.method_num +=1
 ctrlr = ctrl_methods()
 try:
     while True:
@@ -63,7 +63,7 @@ try:
         if not color_frame:
             continue
         color = np.asanyarray(color_frame.get_data())
-        cv2.imshow("color", color)
+        # cv2.imshow("color", color)
         # goto_mine(color, line_color)
         ctrlr.control_methods()
 
