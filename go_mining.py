@@ -4,7 +4,7 @@ import numpy as np
 import maestro
 import cv2
 import control_robot
-import line_crossing
+# import line_crossing
 import goto_area
 robot_control = maestro.Controller()
 # Configure depth and color streams
