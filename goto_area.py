@@ -137,6 +137,7 @@ def goto_mine(edge, line_color, spin_flag):
             move_forward()
         else:
             stop()
+            print("bad")
         if(total <3):
             stop()
         cv2.imshow('RealSense', edge)
