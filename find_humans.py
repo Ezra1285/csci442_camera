@@ -89,7 +89,7 @@ def handleColor(color_image):
     contours, hierarchy = cv2.findContours(red_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
     for pic, contour in enumerate(contours):
         area = cv2.contourArea(contour)
-        if(area > 2500):
+        if(area > 3200):
             color_found = "pink"
             x, y, w, h = cv2.boundingRect(contour)
             color_image = cv2.rectangle(color_image, (x, y), 
@@ -106,8 +106,7 @@ def handleColor(color_image):
     contours, hierarchy = cv2.findContours(green_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
     for pic, contour in enumerate(contours):
         area = cv2.contourArea(contour)
-        if(area > 2500):
-            print("Area " , area)
+        if(area > 3200):
             color_found = "green"
             x, y, w, h = cv2.boundingRect(contour)
             color_image = cv2.rectangle(color_image, (x, y), 
@@ -123,7 +122,7 @@ def handleColor(color_image):
     contours, hierarchy = cv2.findContours(yellow_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
     for pic, contour in enumerate(contours):
         area = cv2.contourArea(contour)
-        if(area > 2500):
+        if(area > 3200):
             color_found = "yellow"
             x, y, w, h = cv2.boundingRect(contour)
             color_image = cv2.rectangle(color_image, (x, y),
@@ -171,7 +170,7 @@ try:
         if(not firstBoxFound):
             bbox, firstBoxFound = handleFaces(color_image)
         
-        if(firstBoxFound):
+        if(firstBoxFound and not color_found):
             color_found = handleColor(color_image) 
         
         #  TODO: Return this color and make it work with baiden main program
@@ -180,7 +179,6 @@ try:
 
         ok = False
         if(trackerNeedsInit and firstBoxFound):
-            print("INIT tracker: ", trackerNeedsInit, ", firstBox: ", firstBoxFound)
             ok = tracker.init(color_image, bbox)
             trackerNeedsInit = False
         elif(not trackerNeedsInit):
@@ -193,18 +191,14 @@ try:
             p2 = (int((bbox[0] + bbox[2])/2), int((bbox[1] + bbox[3])/2))
             # cv2.rectangle(images, (p1),(p2), (255,0,0), 2, 1)
             curr_depth = depth_frame.get_distance(int((bbox[0]) + .5*bbox[2]), int(bbox[1] + .5*bbox[3]))
-            print("Curr ", curr_depth)
             if(curr_depth > 2):
-                print("Foward")
                 robot.move_forward()
             else:
-                print("BAD stop?")
                 robot.stop()
                 shouldMove = False
         elif(not ok and firstBoxFound) :
             # Tracking failure
             cv2.putText(images, "Tracking failure detected", (100,80), cv2.FONT_HERSHEY_SIMPLEX, 0.75,(0,0,255),2)
-            print("STOP 1")
             robot.stop()
             
         cv2.imshow('RealSense', color_image)
