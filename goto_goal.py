@@ -130,12 +130,12 @@ def findColor():
                 continue
             color_image = np.asanyarray(color_frame.get_data())    
 
-            if(needToFindColor):
-                color_found, needToFindColor = handleColor(color_image) 
+            # if(needToFindColor):
+            #     color_found, needToFindColor = handleColor(color_image) 
             
             # #  TODO: Return this color and make it work with baiden main program
-            if(not needToFindColor):
-                return color_found
+            # if(not needToFindColor):
+            #     return color_found
 
             cv2.imshow('RealSense', color_image)
             # cv2.imshow('RealSense', edge)
