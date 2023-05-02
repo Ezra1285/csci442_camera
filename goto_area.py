@@ -54,9 +54,14 @@ def left():
     robot_control.setTarget(2, 4900)
     # print("right")
 
-lower_blue = np.array([80,188,188])
+# lower_blue = np.array([120,188,188])
+# upper_blue = np.array([150,255,255])
+# lower_orange = np.array([0,89,100])
+# upper_orange = np.array([40,150,255])
+
+lower_blue = np.array([120,188,188])
 upper_blue = np.array([150,255,255])
-lower_orange = np.array([0,89,202])
+lower_orange = np.array([0,89,100])
 upper_orange = np.array([40,150,255])
         
 def goto_mine(edge, line_color, spin_flag):
@@ -113,7 +118,7 @@ def goto_mine(edge, line_color, spin_flag):
             total = 1
         yavg = int(x/total)
         xavg = int(y/total)
-        cofy = int((500))
+        cofy = int((520))
         cofx = int(250)
         cof = (cofx, cofy)
         cv2.circle(edge, cof, 10, (255,0,0), 5)
