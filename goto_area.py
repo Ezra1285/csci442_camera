@@ -129,7 +129,12 @@ def goto_mine(edge, line_color, spin_flag):
         xdif = cof[0] - cog[0]
         ydif = cof[1] - cog[1]
         print("MOVING")
-        if ydif <0:
+        if ydif >50:
+            move_forward()
+            if(x + y<1):
+                stop()
+                return "done", spin_flag
+        elif ydif <0:
             stop()
             return "done", spin_flag
         elif xdif <-15:
@@ -148,11 +153,11 @@ def goto_mine(edge, line_color, spin_flag):
         else:
             stop()
             print("bad")
-        if(total <3):
+        if(x+y <1):
             stop()
             return "done", spin_flag
         # cv2.circle(edge, cof, 10, (255,0,0), 5)
-        # cv2.circle(edge, cog, 10, (255,0,0), 5)
+        cv2.circle(edge, cog, 10, (255,0,0), 5)
     else:
         
         print("spinning")
