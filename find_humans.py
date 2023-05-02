@@ -33,10 +33,6 @@ else:
 
 face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 
-#  red thresh
-red_lower = np.array([136, 87, 111], np.uint8)
-red_upper = np.array([180, 255, 255], np.uint8)
-
 # Start streaming
 profile = pipeline.start(config)
 time.sleep(2)
@@ -71,11 +67,21 @@ def handleFaces(color_image):
             cv2.rectangle(color_image,(x,y),(x+w,y+h),(255,0,0),2)
             return bbox, True
     return None, False
-    
+
+#  Red thresh
+red_lower = np.array([136, 87, 111], np.uint8)
+red_upper = np.array([180, 255, 255], np.uint8)
+#  Green thresh
+green_lower = np.array([25, 52, 72], np.uint8)
+green_upper = np.array([102, 255, 255], np.uint8)
+# yellow
+blue_lower = np.array([94, 80, 2], np.uint8)
+blue_upper = np.array([120, 255, 255], np.uint8)
+
 def handleColor(color_image):
     hsvFrame = cv2.cvtColor(color_image, cv2.COLOR_BGR2HSV)
-    red_mask = cv2.inRange(hsvFrame, red_lower, red_upper)
     # For red color
+    red_mask = cv2.inRange(hsvFrame, red_lower, red_upper)
     red_mask = cv2.dilate(red_mask, kernel)
     res_red = cv2.bitwise_and(color_image, color_image, mask = red_mask)
     contours, hierarchy = cv2.findContours(red_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
@@ -92,6 +98,35 @@ def handleColor(color_image):
                         (0, 0, 255))
             break    
 
+    #  For green
+    green_mask = cv2.inRange(hsvFrame, green_lower, green_upper)
+    contours, hierarchy = cv2.findContours(green_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+    for pic, contour in enumerate(contours):
+        area = cv2.contourArea(contour)
+        if(area > 2500):
+            x, y, w, h = cv2.boundingRect(contour)
+            imageFrame = cv2.rectangle(imageFrame, (x, y), 
+                                       (x + w, y + h),
+                                       (0, 255, 0), 2)
+              
+            cv2.putText(imageFrame, "Green Colour", (x, y),
+                        cv2.FONT_HERSHEY_SIMPLEX, 
+                        1.0, (0, 255, 0))
+
+    #  For yellow
+    blue_mask = cv2.inRange(hsvFrame, blue_lower, blue_upper)
+    contours, hierarchy = cv2.findContours(blue_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+    for pic, contour in enumerate(contours):
+        area = cv2.contourArea(contour)
+        if(area > 2500):
+            x, y, w, h = cv2.boundingRect(contour)
+            imageFrame = cv2.rectangle(imageFrame, (x, y),
+                                       (x + w, y + h),
+                                       (255, 0, 0), 2)
+              
+            cv2.putText(imageFrame, "Blue Colour", (x, y),
+                        cv2.FONT_HERSHEY_SIMPLEX,
+                        1.0, (255, 0, 0))
 try:
     robot.startSpin()
     while True:
