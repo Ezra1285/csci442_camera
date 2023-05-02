@@ -68,12 +68,14 @@ def goto_mine(edge, line_color, spin_flag):
         print(" start spining")
         
         cr.startSpin()
-    edge = edge[40:440,150:650]
+    edge = edge[40:440,250:550]
     imghsv = cv2.cvtColor(edge, cv2.COLOR_BGR2HSV)
     if("blue" == line_color):
         print("looking for blue")
         hsv_low = lower_blue
         hsv_high = upper_blue
+
+
         mask_blue = cv2.inRange(imghsv, lower_blue, upper_blue)
         contours, _ = cv2.findContours(mask_blue, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
         blurred = cv2.blur(mask_blue, (10,10))
