@@ -80,6 +80,7 @@ yellow_upper = np.array([52, 255, 255])
 color_found = ""
 
 def handleColor(color_image):
+    global color_found
     hsvFrame = cv2.cvtColor(color_image, cv2.COLOR_BGR2HSV)
     # For red color
     red_mask = cv2.inRange(hsvFrame, red_lower, red_upper)
