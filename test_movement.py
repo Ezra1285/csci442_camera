@@ -20,6 +20,7 @@ import time
 
 robot = control_robot.robot()
 count = 0
+robot.headUp()
 # while True:
 robot.startSpin()
 time.sleep(7)

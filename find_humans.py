@@ -62,6 +62,7 @@ firstBoxFound = False
 # isFaceFound = False
 
 def handleFaces(color_image):
+    passControl = False
     gray = cv2.cvtColor(color_image, cv2.COLOR_BGR2GRAY)
     faces = face_cascade.detectMultiScale(gray, 1.5, 5)
     for (x,y,w,h) in faces:
@@ -69,7 +70,7 @@ def handleFaces(color_image):
             robot.stopSpin()
             bbox = (x,y,w,h)
             cv2.rectangle(color_image,(x,y),(x+w,y+h),(255,0,0),2)
-            firstBoxFound = True
+            passControl = True
             return bbox
     return None
     
@@ -125,7 +126,7 @@ try:
         kernel = np.ones((5, 5), "uint8")
         #  For face detection
         if(not firstBoxFound):
-            bbox = handleFaces(color_image)
+            bbox, firstBoxFound = handleFaces(color_image)
 
         if(firstBoxFound):
             handleColor(color_image) 
