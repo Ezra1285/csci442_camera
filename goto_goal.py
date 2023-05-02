@@ -20,7 +20,7 @@ robot = control_robot.robot()
 
 def handleColor(color_image):
     global color_found
-    global robot
+    # global robot
     hsvFrame = cv2.cvtColor(color_image, cv2.COLOR_BGR2HSV)
     # For red color
     red_mask = cv2.inRange(hsvFrame, red_lower, red_upper)
@@ -112,11 +112,12 @@ def findColor():
     profile = pipeline.start(config)
 #====================================== 
     needToFindColor = True
+    global color_found
+    # global robot
     try:
-        global robot
         robot.startSpin()
-        global color_found
         while True:
+            print("IN loop")
             frames = pipeline.wait_for_frames()
             color_frame = frames.get_color_frame()
             if not color_frame:
