@@ -80,7 +80,6 @@ yellow_upper = np.array([52, 255, 255])
 color_found = ""
 
 def handleColor(color_image):
-    color_found = ""
     hsvFrame = cv2.cvtColor(color_image, cv2.COLOR_BGR2HSV)
     # For red color
     red_mask = cv2.inRange(hsvFrame, red_lower, red_upper)
@@ -197,11 +196,13 @@ try:
                 print("Foward")
                 robot.move_forward()
             else:
+                print("BAD stop?")
                 robot.stop()
                 shouldMove = False
         elif(not ok and firstBoxFound) :
             # Tracking failure
             cv2.putText(images, "Tracking failure detected", (100,80), cv2.FONT_HERSHEY_SIMPLEX, 0.75,(0,0,255),2)
+            print("STOP 1")
             robot.stop()
             
         cv2.imshow('RealSense', color_image)
