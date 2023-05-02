@@ -128,7 +128,7 @@ def handleColor(color_image):
                         cv2.FONT_HERSHEY_SIMPLEX,
                         1.0, (255, 0, 0))
 try:
-    robot.startSpin()
+    robot.startSpin(7100)
     while True:
         # Wait for a coherent pair of frames: depth and color
         frames = pipeline.wait_for_frames()
@@ -160,9 +160,11 @@ try:
         #  For face detection
         if(not firstBoxFound):
             bbox, firstBoxFound = handleFaces(color_image)
+            print("YES")
 
         if(firstBoxFound):
             handleColor(color_image) 
+            print("No")
 
         #  TODO - start here refrencing the camera code
         #       -  finish getting the distance and go to 2 feet away if needed
