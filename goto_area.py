@@ -131,6 +131,9 @@ def goto_mine(edge, line_color, spin_flag):
         print("MOVING")
         if ydif >50:
             move_forward()
+            if(total <1):
+                stop()
+                return "done", spin_flag
         elif ydif <0:
             stop()
             return "done", spin_flag
