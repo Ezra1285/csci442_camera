@@ -104,9 +104,14 @@ class robot:
         self.robot_controll.setTarget(4, self.headTilt)
 
     def headDown(self):
-        self.headTilt -= 2000
+        self.headTilt -= 200
         if(self.headTilt < 1510):
             self.headTilt = 1510
+        self.robot_controll.setTarget(4, self.headTilt)
+
+    def headstraight(self):
+        
+        self.headTilt = 1650
         self.robot_controll.setTarget(4, self.headTilt)
 
     def close(self):

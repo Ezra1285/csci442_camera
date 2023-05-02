@@ -101,7 +101,7 @@ def goto_mine(edge, line_color, spin_flag):
                 time.sleep(2)
                 spin_flag = True
     if(spin_flag):
-        cr.headDown()
+        cr.headstraight()
         for i in contours:
             M = cv2.moments(i)
             if M['m00'] != 0:
@@ -112,7 +112,7 @@ def goto_mine(edge, line_color, spin_flag):
                 y += cy
                 total +=1
                 cv2.drawContours(edge, [i], -1, (0, 255, 0), 2)
-                cv2.circle(edge, (cx, cy), 7, (0, 0, 255), -1)
+                # cv2.circle(edge, (cx, cy), 7, (0, 0, 255), -1)
                 cv2.putText(edge, "center", (cx - 20, cy - 20),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2)
         if total == 0:
@@ -122,9 +122,9 @@ def goto_mine(edge, line_color, spin_flag):
         cofy = int((350))
         cofx = int(150)
         cof = (cofx, cofy)
-        cv2.circle(edge, cof, 10, (255,0,0), 5)
+        # cv2.circle(edge, cof, 10, (255,0,0), 5)
         cog = (xavg,yavg)
-        cv2.circle(edge, cog, 10, (255,0,0), 5)
+        # cv2.circle(edge, cog, 10, (255,0,0), 5)
 
         xdif = cof[0] - cog[0]
         ydif = cof[1] - cog[1]
@@ -151,8 +151,8 @@ def goto_mine(edge, line_color, spin_flag):
         # if(total <3):
         #     stop()
         #     return "done", spin_flag
-        cv2.circle(edge, cof, 10, (255,0,0), 5)
-        cv2.circle(edge, cog, 10, (255,0,0), 5)
+        # cv2.circle(edge, cof, 10, (255,0,0), 5)
+        # cv2.circle(edge, cog, 10, (255,0,0), 5)
     else:
         
         print("spinning")
