@@ -101,7 +101,7 @@ def goto_mine(edge, line_color, spin_flag):
                 time.sleep(2)
                 spin_flag = True
     if(spin_flag):
-        cr.headDown()
+        cr.headstraight()
         for i in contours:
             M = cv2.moments(i)
             if M['m00'] != 0:
