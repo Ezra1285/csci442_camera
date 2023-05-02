@@ -66,7 +66,7 @@ def handleFaces(color_image):
             return bbox, True
     return None, False
 
-#  Red thresh
+#Red thresh
 red_lower = np.array([136, 87, 111], np.uint8)
 red_upper = np.array([180, 255, 255], np.uint8)
 #  Green thresh
@@ -75,6 +75,7 @@ green_upper = np.array([86, 255, 255], np.uint8)
 # yellow
 yellow_lower = np.array([20, 102, 91])
 yellow_upper = np.array([52, 255, 255])
+
 
 kernel = np.ones((5, 5), "uint8")
 color_found = ""
@@ -99,8 +100,7 @@ def handleColor(color_image):
             cv2.putText(color_image, "Pink Colour", (x, y),
                         cv2.FONT_HERSHEY_SIMPLEX, 1.0,
                         (0, 0, 255))
-            break    
-
+    
     #  For green
     green_mask = cv2.inRange(hsvFrame, green_lower, green_upper)
     contours, hierarchy = cv2.findContours(green_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
