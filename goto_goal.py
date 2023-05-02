@@ -11,8 +11,8 @@ red_upper = np.array([180, 255, 255], np.uint8)
 green_lower = np.array([49, 60, 128], np.uint8)
 green_upper = np.array([86, 255, 255], np.uint8)
 # yellow
-yellow_lower = np.array([20, 102, 91])
-yellow_upper = np.array([52, 255, 255])
+yellow_lower = np.array([20, 102, 91], np.uint8)
+yellow_upper = np.array([52, 255, 255], np.uint8)
 
 kernel = np.ones((5, 5), "uint8")
 color_found = ""
@@ -45,6 +45,8 @@ def handleColor(color_image):
 
     #  For green
     green_mask = cv2.inRange(hsvFrame, green_lower, green_upper)
+    green_mask = cv2.dilate(green_mask, kernel)
+    res_green = cv2.bitwise_and(color_image, color_image, mask = green_mask)
     contours, hierarchy = cv2.findContours(green_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
     for pic, contour in enumerate(contours):
         area = cv2.contourArea(contour)
@@ -61,8 +63,11 @@ def handleColor(color_image):
                         cv2.FONT_HERSHEY_SIMPLEX, 
                         1.0, (0, 255, 0))
             return color_found, False
+    
     #  For yellow
     yellow_mask = cv2.inRange(hsvFrame, yellow_lower, yellow_upper)
+    yellow_mask = cv2.dilate(yellow_mask, kernel)
+    res_yellow = cv2.bitwise_and(color_image, color_image, mask = yellow_mask)
     contours, hierarchy = cv2.findContours(yellow_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
     for pic, contour in enumerate(contours):
         area = cv2.contourArea(contour)
