@@ -177,7 +177,7 @@ def findHumans():
             
             #  TODO: Return this color and make it work with baiden main program
             if(color_found):
-                print("Color is: ", color_found)
+                return color_found
 
             ok = False
             if(trackerNeedsInit and firstBoxFound):
@@ -216,4 +216,5 @@ def findHumans():
         pipeline.stop()
 
 
-findHumans()
+finalColor = findHumans()
+print("Color is: ", finalColor)
