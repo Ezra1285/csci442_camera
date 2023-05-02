@@ -126,7 +126,6 @@ def findColor():
     try:
         # robot.startSpin()
         while True:
-            print("IN loop")
             frames = pipeline.wait_for_frames()
             color_frame = frames.get_color_frame()
             if not color_frame:
