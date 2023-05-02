@@ -4,6 +4,80 @@ import pyrealsense2 as rs
 import numpy as np
 import control_robot
 
+#  Red thresh
+red_lower = np.array([136, 87, 111], np.uint8)
+red_upper = np.array([180, 255, 255], np.uint8)
+#  Green thresh
+green_lower = np.array([49, 60, 128], np.uint8)
+green_upper = np.array([86, 255, 255], np.uint8)
+# yellow
+yellow_lower = np.array([20, 102, 91])
+yellow_upper = np.array([52, 255, 255])
+
+kernel = np.ones((5, 5), "uint8")
+color_found = ""
+robot = control_robot.robot()
+
+def handleColor(color_image):
+    global color_found
+    global robot
+    hsvFrame = cv2.cvtColor(color_image, cv2.COLOR_BGR2HSV)
+    # For red color
+    red_mask = cv2.inRange(hsvFrame, red_lower, red_upper)
+    red_mask = cv2.dilate(red_mask, kernel)
+    res_red = cv2.bitwise_and(color_image, color_image, mask = red_mask)
+    contours, hierarchy = cv2.findContours(red_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+    for pic, contour in enumerate(contours):
+        area = cv2.contourArea(contour)
+        if(area > 3200):
+            robot.stopSpin()
+            color_found = "pink"
+            x, y, w, h = cv2.boundingRect(contour)
+            color_image = cv2.rectangle(color_image, (x, y), 
+                                    (x + w, y + h), 
+                                    (0, 0, 255), 2)
+            
+            cv2.putText(color_image, "Pink Colour", (x, y),
+                        cv2.FONT_HERSHEY_SIMPLEX, 1.0,
+                        (0, 0, 255))
+            break    
+
+    #  For green
+    green_mask = cv2.inRange(hsvFrame, green_lower, green_upper)
+    contours, hierarchy = cv2.findContours(green_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+    for pic, contour in enumerate(contours):
+        area = cv2.contourArea(contour)
+        if(area > 3200):
+            robot.stopSpin()
+            color_found = "green"
+            x, y, w, h = cv2.boundingRect(contour)
+            color_image = cv2.rectangle(color_image, (x, y), 
+                                       (x + w, y + h),
+                                       (0, 255, 0), 2)
+              
+            cv2.putText(color_image, "Green Colour", (x, y),
+                        cv2.FONT_HERSHEY_SIMPLEX, 
+                        1.0, (0, 255, 0))
+
+    #  For yellow
+    yellow_mask = cv2.inRange(hsvFrame, yellow_lower, yellow_upper)
+    contours, hierarchy = cv2.findContours(yellow_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+    for pic, contour in enumerate(contours):
+        area = cv2.contourArea(contour)
+        if(area > 3200):
+            robot.stopSpin()
+            color_found = "yellow"
+            x, y, w, h = cv2.boundingRect(contour)
+            color_image = cv2.rectangle(color_image, (x, y),
+                                       (x + w, y + h),
+                                       (255, 0, 0), 2)
+              
+            cv2.putText(color_image, "Yellow Colour", (x, y),
+                        cv2.FONT_HERSHEY_SIMPLEX,
+                        1.0, (255, 0, 0))
+    return color_found
+
+
 def findColor():
     #======================================
     pipeline = rs.pipeline()
@@ -34,10 +108,11 @@ def findColor():
     # Start streaming
     profile = pipeline.start(config)
 #====================================== 
-
-    robot = control_robot.robot()
+    needToFindColor = True
     try:
-        robot.headFullyLeft()
+        global robot
+        robot.startSpin()
+        global color_found
         while True:
             frames = pipeline.wait_for_frames()
             color_frame = frames.get_color_frame()
@@ -46,12 +121,12 @@ def findColor():
             color_image = np.asanyarray(color_frame.get_data())    
 
             robot.headRight()
-            # if(firstBoxFound and not color_found):
-            #     color_found = handleColor(color_image) 
+            if(needToFindColor):
+                color_found = handleColor(color_image) 
             
             # #  TODO: Return this color and make it work with baiden main program
-            # if(color_found):
-            #     return color_found
+            if(color_found):
+                return color_found
 
             cv2.imshow('RealSense', color_image)
             # cv2.imshow('RealSense', edge)
