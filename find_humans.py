@@ -79,6 +79,7 @@ yellow_lower = np.array([20, 102, 91])
 yellow_upper = np.array([52, 255, 255])
 
 def handleColor(color_image):
+    color = None
     hsvFrame = cv2.cvtColor(color_image, cv2.COLOR_BGR2HSV)
     # For red color
     red_mask = cv2.inRange(hsvFrame, red_lower, red_upper)
@@ -88,6 +89,7 @@ def handleColor(color_image):
     for pic, contour in enumerate(contours):
         area = cv2.contourArea(contour)
         if(area > 2500):
+            color = "pink"
             x, y, w, h = cv2.boundingRect(contour)
             color_image = cv2.rectangle(color_image, (x, y), 
                                     (x + w, y + h), 
@@ -104,6 +106,7 @@ def handleColor(color_image):
     for pic, contour in enumerate(contours):
         area = cv2.contourArea(contour)
         if(area > 2500):
+            color = "green"
             x, y, w, h = cv2.boundingRect(contour)
             color_image = cv2.rectangle(color_image, (x, y), 
                                        (x + w, y + h),
@@ -119,6 +122,7 @@ def handleColor(color_image):
     for pic, contour in enumerate(contours):
         area = cv2.contourArea(contour)
         if(area > 2500):
+            color = "yellow"
             x, y, w, h = cv2.boundingRect(contour)
             color_image = cv2.rectangle(color_image, (x, y),
                                        (x + w, y + h),
@@ -127,6 +131,8 @@ def handleColor(color_image):
             cv2.putText(color_image, "Yellow Colour", (x, y),
                         cv2.FONT_HERSHEY_SIMPLEX,
                         1.0, (255, 0, 0))
+    return color
+
 try:
     robot.startSpin(7100)
     while True:
@@ -162,10 +168,12 @@ try:
             bbox, firstBoxFound = handleFaces(color_image)
         
         if(firstBoxFound):
-            handleColor(color_image) 
-            
-        #  TODO - start here refrencing the camera code
-        #       -  finish getting the distance and go to 2 feet away if needed
+            color = handleColor(color_image) 
+        
+        #  TODO: Return this color and make it work with baiden main program
+        if(color != None):
+            print("Color is: ", color)
+
         ok = False
         if(trackerNeedsInit and firstBoxFound):
             print("INIT tracker: ", trackerNeedsInit, ", firstBox: ", firstBoxFound)
