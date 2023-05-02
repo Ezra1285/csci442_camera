@@ -41,7 +41,7 @@ def handleColor(color_image):
             cv2.putText(color_image, "Pink Colour", (x, y),
                         cv2.FONT_HERSHEY_SIMPLEX, 1.0,
                         (0, 0, 255))
-            break    
+            return color_found, False   
 
     #  For green
     green_mask = cv2.inRange(hsvFrame, green_lower, green_upper)
@@ -60,7 +60,7 @@ def handleColor(color_image):
             cv2.putText(color_image, "Green Colour", (x, y),
                         cv2.FONT_HERSHEY_SIMPLEX, 
                         1.0, (0, 255, 0))
-
+            return color_found, False
     #  For yellow
     yellow_mask = cv2.inRange(hsvFrame, yellow_lower, yellow_upper)
     contours, hierarchy = cv2.findContours(yellow_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
@@ -78,7 +78,8 @@ def handleColor(color_image):
             cv2.putText(color_image, "Yellow Colour", (x, y),
                         cv2.FONT_HERSHEY_SIMPLEX,
                         1.0, (255, 0, 0))
-    return color_found
+            return color_found, False        
+    return color_found, True
 
 
 def findColor():
@@ -125,8 +126,7 @@ def findColor():
             color_image = np.asanyarray(color_frame.get_data())    
 
             if(needToFindColor):
-                color_found = handleColor(color_image) 
-                needToFindColor = False
+                color_found, needToFindColor = handleColor(color_image) 
             
             # #  TODO: Return this color and make it work with baiden main program
             if(not needToFindColor):
