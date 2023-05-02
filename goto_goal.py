@@ -4,7 +4,7 @@ import pyrealsense2 as rs
 import numpy as np
 import control_robot
 
-def findColor(color_image):
+def findColor():
     #======================================
     pipeline = rs.pipeline()
     config = rs.config()
