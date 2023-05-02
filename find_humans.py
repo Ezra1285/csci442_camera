@@ -53,8 +53,6 @@ align_to = rs.stream.color
 align = rs.align(align_to)
 # bbox = cv2.selectROI(color, False)
 # Initialize tracker with first frame and bounding box
-trackerNeedsInit = True
-firstBoxFound = False
 # isFaceFound = False
 
 def handleFaces(color_image):
@@ -138,6 +136,8 @@ def handleColor(color_image):
 
 def findHumans():
     shouldMove = True
+    trackerNeedsInit = True
+    firstBoxFound = False
     try:
         robot.startSpin(7000)
         while True:
@@ -213,5 +213,6 @@ def findHumans():
         robot.close()
         # Stop streaming
         pipeline.stop()
+
 
 findHumans()
