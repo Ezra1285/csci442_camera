@@ -79,7 +79,7 @@ yellow_lower = np.array([20, 102, 91])
 yellow_upper = np.array([52, 255, 255])
 
 def handleColor(color_image):
-    color = None
+    color = ""
     hsvFrame = cv2.cvtColor(color_image, cv2.COLOR_BGR2HSV)
     # For red color
     red_mask = cv2.inRange(hsvFrame, red_lower, red_upper)
@@ -171,7 +171,7 @@ try:
             color = handleColor(color_image) 
         
         #  TODO: Return this color and make it work with baiden main program
-        if(color != None):
+        if(color):
             print("Color is: ", color)
 
         ok = False
