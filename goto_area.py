@@ -54,22 +54,21 @@ def left():
     robot_control.setTarget(2, 4900)
     # print("right")
 
+lower_blue = np.array([80,188,188])
+upper_blue = np.array([150,255,255])
+lower_orange = np.array([0,89,202])
+upper_orange = np.array([40,150,255])
 # lower_blue = np.array([120,188,188])
 # upper_blue = np.array([150,255,255])
 # lower_orange = np.array([0,89,100])
 # upper_orange = np.array([40,150,255])
-
-lower_blue = np.array([120,188,188])
-upper_blue = np.array([150,255,255])
-lower_orange = np.array([0,89,100])
-upper_orange = np.array([40,150,255])
         
 def goto_mine(edge, line_color, spin_flag):
     if(spin_flag == False):
         print(" start spining")
         
         cr.startSpin()
-    edge = edge[40:440,150:650]
+    edge = edge[120:360,150:650]
     imghsv = cv2.cvtColor(edge, cv2.COLOR_BGR2HSV)
     if("blue" == line_color):
         print("looking for blue")
