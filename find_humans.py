@@ -99,19 +99,19 @@ def handleColor(color_image):
             break    
 
     #  For green
-    green_mask = cv2.inRange(hsvFrame, green_lower, green_upper)
-    contours, hierarchy = cv2.findContours(green_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-    for pic, contour in enumerate(contours):
-        area = cv2.contourArea(contour)
-        if(area > 2500):
-            x, y, w, h = cv2.boundingRect(contour)
-            color_image = cv2.rectangle(color_image, (x, y), 
-                                       (x + w, y + h),
-                                       (0, 255, 0), 2)
+    # green_mask = cv2.inRange(hsvFrame, green_lower, green_upper)
+    # contours, hierarchy = cv2.findContours(green_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+    # for pic, contour in enumerate(contours):
+    #     area = cv2.contourArea(contour)
+    #     if(area > 2500):
+    #         x, y, w, h = cv2.boundingRect(contour)
+    #         color_image = cv2.rectangle(color_image, (x, y), 
+    #                                    (x + w, y + h),
+    #                                    (0, 255, 0), 2)
               
-            cv2.putText(color_image, "Green Colour", (x, y),
-                        cv2.FONT_HERSHEY_SIMPLEX, 
-                        1.0, (0, 255, 0))
+    #         cv2.putText(color_image, "Green Colour", (x, y),
+    #                     cv2.FONT_HERSHEY_SIMPLEX, 
+    #                     1.0, (0, 255, 0))
 
     #  For yellow
     yellow_mask = cv2.inRange(hsvFrame, yellow_lower, yellow_upper)
@@ -160,12 +160,10 @@ try:
         #  For face detection
         if(not firstBoxFound):
             bbox, firstBoxFound = handleFaces(color_image)
-            print("YES")
-
+        
         if(firstBoxFound):
             handleColor(color_image) 
-            print("No")
-
+            
         #  TODO - start here refrencing the camera code
         #       -  finish getting the distance and go to 2 feet away if needed
         ok = False
