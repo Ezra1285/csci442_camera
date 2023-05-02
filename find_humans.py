@@ -134,6 +134,8 @@ def handleColor(color_image):
                         1.0, (255, 0, 0))
     return color_found
 
+shouldMove = True
+
 try:
     robot.startSpin(7000)
     while True:
@@ -184,18 +186,19 @@ try:
             ok, bbox = tracker.update(color_image)
         
         images = cv2.rectangle(images, (320,400), (325, 410), (0, 0, 255), -1) #Red rectangle
-        if ok:
+        if ok and shouldMove:
             # Tracking success
             p1 = (int(bbox[0]/2), int(bbox[1]/2))
             p2 = (int((bbox[0] + bbox[2])/2), int((bbox[1] + bbox[3])/2))
             # cv2.rectangle(images, (p1),(p2), (255,0,0), 2, 1)
             curr_depth = depth_frame.get_distance(int((bbox[0]) + .5*bbox[2]), int(bbox[1] + .5*bbox[3]))
             print("Curr ", curr_depth)
-            if(curr_depth > 1.3):
+            if(curr_depth > 1.8):
                 print("Foward")
                 robot.move_forward()
             else:
                 robot.stop()
+                shouldMove = False
         elif(not ok and firstBoxFound) :
             # Tracking failure
             cv2.putText(images, "Tracking failure detected", (100,80), cv2.FONT_HERSHEY_SIMPLEX, 0.75,(0,0,255),2)
