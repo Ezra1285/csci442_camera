@@ -105,11 +105,11 @@ def handleColor(color_image):
         area = cv2.contourArea(contour)
         if(area > 2500):
             x, y, w, h = cv2.boundingRect(contour)
-            imageFrame = cv2.rectangle(imageFrame, (x, y), 
+            color_image = cv2.rectangle(color_image, (x, y), 
                                        (x + w, y + h),
                                        (0, 255, 0), 2)
               
-            cv2.putText(imageFrame, "Green Colour", (x, y),
+            cv2.putText(color_image, "Green Colour", (x, y),
                         cv2.FONT_HERSHEY_SIMPLEX, 
                         1.0, (0, 255, 0))
 
@@ -120,11 +120,11 @@ def handleColor(color_image):
         area = cv2.contourArea(contour)
         if(area > 2500):
             x, y, w, h = cv2.boundingRect(contour)
-            imageFrame = cv2.rectangle(imageFrame, (x, y),
+            color_image = cv2.rectangle(color_image, (x, y),
                                        (x + w, y + h),
                                        (255, 0, 0), 2)
               
-            cv2.putText(imageFrame, "Blue Colour", (x, y),
+            cv2.putText(color_image, "Blue Colour", (x, y),
                         cv2.FONT_HERSHEY_SIMPLEX,
                         1.0, (255, 0, 0))
 try:
