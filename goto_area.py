@@ -54,15 +54,15 @@ def left():
     robot_control.setTarget(2, 4900)
     # print("right")
 
-lower_blue = np.array([120,188,188])
-upper_blue = np.array([150,255,255])
-lower_orange = np.array([0,89,100])
-upper_orange = np.array([40,150,255])
-
 # lower_blue = np.array([120,188,188])
 # upper_blue = np.array([150,255,255])
 # lower_orange = np.array([0,89,100])
 # upper_orange = np.array([40,150,255])
+
+lower_blue = np.array([120,188,188])
+upper_blue = np.array([150,255,255])
+lower_orange = np.array([0,89,100])
+upper_orange = np.array([40,150,255])
         
 def goto_mine(edge, line_color, spin_flag):
     if(spin_flag == False):
