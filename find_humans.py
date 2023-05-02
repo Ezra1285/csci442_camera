@@ -93,7 +93,7 @@ def handleColor(color_image):
                                     (x + w, y + h), 
                                     (0, 0, 255), 2)
             
-            cv2.putText(color_image, "Red Colour", (x, y),
+            cv2.putText(color_image, "Pink Colour", (x, y),
                         cv2.FONT_HERSHEY_SIMPLEX, 1.0,
                         (0, 0, 255))
             break    
