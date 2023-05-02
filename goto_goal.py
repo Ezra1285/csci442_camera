@@ -125,9 +125,10 @@ def findColor():
 
             if(needToFindColor):
                 color_found = handleColor(color_image) 
+                needToFindColor = False
             
             # #  TODO: Return this color and make it work with baiden main program
-            if(color_found):
+            if(not needToFindColor):
                 return color_found
 
             cv2.imshow('RealSense', color_image)
