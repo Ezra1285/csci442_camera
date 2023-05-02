@@ -72,8 +72,8 @@ def handleFaces(color_image):
 red_lower = np.array([136, 87, 111], np.uint8)
 red_upper = np.array([180, 255, 255], np.uint8)
 #  Green thresh
-green_lower = np.array([25, 52, 72], np.uint8)
-green_upper = np.array([102, 255, 255], np.uint8)
+green_lower = np.array([36, 60, 128], np.uint8)
+green_upper = np.array([86, 255, 255], np.uint8)
 # yellow
 yellow_lower = np.array([20, 102, 91])
 yellow_upper = np.array([52, 255, 255])
@@ -99,19 +99,19 @@ def handleColor(color_image):
             break    
 
     #  For green
-    # green_mask = cv2.inRange(hsvFrame, green_lower, green_upper)
-    # contours, hierarchy = cv2.findContours(green_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-    # for pic, contour in enumerate(contours):
-    #     area = cv2.contourArea(contour)
-    #     if(area > 2500):
-    #         x, y, w, h = cv2.boundingRect(contour)
-    #         color_image = cv2.rectangle(color_image, (x, y), 
-    #                                    (x + w, y + h),
-    #                                    (0, 255, 0), 2)
+    green_mask = cv2.inRange(hsvFrame, green_lower, green_upper)
+    contours, hierarchy = cv2.findContours(green_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+    for pic, contour in enumerate(contours):
+        area = cv2.contourArea(contour)
+        if(area > 2500):
+            x, y, w, h = cv2.boundingRect(contour)
+            color_image = cv2.rectangle(color_image, (x, y), 
+                                       (x + w, y + h),
+                                       (0, 255, 0), 2)
               
-    #         cv2.putText(color_image, "Green Colour", (x, y),
-    #                     cv2.FONT_HERSHEY_SIMPLEX, 
-    #                     1.0, (0, 255, 0))
+            cv2.putText(color_image, "Green Colour", (x, y),
+                        cv2.FONT_HERSHEY_SIMPLEX, 
+                        1.0, (0, 255, 0))
 
     #  For yellow
     yellow_mask = cv2.inRange(hsvFrame, yellow_lower, yellow_upper)
