@@ -76,7 +76,7 @@ green_lower = np.array([25, 52, 72], np.uint8)
 green_upper = np.array([102, 255, 255], np.uint8)
 # yellow
 yellow_lower = np.array([20, 102, 91])
-yellow_upper = np.array([52, 255, 100])
+yellow_upper = np.array([52, 255, 255])
 
 def handleColor(color_image):
     hsvFrame = cv2.cvtColor(color_image, cv2.COLOR_BGR2HSV)
