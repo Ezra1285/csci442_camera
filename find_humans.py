@@ -77,6 +77,7 @@ green_upper = np.array([86, 255, 255], np.uint8)
 # yellow
 yellow_lower = np.array([20, 102, 91])
 yellow_upper = np.array([52, 255, 255])
+color_found = ""
 
 def handleColor(color_image):
     color_found = ""
