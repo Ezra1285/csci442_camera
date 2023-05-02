@@ -107,6 +107,7 @@ def handleColor(color_image):
     for pic, contour in enumerate(contours):
         area = cv2.contourArea(contour)
         if(area > 2500):
+            print("Area " , area)
             color_found = "green"
             x, y, w, h = cv2.boundingRect(contour)
             color_image = cv2.rectangle(color_image, (x, y), 
