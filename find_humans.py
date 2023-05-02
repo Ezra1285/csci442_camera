@@ -72,7 +72,7 @@ def handleFaces(color_image):
 red_lower = np.array([136, 87, 111], np.uint8)
 red_upper = np.array([180, 255, 255], np.uint8)
 #  Green thresh
-green_lower = np.array([36, 60, 128], np.uint8)
+green_lower = np.array([49, 60, 128], np.uint8)
 green_upper = np.array([86, 255, 255], np.uint8)
 # yellow
 yellow_lower = np.array([20, 102, 91])
