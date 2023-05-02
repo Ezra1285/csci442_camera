@@ -135,6 +135,7 @@ def handleColor(color_image):
     return color_found
 
 def findHumans():
+    global color_found
     shouldMove = True
     trackerNeedsInit = True
     firstBoxFound = False
