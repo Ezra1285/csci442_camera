@@ -89,7 +89,6 @@ def handleColor(color_image):
     #         return color_found, False        
     return color_found, True
 
-
 def findColor():
     #======================================
     pipeline = rs.pipeline()
