@@ -75,8 +75,8 @@ red_upper = np.array([180, 255, 255], np.uint8)
 green_lower = np.array([25, 52, 72], np.uint8)
 green_upper = np.array([102, 255, 255], np.uint8)
 # yellow
-blue_lower = np.array([94, 80, 2], np.uint8)
-blue_upper = np.array([120, 255, 255], np.uint8)
+yellow_lower = np.array([20, 102, 100])
+yellow_upper = np.array([52, 255, 91])
 
 def handleColor(color_image):
     hsvFrame = cv2.cvtColor(color_image, cv2.COLOR_BGR2HSV)
@@ -114,8 +114,8 @@ def handleColor(color_image):
                         1.0, (0, 255, 0))
 
     #  For yellow
-    blue_mask = cv2.inRange(hsvFrame, blue_lower, blue_upper)
-    contours, hierarchy = cv2.findContours(blue_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+    yellow_mask = cv2.inRange(hsvFrame, yellow_lower, yellow_upper)
+    contours, hierarchy = cv2.findContours(yellow_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
     for pic, contour in enumerate(contours):
         area = cv2.contourArea(contour)
         if(area > 2500):
@@ -124,7 +124,7 @@ def handleColor(color_image):
                                        (x + w, y + h),
                                        (255, 0, 0), 2)
               
-            cv2.putText(color_image, "Blue Colour", (x, y),
+            cv2.putText(color_image, "Yellow Colour", (x, y),
                         cv2.FONT_HERSHEY_SIMPLEX,
                         1.0, (255, 0, 0))
 try:
@@ -188,7 +188,6 @@ try:
                 print("Foward")
                 robot.move_forward()
             else:
-                print("Stopped")
                 robot.stop()
         elif(not ok and firstBoxFound) :
             # Tracking failure
