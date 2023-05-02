@@ -93,6 +93,9 @@ class robot:
         if(self.headTurn < 1510):
             self.headTurn = 1510
         self.robot_controll.setTarget(3, self.headTurn)
+    
+    def headFullyLeft(self):
+        self.robot_controll.setTarget(3, 1510)
 
     def headUp(self):
         self.headTilt += 200
