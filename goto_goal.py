@@ -31,6 +31,7 @@ def handleColor(color_image):
         area = cv2.contourArea(contour)
         if(area > 3200):
             robot.stopSpin()
+            print("pink")
             color_found = "pink"
             x, y, w, h = cv2.boundingRect(contour)
             color_image = cv2.rectangle(color_image, (x, y), 
@@ -50,6 +51,7 @@ def handleColor(color_image):
         if(area > 3200):
             robot.stopSpin()
             color_found = "green"
+            print("green")
             x, y, w, h = cv2.boundingRect(contour)
             color_image = cv2.rectangle(color_image, (x, y), 
                                        (x + w, y + h),
@@ -66,6 +68,7 @@ def handleColor(color_image):
         area = cv2.contourArea(contour)
         if(area > 3200):
             robot.stopSpin()
+            print("Yellow")
             color_found = "yellow"
             x, y, w, h = cv2.boundingRect(contour)
             color_image = cv2.rectangle(color_image, (x, y),
@@ -120,7 +123,6 @@ def findColor():
                 continue
             color_image = np.asanyarray(color_frame.get_data())    
 
-            robot.headRight()
             if(needToFindColor):
                 color_found = handleColor(color_image) 
             
