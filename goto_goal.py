@@ -67,7 +67,7 @@ def handleColor(color_image):
             cv2.putText(color_image, "Green Colour", (x, y),
                         cv2.FONT_HERSHEY_SIMPLEX, 
                         1.0, (0, 255, 0))
-            return color_found, False
+            # return color_found, False
     
     #  For yellow
     # yellow_mask = cv2.inRange(hsvFrame, yellow_lower, yellow_upper)
@@ -134,14 +134,14 @@ def findColor():
             color_image = np.asanyarray(color_frame.get_data())    
 
             if(needToFindColor):
-                color_found, needToFindColor = handleColor(color_image) 
+                # color_found, needToFindColor = handleColor(color_image) 
+                handleColor(color_image) 
             
-            #  TODO: Return this color and make it work with baiden main program
-            if(not needToFindColor):
-                robot.move_forward()
-                time.sleep(1)
-                robot.stop()
-                return color_found
+            # if(not needToFindColor):
+            #     robot.move_forward()
+            #     time.sleep(1)
+            #     robot.stop()
+            #     return color_found
 
             cv2.imshow('RealSense', color_image)
             # cv2.imshow('RealSense', edge)
