@@ -49,8 +49,8 @@ def handleColor(color_image):
 
     #  For green
     green_mask = cv2.inRange(hsvFrame, green_lower, green_upper)
-    green_mask = cv2.dilate(green_mask, kernel)
-    res_green = cv2.bitwise_and(color_image, color_image, mask = green_mask)
+    # green_mask = cv2.dilate(green_mask, kernel)
+    # res_green = cv2.bitwise_and(color_image, color_image, mask = green_mask)
     contours, hierarchy = cv2.findContours(green_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
     for pic, contour in enumerate(contours):
         area = cv2.contourArea(contour)
