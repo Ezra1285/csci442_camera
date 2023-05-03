@@ -182,6 +182,7 @@ def findHumans(frames):
     #  TODO: Return this color and make it work with baiden main program
     if(color_found):
         print(color_found, "was found.")
+        time.sleep(5)
         return "done", color_found
     
     ok = False
