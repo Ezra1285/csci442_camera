@@ -79,7 +79,7 @@ def goto_mine(edge, line_color, spin_flag):
         # print(" start spining")
         
         cr.startSpin()
-    edge = cv2.blur(edge)
+    edge = cv2.blur(edge,(7,7))
     edge = edge[40:,250:550]
     
     imghsv = cv2.cvtColor(edge, cv2.COLOR_BGR2HSV)
