@@ -3,6 +3,7 @@ import control_robot
 import pyrealsense2 as rs
 import numpy as np
 import control_robot
+import time
 
 # #  Red thresh
 # red_lower = np.array([136, 87, 111], np.uint8)
@@ -124,7 +125,7 @@ def findColor():
     global color_found
     # global robot
     try:
-        # robot.startSpin()
+        robot.startSpin()
         while True:
             frames = pipeline.wait_for_frames()
             color_frame = frames.get_color_frame()
@@ -137,6 +138,9 @@ def findColor():
             
             #  TODO: Return this color and make it work with baiden main program
             if(not needToFindColor):
+                robot.move_forward()
+                time.sleep(1)
+                robot.stop()
                 return color_found
 
             cv2.imshow('RealSense', color_image)
