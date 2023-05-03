@@ -53,6 +53,7 @@ class ctrl_methods():
         elif(self.method_num ==1):
             print(ret)
             ret, self.spin_flag = goto_area.goto_mine(color, "orange", self.spin_flag)
+            print(ret)
         else:
             raise Exception("Done!")
         if(ret == "done"):
