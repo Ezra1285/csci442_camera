@@ -7,6 +7,8 @@ import time
 import control_robot
 # import line_crossing
 import goto_area
+import find_humans
+
 robot_control = maestro.Controller()
 # Configure depth and color streams
 pipeline = rs.pipeline()
@@ -51,6 +53,8 @@ class ctrl_methods():
         if(self.method_num ==0):
             ret, self.spin_flag = goto_area.goto_mine(color, "blue", self.spin_flag)
         elif(self.method_num ==1):
+            ret, color_found = find_humans.findHumans(frames)
+        elif(self.method_num ==2):
             print(ret)
             ret, self.spin_flag = goto_area.goto_mine(color, "orange", self.spin_flag)
             print(ret)

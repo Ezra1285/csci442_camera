@@ -138,88 +138,87 @@ def handleColor(color_image):
                         1.0, (255, 0, 0))
     return color_found
 
-def findHumans():
+def findHumans(frames):
     global color_found
     shouldMove = True
     trackerNeedsInit = True
     firstBoxFound = False
-    try:
-        robot.startSpin(7000)
-        print('Spin')
-        while True:
-            # Wait for a coherent pair of frames: depth and color
-            frames = pipeline.wait_for_frames()
-            depth_frame = frames.get_depth_frame()
-            color_frame = frames.get_color_frame()
-            if not color_frame:
-                continue
-            # Convert color_frameimages to numpy arrays
-            depth_image = np.asanyarray(depth_frame.get_data())
-            color_image = np.asanyarray(color_frame.get_data())
-            # color = np.asanyarray(color_frame.get_data())
-        
-            depth_colormap = cv2.applyColorMap(cv2.convertScaleAbs(depth_image, alpha=0.03), cv2.COLORMAP_JET)
-            depth_colormap_dim = depth_colormap.shape
-            color_colormap_dim = color.shape
-            # diff = cv2.blur(color_image, (5,5))
+    # try:
+    robot.startSpin(7000)
+    print('Spin')
+    # while True:
+    # Wait for a coherent pair of frames: depth and color
+    # frames = pipeline.wait_for_frames()
+    depth_frame = frames.get_depth_frame()
+    color_frame = frames.get_color_frame()
+    
+    # Convert color_frameimages to numpy arrays
+    depth_image = np.asanyarray(depth_frame.get_data())
+    color_image = np.asanyarray(color_frame.get_data())
+    # color = np.asanyarray(color_frame.get_data())
 
-            # If depth and color resolutions are different, resize color image to match depth image for display
-            if depth_colormap_dim != color_colormap_dim:
-                resized_color_image = cv2.resize(color_image, dsize=(depth_colormap_dim[1], depth_colormap_dim[0]), interpolation=cv2.INTER_AREA)
-                images = np.hstack((resized_color_image, depth_colormap))
-            else:
-                images = np.hstack((color_image, depth_colormap))
+    depth_colormap = cv2.applyColorMap(cv2.convertScaleAbs(depth_image, alpha=0.03), cv2.COLORMAP_JET)
+    depth_colormap_dim = depth_colormap.shape
+    color_colormap_dim = color.shape
+    # diff = cv2.blur(color_image, (5,5))
 
-            blank = np.zeros_like(images)
-            images = np.vstack((images,blank))
+    # If depth and color resolutions are different, resize color image to match depth image for display
+    if depth_colormap_dim != color_colormap_dim:
+        resized_color_image = cv2.resize(color_image, dsize=(depth_colormap_dim[1], depth_colormap_dim[0]), interpolation=cv2.INTER_AREA)
+        images = np.hstack((resized_color_image, depth_colormap))
+    else:
+        images = np.hstack((color_image, depth_colormap))
 
-            #  For face detection
-            if(not firstBoxFound):
-                bbox, firstBoxFound = handleFaces(color_image)
-            
-            if(firstBoxFound and not color_found):
-                color_found = handleColor(color_image) 
-            
-            #  TODO: Return this color and make it work with baiden main program
-            if(color_found):
-                return color_found
+    blank = np.zeros_like(images)
+    images = np.vstack((images,blank))
 
-            ok = False
-            if(trackerNeedsInit and firstBoxFound):
-                ok = tracker.init(color_image, bbox)
-                trackerNeedsInit = False
-            elif(not trackerNeedsInit):
-                ok, bbox = tracker.update(color_image)
-            
-            images = cv2.rectangle(images, (320,400), (325, 410), (0, 0, 255), -1) #Red rectangle
-            if ok and shouldMove:
-                # Tracking success
-                p1 = (int(bbox[0]/2), int(bbox[1]/2))
-                p2 = (int((bbox[0] + bbox[2])/2), int((bbox[1] + bbox[3])/2))
-                # cv2.rectangle(images, (p1),(p2), (255,0,0), 2, 1)
-                curr_depth = depth_frame.get_distance(int((bbox[0]) + .5*bbox[2]), int(bbox[1] + .5*bbox[3]))
-                if(curr_depth > 2):
-                    robot.move_forward()
-                else:
-                    robot.stop()
-                    shouldMove = False
-            elif(not ok and firstBoxFound) :
-                # Tracking failure
-                cv2.putText(images, "Tracking failure detected", (100,80), cv2.FONT_HERSHEY_SIMPLEX, 0.75,(0,0,255),2)
-                robot.stop()
-                
-            cv2.imshow('RealSense', color_image)
-            # cv2.imshow('RealSense', edge)
-            key = cv2.waitKey(1)
-            if(key == 27):
-                break
-
-    finally:
+    #  For face detection
+    if(not firstBoxFound):
+        bbox, firstBoxFound = handleFaces(color_image)
+    
+    if(firstBoxFound and not color_found):
+        color_found = handleColor(color_image) 
+    
+    #  TODO: Return this color and make it work with baiden main program
+    if(color_found):
+        return "done", color_found
+    
+    ok = False
+    if(trackerNeedsInit and firstBoxFound):
+        ok = tracker.init(color_image, bbox)
+        trackerNeedsInit = False
+    elif(not trackerNeedsInit):
+        ok, bbox = tracker.update(color_image)
+    
+    images = cv2.rectangle(images, (320,400), (325, 410), (0, 0, 255), -1) #Red rectangle
+    if ok and shouldMove:
+        # Tracking success
+        p1 = (int(bbox[0]/2), int(bbox[1]/2))
+        p2 = (int((bbox[0] + bbox[2])/2), int((bbox[1] + bbox[3])/2))
+        # cv2.rectangle(images, (p1),(p2), (255,0,0), 2, 1)
+        curr_depth = depth_frame.get_distance(int((bbox[0]) + .5*bbox[2]), int(bbox[1] + .5*bbox[3]))
+        if(curr_depth > 2):
+            robot.move_forward()
+        else:
+            robot.stop()
+            shouldMove = False
+    elif(not ok and firstBoxFound) :
+        # Tracking failure
+        cv2.putText(images, "Tracking failure detected", (100,80), cv2.FONT_HERSHEY_SIMPLEX, 0.75,(0,0,255),2)
         robot.stop()
-        robot.close()
-        # Stop streaming
-        pipeline.stop()
+        
+    cv2.imshow('RealSense', color_image)
+    # cv2.imshow('RealSense', edge)
+    key = cv2.waitKey(1)
+    # if(key == 27):
+    # break
+    return "notdone", None
+    # finally:
+    #     robot.stop()
+    #     robot.close()
+    #     # Stop streaming
+    #     pipeline.stop()
 
 
-finalColor = findHumans()
-print("Color is: ", finalColor)
+# finalColor = findHumans()
+# print("Color is: ", finalColor)
