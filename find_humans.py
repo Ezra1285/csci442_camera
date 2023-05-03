@@ -60,7 +60,7 @@ def handleFaces(color_image):
     for (x,y,w,h) in faces:
             #  if faces exist then we stop the spin and init bbox and boolean vars
             if(w*h > 400):
-                print("Face found")
+                print("Face found, area of ", (w*h))
                 robot.stopSpin()
                 robot.stop()
                 bbox = (x,y,w,h)
@@ -141,13 +141,15 @@ def handleColor(color_image):
 
 firstBoxFound = False
 bbox = None
+trackerNeedsInit = True
+shouldMove = True
 
 def findHumans(frames):
     global color_found
     global firstBoxFound
     global bbox
-    shouldMove = True
-    trackerNeedsInit = True
+    global firstBoxFound
+    global shouldMove
     robot.centerHead()
     # try:
     if(not firstBoxFound):
