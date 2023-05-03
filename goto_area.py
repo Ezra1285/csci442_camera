@@ -27,27 +27,27 @@ cr = control_robot.robot()
 def move_forward():
     # robot_control.setTarget(2, 6000)
     robot_control.setTarget(0, 5200)
-    print("forward")
+    # print("forward")
 
 def stop():
     # robot_control.setTarget(2, 6000)
     robot_control.setTarget(0, 6000)
-    print("stop")
+    # print("stop")
 
 def right_forward():
     robot_control.setTarget(0, 5100)
     robot_control.setTarget(2, 7100)
-    print("left foward")
+    # print("left foward")
 
 def left_forward():
     robot_control.setTarget(0, 5100)
     robot_control.setTarget(2, 4900)
-    print("right forward")
+    # print("right forward")
 
 def right():
     # robot_control.setTarget(0, 6000)
     robot_control.setTarget(2, 7100)
-    print("left")
+    # print("left")
 
 def left():
     # robot_control.setTarget(0, 6000)
@@ -65,13 +65,13 @@ upper_orange = np.array([25,150,255])
         
 def goto_mine(edge, line_color, spin_flag):
     if(spin_flag == False):
-        print(" start spining")
+        # print(" start spining")
         
         cr.startSpin()
     edge = edge[40:,250:550]
     imghsv = cv2.cvtColor(edge, cv2.COLOR_BGR2HSV)
     if("blue" == line_color):
-        print("looking for blue")
+        # print("looking for blue")
         hsv_low = lower_blue
         hsv_high = upper_blue
 
@@ -80,13 +80,13 @@ def goto_mine(edge, line_color, spin_flag):
         contours, _ = cv2.findContours(mask_blue, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
         blurred = cv2.blur(mask_blue, (10,10))
     elif ("orange" == line_color):
-        print("looking for orange")
+        # print("looking for orange")
         hsv_low = lower_orange
         hsv_high = upper_orange
         mask_orange = cv2.inRange(imghsv, lower_orange, upper_orange)
         blurred = cv2.blur(mask_orange, (10,10))
     else:
-        print("no color")
+        # print("no color")
         hsv_low = lower_blue
         hsv_high = upper_blue
     contours, _ = cv2.findContours(blurred, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
@@ -128,7 +128,7 @@ def goto_mine(edge, line_color, spin_flag):
 
         xdif = cof[0] - cog[0]
         ydif = cof[1] - cog[1]
-        print("MOVING")
+        # print("MOVING")
         if ydif >50:
             move_forward()
             if(x + y<1):
@@ -152,15 +152,19 @@ def goto_mine(edge, line_color, spin_flag):
             move_forward()
         else:
             stop()
-            print("bad")
+            # print("bad")
         if(x+y <1):
             stop()
+            if line_color == "blue":
+                print("entered mining area")
+            else:
+                print("entered goal area")
             return "done", spin_flag
         # cv2.circle(edge, cof, 10, (255,0,0), 5)
         cv2.circle(edge, cog, 10, (255,0,0), 5)
     else:
-        
-        print("spinning")
+        pass
+        # print("spinning")
     
     cv2.imshow('RealSense', edge)
     cv2.waitKey(1)
