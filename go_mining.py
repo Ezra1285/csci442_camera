@@ -3,6 +3,7 @@ import pyrealsense2 as rs
 import numpy as np
 import maestro
 import cv2
+import time
 import control_robot
 # import line_crossing
 import goto_area
@@ -43,6 +44,7 @@ class ctrl_methods():
     def __init__(self) -> None:
         self.method_num = 0
         self.spin_flag = False
+        goto_area.cr.headUp()
             
     def control_methods(self):
         ret = "not done"
@@ -54,6 +56,7 @@ class ctrl_methods():
             raise Exception("Done!")
         if(ret == "done"):
             self.method_num +=1
+            time.sleep()
 ctrlr = ctrl_methods()
 try:
     while True:
