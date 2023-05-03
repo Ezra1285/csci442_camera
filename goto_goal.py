@@ -123,11 +123,15 @@ def findColor():
 #====================================== 
     needToFindColor = True
     global color_found
+    count = 0
     # global robot
     try:
         robot.startSpin()
         while True:
             frames = pipeline.wait_for_frames()
+            if(count < 25):
+                count += 1
+                continue
             color_frame = frames.get_color_frame()
             if not color_frame:
                 continue
