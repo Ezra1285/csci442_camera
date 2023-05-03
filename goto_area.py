@@ -105,19 +105,21 @@ def goto_mine(edge, line_color, spin_flag):
         cr.headstraight()
         for i in contours:
             area = cv2.contourArea(i)
-            
-            M = cv2.moments(i)
-            if M['m00'] != 0:
+            print(area)
+            if area >100:
                 
-                cx = int(M['m10']/M['m00'])
-                cy = int(M['m01']/M['m00'])
-                x += cx
-                y += cy
-                total +=1
-                cv2.drawContours(edge, [i], -1, (0, 255, 0), 2)
-                # cv2.circle(edge, (cx, cy), 7, (0, 0, 255), -1)
-                cv2.putText(edge, "center", (cx - 20, cy - 20),
-                        cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2)
+                M = cv2.moments(i)
+                if M['m00'] != 0:
+                    
+                    cx = int(M['m10']/M['m00'])
+                    cy = int(M['m01']/M['m00'])
+                    x += cx
+                    y += cy
+                    total +=1
+                    cv2.drawContours(edge, [i], -1, (0, 255, 0), 2)
+                    # cv2.circle(edge, (cx, cy), 7, (0, 0, 255), -1)
+                    cv2.putText(edge, "center", (cx - 20, cy - 20),
+                            cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2)
         if total == 0:
             total = 1
         yavg = int(x/total)
