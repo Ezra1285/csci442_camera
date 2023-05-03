@@ -158,7 +158,7 @@ def findHumans(frames):
 
     depth_colormap = cv2.applyColorMap(cv2.convertScaleAbs(depth_image, alpha=0.03), cv2.COLORMAP_JET)
     depth_colormap_dim = depth_colormap.shape
-    color_colormap_dim = color.shape
+    color_colormap_dim = color_image.shape
     # diff = cv2.blur(color_image, (5,5))
 
     # If depth and color resolutions are different, resize color image to match depth image for display
