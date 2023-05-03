@@ -124,7 +124,7 @@ def goto_mine(edge, line_color, spin_flag):
             total = 1
         yavg = int(x/total)
         xavg = int(y/total)
-        cofy = int((350))
+        cofy = int((375))
         cofx = int(150)
         cof = (cofx, cofy)
         # cv2.circle(edge, cof, 10, (255,0,0), 5)
