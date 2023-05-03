@@ -139,11 +139,13 @@ def handleColor(color_image):
 
     return color_found
 
+firstBoxFound = False
+
 def findHumans(frames):
     global color_found
+    global firstBoxFound
     shouldMove = True
     trackerNeedsInit = True
-    firstBoxFound = False
     robot.centerHead()
     # try:
     if(not firstBoxFound):
