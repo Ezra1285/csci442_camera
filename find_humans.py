@@ -148,7 +148,7 @@ def findHumans(frames):
     global color_found
     global firstBoxFound
     global bbox
-    global firstBoxFound
+    global trackerNeedsInit
     global shouldMove
     robot.centerHead()
     # try:
