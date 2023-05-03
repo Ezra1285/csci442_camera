@@ -142,7 +142,7 @@ def findHumans(frames):
     shouldMove = True
     trackerNeedsInit = True
     firstBoxFound = False
-    robot.headUp()
+    robot.centerHead()
     # try:
     robot.startSpin(7000)
     # while True:
