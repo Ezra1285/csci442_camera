@@ -77,8 +77,10 @@ red_upper = np.array([180, 255, 255], np.uint8)
 green_lower = np.array([27, 91, 106], np.uint8) 
 green_upper = np.array([88, 173, 197], np.uint8) 
 # yellow
-yellow_lower = np.array([20, 102, 91])
-yellow_upper = np.array([52, 255, 255])
+# yellow_lower = np.array([20, 102, 91])
+# yellow_upper = np.array([52, 255, 255])
+yellow_lower = np.array([20, 125, 91])
+yellow_upper = np.array([52, 255, 174])
 
 
 kernel = np.ones((5, 5), "uint8")
