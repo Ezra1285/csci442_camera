@@ -54,8 +54,8 @@ def handleColor(color_image):
     contours, hierarchy = cv2.findContours(green_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
     for pic, contour in enumerate(contours):
         area = cv2.contourArea(contour)
-        print("AREA is ", area)
         if(area > 3200):
+            print("AREA is ", area)
             robot.stopSpin()
             color_found = "green"
             print("green")
