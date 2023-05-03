@@ -67,7 +67,7 @@ def handleColor(color_image):
             cv2.putText(color_image, "Green Colour", (x, y),
                         cv2.FONT_HERSHEY_SIMPLEX, 
                         1.0, (0, 255, 0))
-            # return color_found, False
+            return color_found, False
     
     #  For yellow
     # yellow_mask = cv2.inRange(hsvFrame, yellow_lower, yellow_upper)
@@ -126,6 +126,7 @@ def findColor():
     count = 0
     # global robot
     try:
+        robot.headstraight()
         robot.startSpin()
         while True:
             frames = pipeline.wait_for_frames()
@@ -138,8 +139,13 @@ def findColor():
             color_image = np.asanyarray(color_frame.get_data())    
 
             if(needToFindColor):
-                # color_found, needToFindColor = handleColor(color_image) 
-                handleColor(color_image) 
+                color_found, needToFindColor = handleColor(color_image) 
+                # handleColor(color_image) 
+            
+            if(not needToFindColor):
+                robot.move_forward()
+                time.sleep(1)
+                break
             
             # if(not needToFindColor):
             #     robot.move_forward()
