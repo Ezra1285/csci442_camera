@@ -98,27 +98,27 @@ def goto_mine(edge, line_color, spin_flag):
         contours, _ = cv2.findContours(mask_orange, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
         # blurred = cv2.blur(mask_orange, (5,5))
     elif ("pink" == line_color):
-        imghsv = imghsv[0:,350:450]
+        # imghsv = imghsv[0:,350:450]
         # print("looking for orange")
         hsv_low = red_lower
         hsv_high = red_upper
-        mask_red = cv2.inRange(imghsv, lower_orange, upper_orange)
+        mask_red = cv2.inRange(imghsv, hsv_low, hsv_high)
         contours, _ = cv2.findContours(mask_red, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
         # blurred = cv2.blur(mask_red, (5,5))
     elif ("green" == line_color):
-        imghsv = imghsv[0:,350:450]
+        # imghsv = imghsv[0:,350:450]
         # print("looking for orange")
         hsv_low = green_lower
         hsv_high = green_upper
-        mask_green = cv2.inRange(imghsv, lower_orange, upper_orange)
+        mask_green = cv2.inRange(imghsv, hsv_low, hsv_high)
         contours, _ = cv2.findContours(mask_green, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
         # blurred = cv2.blur(mask_green, (5,5))
     elif ("yellow" == line_color):
-        imghsv = imghsv[0:,350:450]
+        # imghsv = imghsv[0:,350:450]
         # print("looking for orange")
         hsv_low = yellow_lower
         hsv_high = yellow_upper
-        mask_yellow = cv2.inRange(imghsv, lower_orange, upper_orange)
+        mask_yellow = cv2.inRange(imghsv, hsv_low, hsv_high)
         contours, _ = cv2.findContours(mask_yellow, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
         # blurred = cv2.blur(mask_yellow, (5,5))
     else:
