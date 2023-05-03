@@ -54,8 +54,8 @@ def left():
     robot_control.setTarget(2, 4900)
     # print("right")
 
-lower_blue = np.array([70,140,170])
-upper_blue = np.array([160,255,255])
+lower_blue = np.array([80,140,170])
+upper_blue = np.array([150,250,250])
 lower_orange = np.array([7,120,232])
 upper_orange = np.array([25,150,255])
 red_lower = np.array([136, 87, 111])
