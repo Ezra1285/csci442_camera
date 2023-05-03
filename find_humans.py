@@ -62,6 +62,7 @@ def handleFaces(color_image):
             if(w*h > 400):
                 print("Face found")
                 robot.stopSpin()
+                robot.stop()
                 bbox = (x,y,w,h)
                 cv2.rectangle(color_image,(x,y),(x+w,y+h),(255,0,0),2)
                 return bbox, True
