@@ -16,14 +16,14 @@ class robot:
     def move_forward(self):
         self.robot_controll.setTarget(2, 6000)
         self.robot_controll.setTarget(0, 5250)
-        print("forward")
+        # print("forward")
 
     def fullyStop(self):
         self.robot_controll.setAccel(0,60)
         self.robot_controll.setSpeed(0, 10)
         self.robot_controll.setTarget(2, 6000)
         self.robot_controll.setTarget(0, 6000)
-        print("Full stop")
+        # print("Full stop")
 
     def stop(self):
         self.robot_controll.setTarget(2, 6000)
@@ -33,22 +33,22 @@ class robot:
     def right_forward(self):
         self.robot_controll.setTarget(0, 5200)
         self.robot_controll.setTarget(2, 7000)
-        print("left foward")
+        # print("left foward")
 
     def left_forward(self):
         self.robot_controll.setTarget(0, 5200)
         self.robot_controll.setTarget(2, 5000)
-        print("right forward")
+        # print("right forward")
 
     def right(self):
         self.robot_controll.setTarget(0, 6000)
         self.robot_controll.setTarget(2, 7000)
-        print("left")
+        # print("left")
 
     def left(self):
         self.robot_controll.setTarget(0, 6000)
         self.robot_controll.setTarget(2, 5000)
-        print("right")
+        # print("right")
 
     def spinInCircle(self):
         self.robot_controll.setSpeed(2, 5)
@@ -72,7 +72,7 @@ class robot:
         self.waist += 200
         if(self.waist > 7900):
             self.waist = 7900
-        print("waist ", self.waist)
+        # print("waist ", self.waist)
         self.robot_controll.setTarget(2, self.waist)
 
     def waistLeft(self):
