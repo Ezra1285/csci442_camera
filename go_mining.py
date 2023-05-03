@@ -58,6 +58,7 @@ class ctrl_methods():
             raise Exception("Done!")
         if(ret == "done"):
             self.method_num +=1
+            self.spin_flag = False
             time.sleep(1)
 ctrlr = ctrl_methods()
 try:
