@@ -167,6 +167,8 @@ def goto_mine(edge, line_color, spin_flag):
         elif xdif >30:
             if ydif > 10:
                 right_forward()
+            else:
+                left()
         elif ydif >75:
             move_forward()
             if(x + y<1):
@@ -192,8 +194,7 @@ def goto_mine(edge, line_color, spin_flag):
                 print("GOOAALLLLL")
             return "done", spin_flag
         
-            else:
-                left()
+        
 
         elif ydif > 0:
             move_forward()
