@@ -133,9 +133,17 @@ def goto_mine(edge, line_color, spin_flag):
             move_forward()
             if(x + y<1):
                 stop()
+                if line_color == "blue":
+                    print("entered mining area")
+                else:
+                    print("entered goal area")
                 return "done", spin_flag
         elif ydif <0:
             stop()
+            if line_color == "blue":
+                print("entered mining area")
+            else:
+                print("entered goal area")
             return "done", spin_flag
         elif xdif <-15:
             if ydif >10:
