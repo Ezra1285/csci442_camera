@@ -104,7 +104,7 @@ class robot:
         self.robot_controll.setTarget(4, self.headTilt)
 
     def centerHead(self):
-        self.robot_controll.setTarget(4, 6000)
+        self.robot_controll.setTarget(4, 2200)
 
     def headDown(self):
         self.headTilt -= 200
