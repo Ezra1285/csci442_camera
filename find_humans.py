@@ -104,7 +104,23 @@ def handleColor(color_image):
             cv2.putText(color_image, "Pink Colour", (x, y),
                         cv2.FONT_HERSHEY_SIMPLEX, 1.0,
                         (0, 0, 255))
-    
+
+   #  For yellow
+    yellow_mask = cv2.inRange(hsvFrame, yellow_lower, yellow_upper)
+    contours, hierarchy = cv2.findContours(yellow_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+    for pic, contour in enumerate(contours):
+        area = cv2.contourArea(contour)
+        if(area > 3200):
+            color_found = "yellow"
+            x, y, w, h = cv2.boundingRect(contour)
+            color_image = cv2.rectangle(color_image, (x, y),
+                                       (x + w, y + h),
+                                       (255, 0, 0), 2)
+              
+            cv2.putText(color_image, "Yellow Colour", (x, y),
+                        cv2.FONT_HERSHEY_SIMPLEX,
+                        1.0, (255, 0, 0))
+
     #  For green
     green_mask = cv2.inRange(hsvFrame, green_lower, green_upper)
     contours, hierarchy = cv2.findContours(green_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
@@ -121,21 +137,6 @@ def handleColor(color_image):
                         cv2.FONT_HERSHEY_SIMPLEX, 
                         1.0, (0, 255, 0))
 
-    #  For yellow
-    yellow_mask = cv2.inRange(hsvFrame, yellow_lower, yellow_upper)
-    contours, hierarchy = cv2.findContours(yellow_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-    for pic, contour in enumerate(contours):
-        area = cv2.contourArea(contour)
-        if(area > 3200):
-            color_found = "yellow"
-            x, y, w, h = cv2.boundingRect(contour)
-            color_image = cv2.rectangle(color_image, (x, y),
-                                       (x + w, y + h),
-                                       (255, 0, 0), 2)
-              
-            cv2.putText(color_image, "Yellow Colour", (x, y),
-                        cv2.FONT_HERSHEY_SIMPLEX,
-                        1.0, (255, 0, 0))
     return color_found
 
 def findHumans(frames):
