@@ -56,7 +56,7 @@ class ctrl_methods():
             raise Exception("Done!")
         if(ret == "done"):
             self.method_num +=1
-            time.sleep()
+            time.sleep(1)
 ctrlr = ctrl_methods()
 try:
     while True:

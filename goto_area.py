@@ -64,6 +64,7 @@ upper_orange = np.array([25,150,255])
 # upper_orange = np.array([40,150,255])
         
 def goto_mine(edge, line_color, spin_flag):
+    cr.headstraight()
     if(spin_flag == False):
         # print(" start spining")
         
