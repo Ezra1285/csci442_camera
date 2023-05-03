@@ -59,13 +59,13 @@ class robot:
         self.robot_controll.setSpeed(2, 3)
         self.robot_controll.setAccel(2, 3)
         self.robot_controll.setTarget(2, speed)
-        print("Start spin")
+        # print("Start spin")
         
     def stopSpin(self):
         self.robot_controll.setSpeed(2, 0)
         self.robot_controll.setAccel(2, 0)
         self.robot_controll.setTarget(2, 6000) 
-        print("Stop spin")
+        # print("Stop spin")
 
     #  handle waist movement
     def waistRight(self):
