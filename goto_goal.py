@@ -126,7 +126,7 @@ def findColor():
     count = 0
     # global robot
     try:
-        robot.headDown()
+        robot.headstraight()
         robot.startSpin()
         while True:
             frames = pipeline.wait_for_frames()
