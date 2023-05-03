@@ -162,13 +162,15 @@ def goto_mine(edge, line_color, spin_flag):
         if ydif >75:
             move_forward()
             if(x + y<1):
-                move_forward()
-                time.sleep(2)
-                stop()
+                # move_forward()
+                # time.sleep(2)
+                # stop()
                 # if line_color == "blue":
                 #     print("entered mining area")
-                # else:
+                # elif line_color == "orange":
                 #     print("entered goal area")
+                # else:
+                #     print("GOOAALLLLL")
                 return "not done", spin_flag
         elif ydif <0:
             move_forward()
@@ -199,11 +201,13 @@ def goto_mine(edge, line_color, spin_flag):
             # print("bad")
         if(x+y <1):
             stop()
-            if line_color == "blue":
-                print("entered mining area")
-            else:
-                print("entered goal area")
-            return "done", spin_flag
+            # if line_color == "blue":
+            #     print("entered mining area")
+            # elif line_color == "orange":
+            #     print("entered goal area")
+            # else:
+            #     print("GOOAALLLLL")
+            return "not done", spin_flag
         # cv2.circle(edge, cof, 10, (255,0,0), 5)
         cv2.circle(edge, cog, 10, (255,0,0), 5)
     else:
