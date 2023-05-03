@@ -134,7 +134,7 @@ def goto_mine(edge, line_color, spin_flag):
                 time.sleep(1)
                 cr.stopSpin()
                 stop()
-                print("Lost track")
+                # print("Lost track")
                 time.sleep(2)
                 spin_flag = True
     if(spin_flag):
@@ -188,7 +188,7 @@ def goto_mine(edge, line_color, spin_flag):
             move_forward()
             time.sleep(2)
             stop()
-            print("Stop2")
+            # print("Stop2")
             if line_color == "blue":
                 print("entered mining area")
             elif line_color == "orange":
@@ -213,13 +213,13 @@ def goto_mine(edge, line_color, spin_flag):
                 left()
         else:
             stop()
-            print("Stop3")
+            # print("Stop3")
             # print("bad")
         if(x+y <1):
             move_forward()
             time.sleep(2)
             stop()
-            print("Stop4")
+            # print("Stop4")
             if line_color == "blue":
                 print("entered mining area")
             elif line_color == "orange":
