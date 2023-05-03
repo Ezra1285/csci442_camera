@@ -58,6 +58,16 @@ lower_blue = np.array([80,188,188])
 upper_blue = np.array([150,255,255])
 lower_orange = np.array([7,120,232])
 upper_orange = np.array([25,150,255])
+red_lower = np.array([136, 87, 111])
+red_upper = np.array([180, 255, 255])
+# #  Green thresh
+# green_lower = np.array([49, 60, 128], np.uint8)
+# green_upper = np.array([86, 255, 255], np.uint8)
+green_lower = np.array([27, 91, 106]) 
+green_upper = np.array([88, 173, 197]) 
+# yellow
+yellow_lower = np.array([20, 102, 91])
+yellow_upper = np.array([52, 255, 255])
 # lower_blue = np.array([120,188,188])
 # upper_blue = np.array([150,255,255])
 # lower_orange = np.array([0,89,100])
@@ -75,8 +85,6 @@ def goto_mine(edge, line_color, spin_flag):
         # print("looking for blue")
         hsv_low = lower_blue
         hsv_high = upper_blue
-
-
         mask_blue = cv2.inRange(imghsv, lower_blue, upper_blue)
         contours, _ = cv2.findContours(mask_blue, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
         blurred = cv2.blur(mask_blue, (10,10))
@@ -86,6 +94,24 @@ def goto_mine(edge, line_color, spin_flag):
         hsv_high = upper_orange
         mask_orange = cv2.inRange(imghsv, lower_orange, upper_orange)
         blurred = cv2.blur(mask_orange, (10,10))
+    elif ("pink" == line_color):
+        # print("looking for orange")
+        hsv_low = red_lower
+        hsv_high = red_upper
+        mask_red = cv2.inRange(imghsv, lower_orange, upper_orange)
+        blurred = cv2.blur(mask_red, (10,10))
+    elif ("green" == line_color):
+        # print("looking for orange")
+        hsv_low = green_lower
+        hsv_high = green_upper
+        mask_green = cv2.inRange(imghsv, lower_orange, upper_orange)
+        blurred = cv2.blur(mask_green, (10,10))
+    elif ("yellow" == line_color):
+        # print("looking for orange")
+        hsv_low = yellow_lower
+        hsv_high = yellow_upper
+        mask_yellow = cv2.inRange(imghsv, lower_orange, upper_orange)
+        blurred = cv2.blur(mask_yellow, (10,10))
     else:
         # print("no color")
         hsv_low = lower_blue
@@ -133,32 +159,42 @@ def goto_mine(edge, line_color, spin_flag):
         xdif = cof[0] - cog[0]
         ydif = cof[1] - cog[1]
         # print("MOVING")
-        if ydif >75:
-            move_forward()
-            if(x + y<1):
-                stop()
-                if line_color == "blue":
-                    print("entered mining area")
-                else:
-                    print("entered goal area")
-                return "done", spin_flag
-        elif ydif <0:
-            stop()
-            if line_color == "blue":
-                print("entered mining area")
-            else:
-                print("entered goal area")
-            return "done", spin_flag
-        elif xdif <-15:
+        if xdif <-30:
             if ydif >10:
                 left_forward()
             else:
                 right()
-        elif xdif >15:
+        elif xdif >30:
             if ydif > 10:
                 right_forward()
             else:
                 left()
+        elif ydif >75:
+            move_forward()
+            if(x + y<1):
+                move_forward()
+                time.sleep(2)
+                stop()
+                if line_color == "blue":
+                    print("entered mining area")
+                elif line_color == "orange":
+                    print("entered goal area")
+                else:
+                    print("GOOAALLLLL")
+                return "done", spin_flag
+        elif ydif <0:
+            move_forward()
+            time.sleep(2)
+            stop()
+            if line_color == "blue":
+                print("entered mining area")
+            elif line_color == "orange":
+                print("entered goal area")
+            else:
+                print("GOOAALLLLL")
+            return "done", spin_flag
+        
+        
 
         elif ydif > 0:
             move_forward()
@@ -169,8 +205,10 @@ def goto_mine(edge, line_color, spin_flag):
             stop()
             if line_color == "blue":
                 print("entered mining area")
-            else:
+            elif line_color == "orange":
                 print("entered goal area")
+            else:
+                print("GOOAALLLLL")
             return "done", spin_flag
         # cv2.circle(edge, cof, 10, (255,0,0), 5)
         cv2.circle(edge, cog, 10, (255,0,0), 5)
