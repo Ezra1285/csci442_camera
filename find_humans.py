@@ -60,7 +60,7 @@ def handleFaces(color_image):
     for (x,y,w,h) in faces:
             #  if faces exist then we stop the spin and init bbox and boolean vars
             if(w*h > 400):
-                print("Stopped spin on face")
+                print("Face found")
                 robot.stopSpin()
                 bbox = (x,y,w,h)
                 cv2.rectangle(color_image,(x,y),(x+w,y+h),(255,0,0),2)
@@ -144,7 +144,6 @@ def findHumans(frames):
     firstBoxFound = False
     # try:
     robot.startSpin(7000)
-    print('Spin')
     # while True:
     # Wait for a coherent pair of frames: depth and color
     # frames = pipeline.wait_for_frames()
@@ -180,6 +179,7 @@ def findHumans(frames):
     
     #  TODO: Return this color and make it work with baiden main program
     if(color_found):
+        print(color_found, "was found.")
         return "done", color_found
     
     ok = False
