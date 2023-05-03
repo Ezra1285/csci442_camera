@@ -60,7 +60,7 @@ def handleFaces(color_image):
     for (x,y,w,h) in faces:
             #  if faces exist then we stop the spin and init bbox and boolean vars
             if(w*h > 400):
-                print("Face found, area of ", (w*h))
+                # print("Face found, area of ", (w*h))
                 robot.stopSpin()
                 robot.stop()
                 bbox = (x,y,w,h)
