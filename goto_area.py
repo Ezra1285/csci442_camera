@@ -122,7 +122,7 @@ def goto_mine(edge, line_color, spin_flag):
     y=0
     if(not(len(contours) <1)):
             if(not spin_flag):
-                
+                time.sleep(1)
                 cr.stopSpin()
                 stop()
                 time.sleep(2)
@@ -159,17 +159,8 @@ def goto_mine(edge, line_color, spin_flag):
         xdif = cof[0] - cog[0]
         ydif = cof[1] - cog[1]
         # print("MOVING")
-        if xdif <-30:
-            if ydif >10:
-                left_forward()
-            else:
-                right()
-        elif xdif >30:
-            if ydif > 10:
-                right_forward()
-            else:
-                left()
-        elif ydif >75:
+        
+        if ydif >75:
             move_forward()
             if(x + y<1):
                 move_forward()
@@ -195,9 +186,21 @@ def goto_mine(edge, line_color, spin_flag):
             return "done", spin_flag
         
         
+        
 
         elif ydif > 0:
             move_forward()
+        
+        elif xdif <-30:
+            if ydif >10:
+                left_forward()
+            else:
+                right()
+        elif xdif >30:
+            if ydif > 10:
+                right_forward()
+            else:
+                left()
         else:
             stop()
             # print("bad")
