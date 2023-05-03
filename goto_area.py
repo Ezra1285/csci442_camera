@@ -106,7 +106,7 @@ def goto_mine(edge, line_color, spin_flag):
         for i in contours:
             area = cv2.contourArea(i)
             print(area)
-            if area <500:
+            if area <100:
                 break
             M = cv2.moments(i)
             if M['m00'] != 0:
