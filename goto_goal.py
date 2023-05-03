@@ -15,8 +15,8 @@ import time
 # yellow_lower = np.array([20, 102, 91], np.uint8)
 # yellow_upper = np.array([52, 255, 255], np.uint8)
 
-green_lower = np.array([0, 91, 122]) 
-green_upper = np.array([88, 173, 208]) 
+green_lower = np.array([27, 91, 106], np.uint8) 
+green_upper = np.array([88, 173, 197], np.uint8) 
 
 kernel = np.ones((5, 5), "uint8")
 color_found = ""
@@ -154,5 +154,6 @@ def findColor():
         robot.close()
         # Stop streaming
         pipeline.stop()
+        
 
 findColor()
