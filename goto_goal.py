@@ -125,6 +125,7 @@ def findColor():
     global color_found
     count = 0
     # global robot
+    #  TODO get rid of while and try( we handle 1 frame at a time) get rid of all pipline stuff
     try:
         robot.startSpin()
         while True:
