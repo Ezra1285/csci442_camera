@@ -60,11 +60,12 @@ def handleFaces(color_image):
     faces = face_cascade.detectMultiScale(gray, 1.5, 5)
     for (x,y,w,h) in faces:
             #  if faces exist then we stop the spin and init bbox and boolean vars
-            print("Stopped spin on face")
-            robot.stopSpin()
-            bbox = (x,y,w,h)
-            cv2.rectangle(color_image,(x,y),(x+w,y+h),(255,0,0),2)
-            return bbox, True
+            if(w*h > 400):
+                print("Stopped spin on face")
+                robot.stopSpin()
+                bbox = (x,y,w,h)
+                cv2.rectangle(color_image,(x,y),(x+w,y+h),(255,0,0),2)
+                return bbox, True
     return None, False
 
 #Red thresh
