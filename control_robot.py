@@ -114,7 +114,7 @@ class robot:
 
     def headstraight(self):
     
-        self.headTilt = 1850
+        self.headTilt = 1800
         self.robot_controll.setTarget(4, self.headTilt)
 
     def close(self):
