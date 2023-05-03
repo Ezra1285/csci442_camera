@@ -14,8 +14,8 @@ import control_robot
 # yellow_lower = np.array([20, 102, 91], np.uint8)
 # yellow_upper = np.array([52, 255, 255], np.uint8)
 
-green_lower = np.array([80, 140, 110]) 
-green_upper = np.array([90, 160, 125]) 
+green_lower = np.array([0, 91, 122]) 
+green_upper = np.array([88, 173, 208]) 
 
 kernel = np.ones((5, 5), "uint8")
 color_found = ""
@@ -24,7 +24,7 @@ robot = control_robot.robot()
 def handleColor(color_image):
     global color_found
     # global robot
-    # hsvFrame = cv2.cvtColor(color_image, cv2.COLOR_BGR2HSV)
+    hsvFrame = cv2.cvtColor(color_image, cv2.COLOR_BGR2HSV)
     # # For red color
     # red_mask = cv2.inRange(hsvFrame, red_lower, red_upper)
     # red_mask = cv2.dilate(red_mask, kernel)
@@ -47,9 +47,9 @@ def handleColor(color_image):
     #         return color_found, False   
 
     #  For green
-    green_mask = cv2.inRange(color_image, green_lower, green_upper)
-    # green_mask = cv2.dilate(green_mask, kernel)
-    # res_green = cv2.bitwise_and(color_image, color_image, mask = green_mask)
+    green_mask = cv2.inRange(hsvFrame, green_lower, green_upper)
+    green_mask = cv2.dilate(green_mask, kernel)
+    res_green = cv2.bitwise_and(color_image, color_image, mask = green_mask)
     contours, hierarchy = cv2.findContours(green_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
     for pic, contour in enumerate(contours):
         area = cv2.contourArea(contour)
