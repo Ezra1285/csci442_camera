@@ -60,6 +60,7 @@ def handleFaces(color_image):
     faces = face_cascade.detectMultiScale(gray, 1.5, 5)
     for (x,y,w,h) in faces:
             #  if faces exist then we stop the spin and init bbox and boolean vars
+            print("Stopped spin on face")
             robot.stopSpin()
             bbox = (x,y,w,h)
             cv2.rectangle(color_image,(x,y),(x+w,y+h),(255,0,0),2)
@@ -143,6 +144,7 @@ def findHumans():
     firstBoxFound = False
     try:
         robot.startSpin(7000)
+        print('Spin')
         while True:
             # Wait for a coherent pair of frames: depth and color
             frames = pipeline.wait_for_frames()
