@@ -145,7 +145,8 @@ def findHumans(frames):
     firstBoxFound = False
     robot.centerHead()
     # try:
-    robot.startSpin(7000)
+    if(not firstBoxFound):
+        robot.startSpin(7100)
     # while True:
     # Wait for a coherent pair of frames: depth and color
     # frames = pipeline.wait_for_frames()
