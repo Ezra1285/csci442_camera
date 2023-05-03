@@ -186,7 +186,7 @@ def goto_mine(edge, line_color, spin_flag):
             #     return "done", spin_flag
         elif ydif <0:
             move_forward()
-            time.sleep(3)
+            time.sleep(2)
             stop()
             print("Stop2")
             if line_color == "blue":
@@ -217,7 +217,7 @@ def goto_mine(edge, line_color, spin_flag):
             # print("bad")
         if(x+y <1):
             move_forward()
-            time.sleep(3)
+            time.sleep(2)
             stop()
             print("Stop4")
             if line_color == "blue":
