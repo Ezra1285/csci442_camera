@@ -105,7 +105,7 @@ def goto_mine(edge, line_color, spin_flag):
         cr.headstraight()
         for i in contours:
             area = cv2.contourArea(i)
-            # print(area)
+            print(area)
             if area <50:
                 break
             M = cv2.moments(i)
