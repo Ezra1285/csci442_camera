@@ -105,7 +105,6 @@ def goto_mine(edge, line_color, spin_flag):
         cr.headstraight()
         for i in contours:
             area = cv2.contourArea(i)
-            # print(area)
             if area >100:
                 
                 M = cv2.moments(i)
@@ -124,7 +123,7 @@ def goto_mine(edge, line_color, spin_flag):
             total = 1
         yavg = int(x/total)
         xavg = int(y/total)
-        cofy = int((375))
+        cofy = int((350))
         cofx = int(150)
         cof = (cofx, cofy)
         # cv2.circle(edge, cof, 10, (255,0,0), 5)
