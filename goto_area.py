@@ -89,7 +89,6 @@ def goto_mine(edge, line_color, spin_flag):
         hsv_high = upper_blue
         mask_blue = cv2.inRange(imghsv, lower_blue, upper_blue)
         contours, _ = cv2.findContours(mask_blue, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-        print(len(contours))
         # blurred = cv2.blur(mask_blue, (10,10))
     elif ("orange" == line_color):
         # print("looking for orange")
@@ -142,7 +141,7 @@ def goto_mine(edge, line_color, spin_flag):
         cr.headstraight()
         for i in contours:
             area = cv2.contourArea(i)
-            if area >50:
+            if area >0:
                 
                 M = cv2.moments(i)
                 if M['m00'] != 0:
